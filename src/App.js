@@ -1,7 +1,10 @@
-import * as S from './App.styled'
+import * as S from './App.styled';
+import AppRoutes from './routes';
 
 function App() {
-  return <S.MainApp></S.MainApp>
+  return <S.MainApp>
+    <AppRoutes/>
+  </S.MainApp>;
 }
 
-export default App
+export default App;
