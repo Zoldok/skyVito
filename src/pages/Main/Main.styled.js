@@ -24,7 +24,7 @@ export const Container = styled.div`
   }
 `
 
-export const Main = styled.div``
+export const Main = styled.main``
 
 export const MainContainer = styled.div`
 max-width: 1178px;
