@@ -1,74 +1,58 @@
 const PATH = "http://localhost:8090";
 
-export async function registerUser(
-  email,
-  password,
-  firstname,
-  surname,
-  city
-) {
-  const response = await fetch(`${PATH}/auth/register`, {
-    method: "POST",
-    body: JSON.stringify({
-      email: email,
-      password: password,
-      name: firstname,
-      surname: surname,
-      city: city,
-    }),
-    headers: {
-      "content-type": "application/json",
-    },
-  });
-
-  const responseData = await response.json();
-  return responseData;
-}
-
 export async function loginUser(email, password) {
   const response = await fetch(`${PATH}/auth/login`, {
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify({
       email: email,
       password: password,
     }),
     headers: {
-      "content-type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 
-  if (!response.ok && response.status === 401) {
-    throw new Error("Authentication error");
+  if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error('Ошибка авторизации');
+    } else if (response.status === 422) {
+      throw new Error('Невалидный email');
+    } else {
+      throw new Error('Произошла ошибка');
+    }
   }
 
   const responseData = await response.json();
   return responseData;
 }
 
-export const changePassword = async (
-  oldPassword,
-  newPassword
-) => {
-  const { access_token } = JSON.parse(
-    localStorage.getItem("tokenData") || "{}"
-  );
+  
+export async function registerUser(email, password, name, surname, city) {
 
-  const response = await fetch(`${PATH}/user/password`, {
-    method: "PUT",
-    body: JSON.stringify({
-      password_1: oldPassword,
-      password_2: newPassword,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
+    const response = await fetch(`${PATH}/auth/register`, {
+      method: 'POST',
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        name: name,
+        surname: surname,
+        city: city,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  if (!response.ok && response.status === 400) {
-    throw new Error("Validation error");
-  }
+    if (!response.ok) {
+      if (response.status === 400) {
+        throw new Error('Такой пользователь существует');
+      } else if (response.status === 422) {
+        throw new Error('Невалидный email');
+      } else {
+        throw new Error('Произошла ошибка');
+      }
+    }
 
-  const responseData = await response.json();
-  return responseData;
-};
+    const responseData = await response.json();
+    return responseData;
+}
