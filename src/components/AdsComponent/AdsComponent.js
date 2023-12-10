@@ -4,13 +4,14 @@ import { useSelector } from 'react-redux'
 
 const AdsComponent = () => {
   const ads = useSelector((state) => state.user.ads)
-  console.log('АДС', ads)
+  // console.log('АДС', ads)
 
   if (!ads) return <div>Loading</div>
 
   return (
     <>
       {ads.map((ad, index) => (
+        //ad.id соответствует id обьявления
         <Link to={`/ad/${ad.id}`} key={index}> {/* Создаем ссылку на новую страницу */}
           <S.CardsItem>
             <S.CardsCard>

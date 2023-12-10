@@ -5,13 +5,19 @@ import CenterBlockProfile from '../../components/CenterBlockProfile/CenterBlockP
 import AdsComponent from '../../components/AdsComponent/AdsComponent'
 
 const Profile = () => {
+const profileKey = true
+  //сделать запрос на получение списка для юзера
   return (
     <S.Wrapper>
       <S.Container>
-        <Header />
+        <Header profileKey={profileKey} />
         <S.MainContainer>
           <CenterBlockProfile />
-          <AdsComponent />
+          <S.MainContent>
+            <S.ContentCards>
+              <AdsComponent />
+            </S.ContentCards>
+          </S.MainContent>
         </S.MainContainer>
         <Footer />
       </S.Container>

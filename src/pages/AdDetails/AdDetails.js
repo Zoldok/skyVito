@@ -1,42 +1,135 @@
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom'
+import { useGetAdsIdQuery } from '../../store/Service/Service'
+import * as S from './AdDetails.styled'
+import Footer from '../../components/Footer/Footer'
+import Header from '../../components/Header/Header'
+import { useAuth } from '../../hooks/use-auth'
+import './my-article.css'
+import MainMenu from '../../components/MainMenu/MainMenu'
+const AdDetails = () => {
+  const { adId } = useParams()
+  console.log(adId)
+  const { isAuth } = useAuth()
+  // запрос на получение обьявления по Id
+  const { data, isLoading } = useGetAdsIdQuery(adId)
+  console.log(data)
+  if (isLoading || ! data ) return <div>идет загрузка</div>
 
-const ComponentName = () => {
-
-    const ads = useSelector((state) => state.user.ads);
-    //значение id  страницы
-    const { adId } = useParams();
-    console.log(adId);
 
 
+  return (
+    <div>
+      {/* Обьявление
+      <h1>{data.title}</h1> */}
+      <S.Wrapper>
+        <S.Container>
+          <Header isAuth={isAuth} />
+          <S.Main>
+            <S.MainContainer>
+              <MainMenu />
+            </S.MainContainer>
+            <S.MainArtic>
+              <S.ArticContent>
+                <S.ArticleLeft>
+                  <S.ArticleFillImg>
+                    <S.ArticleImg>
+                      <S.ArticleImgImg src="" alt="" />
+                    </S.ArticleImg>
+                    <S.ArticleImgBar>
+                      <S.ArticleImgBarDiv>
+                        <S.ArticleImgBarDivImg src="" alt="" />
+                      </S.ArticleImgBarDiv>
+                    </S.ArticleImgBar>
+                    <S.ArticleImgBarMob>
+                      <S.ImgBarMobCircleActive />
+                      <S.ImgBarMobCircle />
+                      <S.ImgBarMobCircle />
+                      <S.ImgBarMobCircle />
+                      <S.ImgBarMobCircle />
+                    </S.ArticleImgBarMob>
+                  </S.ArticleFillImg>
+                </S.ArticleLeft>
 
-    //Создать новый запрос на получение обьявления по Id
+                <S.ArticleRight>
+                  <S.ArticleBlock>
+                    <S.ArticleTitle>
+                    {data.title}
+                    </S.ArticleTitle>
+                    <S.ArticleInfo>
+                    <S.ArticleDate>Сегодня в 10:45</S.ArticleDate>
+                      <S.ArticleCity>Санкт-Петербург</S.ArticleCity>
+                      <S.ArticleLink
+                        href=""
+                        target="_blank"
+                        rel=""
+                      >
+                        4 отзыва
+                      </S.ArticleLink>
+                    </S.ArticleInfo>
+                    <S.ArticlePrice>2 200 ₽</S.ArticlePrice>
+
+                    {isAuth ? (
+
+                    <S.ArticleBtnBlock>
+                      <S.ArticleBtnReact>
+                        Редактировать
+                      </S.ArticleBtnReact>
+                      <S.ArticleBtnRemove>
+                        Снять с публикации
+                      </S.ArticleBtnRemove>
+                    </S.ArticleBtnBlock>
+        ) : (
+
+          <S.ArticleBtnReact>
+          Показать телефон<br />
+      8 984 ХХХ ХХХ
+        </S.ArticleBtnReact>
 
 
-    
-    //пдля преобразования в число, т.к. id - числовой
-    const convertedAdId = parseInt(adId, 10);
-    const selectedAd = ads.find(ad => ad.id === convertedAdId);
-    console.log(selectedAd);
+        )}
 
-    if (selectedAd) {
-        console.log("Найденное объявление:", selectedAd);
-        // код если найдено
 
- 
-    } else {
-        console.log("Объявление не найдено");
-        // код если не наидено
-    }
 
-    return (
-        <div>
-            Обьявление
-            <h1>
-       {selectedAd.title}
-        </h1>
-        </div>
-    );
-};
 
-export default ComponentName;
+                    <S.ArticleAuthor>
+                      <S.AuthorImg>
+                        <S.AuthorImgImg src="" alt="" />
+                      </S.AuthorImg>
+                      <S.AuthorCont>
+                        <S.AuthorName>Антон</S.AuthorName>
+                        <S.AuthorAbout>
+                          Продает товары с&nbsp;мая 2022
+                        </S.AuthorAbout>
+                      </S.AuthorCont>
+                    </S.ArticleAuthor>
+                  </S.ArticleBlock>
+                </S.ArticleRight>
+              </S.ArticContent>
+            </S.MainArtic>
+
+            <S.MainContainer>
+              <S.MainTitle>Описание товара</S.MainTitle>
+              <S.MainContent>
+
+                <S.MainText>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
+                </S.MainText>
+              </S.MainContent>
+            </S.MainContainer>
+          </S.Main>
+
+          <Footer />
+        </S.Container>
+      </S.Wrapper>
+    </div>
+  )
+}
+
+export default AdDetails
