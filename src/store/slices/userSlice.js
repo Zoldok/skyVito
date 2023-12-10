@@ -4,6 +4,7 @@ const initialState = {
     email: null,
     token: null,
     id: null,
+    ads: [],
 }
 
 const userSlise = createSlice({
@@ -21,9 +22,12 @@ const userSlise = createSlice({
             state.token = null;
             state.id = null;
         },
+        setAds(state,action) {
+            state.ads = action.payload;
+        }
     },
 })
 
-export const {setUser, removeUser} = userSlise.actions
+export const {setUser, removeUser, setAds} = userSlise.actions
 
 export default userSlise.reducer

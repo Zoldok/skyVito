@@ -22,6 +22,7 @@ const GlobalStyles = createGlobalStyle`
   button,
   ._btn {
     cursor: pointer;
+    
   }
   
   ul li {
