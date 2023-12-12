@@ -1,5 +1,3 @@
-
-
 export function useAuth() {
     // const {email, token, id} = useSelector(state => state.user)
     // const email = localStorage.getItem('email') || '';
@@ -10,10 +8,4 @@ export function useAuth() {
         token
         
     }
-    // return {
-    //     isAuth: !!email,
-    //     email,
- 
-        
-    // }
 }

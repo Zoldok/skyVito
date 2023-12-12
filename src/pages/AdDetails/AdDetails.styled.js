@@ -115,6 +115,9 @@ export const ArticleImg = styled.div`
   height: 480px;
   background-color: #f0f0f0;
   margin: 0 5px;
+  display: flex;
+  justify-content: center; /* Центрируем по горизонтали */
+  align-items: center; /* Центрируем по вертикали */
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
@@ -128,9 +131,11 @@ export const ArticleImg = styled.div`
 export const ArticleImgImg = styled.img`
   width: 100%;
   height: auto;
-  display: block;
+  // display: inline-block; 
+  // vertical-align: middle; 
   -o-object-fit: cover;
   object-fit: cover;
+
 `
 
 export const ArticleImgBar = styled.div`

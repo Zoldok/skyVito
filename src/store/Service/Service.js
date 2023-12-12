@@ -21,9 +21,13 @@ export const Api = createApi({
     }),
     getUserInfo: builder.query({
       query: () => `user`,
-      onQueryStarted: async (arg, { queryFulfilled }) => {
-        const result = await queryFulfilled;
-        return result;
+      onError: (error) => {
+        if (error.status === 401) {
+          // Обработка ошибки авторизации
+          // Например, очистка токенов и перенаправление на страницу входа
+        } else {
+          throw error; // Проброс остальных ошибок для дальнейшей обработки
+        }
       },
     }),
     refreshToken: builder.mutation({
@@ -32,13 +36,14 @@ export const Api = createApi({
         method: 'PUT',
         body: { access_token, refresh_token },
       }),
-      onError: (error) => {
-        console.error('Error refreshing token:', error);
-        // Дополнительные действия по обработке ошибки обновления токена
-        // Например, редирект на страницу входа, очистка хранилища и т. д.
-        // Возвращаемое значение из этой функции будет передано в место вызова mutation
-        return { error: 'Token refresh failed' }; 
-      },
+      // onError: (error) => {
+      //   if (error.status === 401) {
+      //     // Обработка ошибки авторизации при обновлении токена
+      //     // Например, очистка токенов и перенаправление на страницу входа
+      //   } else {
+      //     throw error; // Проброс остальных ошибок для дальнейшей обработки
+      //   }
+      // },
       transformResponse: (response) => {
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('refresh_token', response.refresh_token);

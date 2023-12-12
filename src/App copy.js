@@ -6,8 +6,16 @@ import useTokenRefresh from './hooks/useTokenRefresh';
 
 
 function App() {
-  const { handleRefreshToken } = useTokenRefresh();
 
+  const token = localStorage.getItem('access_token')
+  if(token) {
+
+
+    
+  }
+  const { handleRefreshToken, error } = useTokenRefresh();
+  console.log('Ошибка', error);
+  // const { handleRefreshToken, isLoading: load2, isSuccess } = useTokenRefresh();
   // console.log(load2, isSuccess);
 
   // const token = localStorage.getItem('access_token')

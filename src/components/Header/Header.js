@@ -4,15 +4,14 @@ import { useAuth } from '../../hooks/use-auth'
 
 const Header = ({ profileKey }) => {
   const { isAuth } = useAuth()
-  console.log(isAuth)
+  // console.log(isAuth)
   const navigate = useNavigate()
   const Logut = () => {
     navigate('/')
     localStorage.clear()
-    window.location.reload() // Перезагрузка страницы
-
+    // window.location.reload() // Перезагрузка страницы
   }
-  console.log(profileKey);
+  // console.log(profileKey)
   return (
     <S.Header>
       <S.HeaderNav>
@@ -23,10 +22,8 @@ const Header = ({ profileKey }) => {
         </S.Logo>
         {profileKey ? (
           <>
-            <S.HeaderBtnLk onClick={Logut}
-            >
-              Выйти
-            </S.HeaderBtnLk>
+            <S.HeaderBtnPutAd>Разместить объявление</S.HeaderBtnPutAd>
+            <S.HeaderBtnLk onClick={Logut}>Выйти</S.HeaderBtnLk>
           </>
         ) : isAuth ? (
           <>

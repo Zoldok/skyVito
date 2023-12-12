@@ -8,7 +8,6 @@ import './my-article.css'
 import MainMenu from '../../components/MainMenu/MainMenu'
 import { formatDate } from '../../utils/FormatteDate'
 import { formatTime } from '../../utils/FormatteTime'
-import { useState } from 'react'
 
 const AdDetails = () => {
   const { adId } = useParams()
@@ -17,18 +16,12 @@ const AdDetails = () => {
   // запрос на получение обьявления по Id
   const { data, isLoading } = useGetAdsIdQuery(adId)
 
-  console.log(data)
-  if (isLoading || !data) return <div>идет загрузка</div>
-
   const imageUrls = data?.images?.map(
     (image) => `http://127.0.0.1:8090/${image.url}`
   )
 
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-
-  const handleImageClick = (index) => {
-    setSelectedImageIndex(index);
-  };
+  console.log(data)
+  if (isLoading || !data) return <div>идет загрузка</div>
 
   return (
     <div>
@@ -47,24 +40,21 @@ const AdDetails = () => {
                   <S.ArticleFillImg>
                     <S.ArticleImg>
                       <S.ArticleImgImg
-                        src={`http://127.0.0.1:8090/${data?.images[selectedImageIndex]?.url}`}
+                        src={`http://127.0.0.1:8090/${data?.images[0]?.url}`}
                         alt=""
                       />
                     </S.ArticleImg>
                     <S.ArticleImgBar>
-        {imageUrls &&
-          imageUrls.map((imageUrl, index) => (
-            <S.ArticleImgBarDiv
-              key={index}
-              onClick={() => handleImageClick(index)}
-            >
-              <S.ArticleImgBarDivImg
-                src={imageUrl}
-                alt={`Image ${index + 1}`}
-              />
-            </S.ArticleImgBarDiv>
-          ))}
-      </S.ArticleImgBar>
+                      {imageUrls &&
+                        imageUrls.map((imageUrl, index) => (
+                          <S.ArticleImgBarDiv key={index}>
+                            <S.ArticleImgBarDivImg
+                              src={imageUrl}
+                              alt={`Image ${index + 1}`}
+                            />
+                          </S.ArticleImgBarDiv>
+                        ))}
+                    </S.ArticleImgBar>
                     <S.ArticleImgBarMob>
                       <S.ImgBarMobCircleActive />
                       <S.ImgBarMobCircle />
