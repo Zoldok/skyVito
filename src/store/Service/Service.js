@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery  } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const Api = createApi({
   reducerPath: 'Api',
@@ -24,9 +24,9 @@ export const Api = createApi({
       onError: (error) => {
         if (error.status === 401) {
           // Обработка ошибки авторизации
-          // Например, очистка токенов и перенаправление на страницу входа
+          console.log(error)
         } else {
-          throw error; // Проброс остальных ошибок для дальнейшей обработки
+          throw error // Проброс остальных ошибок
         }
       },
     }),
@@ -39,21 +39,24 @@ export const Api = createApi({
       // onError: (error) => {
       //   if (error.status === 401) {
       //     // Обработка ошибки авторизации при обновлении токена
-      //     // Например, очистка токенов и перенаправление на страницу входа
+
       //   } else {
-      //     throw error; // Проброс остальных ошибок для дальнейшей обработки
+      //     throw error; // Проброс остальных ошибок
       //   }
       // },
       transformResponse: (response) => {
-        localStorage.setItem('access_token', response.access_token);
-        localStorage.setItem('refresh_token', response.refresh_token);
-        return response;
+        localStorage.setItem('access_token', response.access_token)
+        localStorage.setItem('refresh_token', response.refresh_token)
+        return response
       },
     }),
   }),
-});
+})
 
-
-
-export const { useGetAdsQuery, useGetAdsIdQuery, useGetUserInfoQuery, useRefreshTokenMutation } = Api
+export const {
+  useGetAdsQuery,
+  useGetAdsIdQuery,
+  useGetUserInfoQuery,
+  useRefreshTokenMutation,
+} = Api
 // builder.mutation:POST, PUT или DELETE
