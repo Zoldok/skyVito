@@ -24,9 +24,10 @@ export const Api = createApi({
       onError: (error) => {
         if (error.status === 401) {
           // Обработка ошибки авторизации
-          // Например, очистка токенов и перенаправление на страницу входа
+console.log(error);
         } else {
-          throw error; // Проброс остальных ошибок для дальнейшей обработки
+          throw error;
+           // Проброс остальных ошибок для дальнейшей обработки
         }
       },
     }),
@@ -38,10 +39,10 @@ export const Api = createApi({
       }),
       // onError: (error) => {
       //   if (error.status === 401) {
-      //     // Обработка ошибки авторизации при обновлении токена
-      //     // Например, очистка токенов и перенаправление на страницу входа
+        // console.log(error);
+      //     //
       //   } else {
-      //     throw error; // Проброс остальных ошибок для дальнейшей обработки
+      //     throw error; 
       //   }
       // },
       transformResponse: (response) => {
