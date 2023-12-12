@@ -17,17 +17,18 @@ const AdDetails = () => {
   // запрос на получение обьявления по Id
   const { data, isLoading } = useGetAdsIdQuery(adId)
 
-  console.log(data)
-  if (isLoading || !data) return <div>идет загрузка</div>
-
   const imageUrls = data?.images?.map(
     (image) => `http://127.0.0.1:8090/${image.url}`
   )
 
+  console.log(data)
+  if (isLoading || !data) return <div>идет загрузка</div>
+
+
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const handleImageClick = (index) => {
-    setSelectedImageIndex(index);
+    setSelectedImageIndex(index); 
   };
 
   return (
@@ -52,19 +53,19 @@ const AdDetails = () => {
                       />
                     </S.ArticleImg>
                     <S.ArticleImgBar>
-        {imageUrls &&
-          imageUrls.map((imageUrl, index) => (
-            <S.ArticleImgBarDiv
-              key={index}
-              onClick={() => handleImageClick(index)}
-            >
-              <S.ArticleImgBarDivImg
-                src={imageUrl}
-                alt={`Image ${index + 1}`}
-              />
-            </S.ArticleImgBarDiv>
-          ))}
-      </S.ArticleImgBar>
+                    {imageUrls &&
+                        imageUrls.map((imageUrl, index) => (
+                          <S.ArticleImgBarDiv
+                            key={index}
+                            onClick={() => handleImageClick(index)}
+                          >
+                            <S.ArticleImgBarDivImg
+                              src={imageUrl}
+                              alt={`Image ${index + 1}`}
+                            />
+                          </S.ArticleImgBarDiv>
+                        ))}
+                    </S.ArticleImgBar>
                     <S.ArticleImgBarMob>
                       <S.ImgBarMobCircleActive />
                       <S.ImgBarMobCircle />

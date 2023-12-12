@@ -10,14 +10,12 @@ import { useEffect } from 'react'
 import { useAuth } from '../../hooks/use-auth'
 import useTokenRefresh from '../../hooks/useTokenRefresh'
 
+
 const Main = () => {
   const dispatch = useDispatch()
   const { isAuth } = useAuth()
   const { handleRefreshToken} = useTokenRefresh();
   const { data, isLoading } = useGetAdsQuery()
-
-  //isAuth проверка пользователя на регистрацию
-
 
 const {data: userInfo, isLoading: loadUser, isError: userInfoError} = useGetUserInfoQuery()
 
@@ -28,8 +26,6 @@ useEffect(() => {
 }, [userInfoError])
 
 console.log('данные пользователя',userInfo);
-// console.log('Ошибка при получении userInfo' , userInfoError);
-
 
   useEffect(() => {
     if (!isLoading) {
@@ -44,7 +40,6 @@ console.log('данные пользователя',userInfo);
     <S.Wrapper>
       <S.Container>
         <Header isAuth={isAuth} />
-        {/* <button onClick={handleRefreshToken}>жми</button> */}
         <S.Main>
           <Search />
           <S.MainContainer>
