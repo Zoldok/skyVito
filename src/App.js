@@ -10,8 +10,8 @@ function App() {
 
   // console.log(load2, isSuccess);
 
-  // const token = localStorage.getItem('access_token')
-  // console.log("текущий токен", token);
+  const token = localStorage.getItem('access_token')
+  console.log("текущий токен", token);
 
   useEffect(() => {
     handleRefreshToken();

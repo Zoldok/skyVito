@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import './signin.css'
 import * as S from './Login.styled'
 import { loginUser } from '../../api'
 import { useNavigate } from 'react-router-dom'
@@ -26,7 +25,7 @@ const Login = () => {
       localStorage.setItem('refresh_token', response.refresh_token);
       navigate('/')
     } catch (error) {
-      console.error(error)
+      // console.error(error)
       setErrorMessage(error.message)
     }
   }
