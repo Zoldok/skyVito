@@ -1,34 +1,74 @@
-import { useParams } from 'react-router-dom'
-import { useGetAdsIdQuery } from '../../store/Service/Service'
+import {   useParams } from 'react-router-dom'
+import {
+  useDelAdsIdMutation,
+  useGetAdsIdQuery,
+} from '../../store/Service/Service'
 import * as S from './AdDetails.styled'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import { useAuth } from '../../hooks/use-auth'
-import './my-article.css'
 import MainMenu from '../../components/MainMenu/MainMenu'
 import { formatDate } from '../../utils/FormatteDate'
 import { formatTime } from '../../utils/FormatteTime'
 import { useState } from 'react'
+import EditModal from '../../components/Modal/EditModal/EditModal'
+// import { useMutation } from 'react-query'
 
 const AdDetails = () => {
+  // const [showEdit, setShowEdit] = useState(false)
   const { adId } = useParams()
   // console.log(adId)
   const { isAuth } = useAuth()
   // запрос на получение обьявления по Id
   const { data, isLoading } = useGetAdsIdQuery(adId)
+  //вытащить данные из стейта
+  // const ads = useSelector((state) => state.user.ads)
 
-  console.log(data)
-  if (isLoading || !data) return <div>идет загрузка</div>
+  
+  const [DeteleAds] = useDelAdsIdMutation(adId)
+
+  let showEdit = false
+  // const navigate = useNavigate()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const openModal = () => {
+    setIsModalOpen(true) // Открываем модальное окно
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false) // Закрываем модальное окно
+  }
 
   const imageUrls = data?.images?.map(
     (image) => `http://127.0.0.1:8090/${image.url}`
   )
 
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
   const handleImageClick = (index) => {
-    setSelectedImageIndex(index);
-  };
+    setSelectedImageIndex(index)
+  }
+
+  const DeleteAtdFunc = async () => {
+    DeteleAds(
+      {adId: adId}
+    )
+  }
+  console.log('текущее объявление', data)
+  
+  const currentUser = localStorage.getItem('id_сur_user')
+
+  if (isLoading || !data) return <div>идет загрузка</div>
+
+  if (isAuth) {
+    localStorage.setItem('id_seller', data.user.id)
+    console.log('id продавца', data.user.id)
+  }
+  console.log('id текущего пользователя', currentUser)
+
+  if (data.user.id === parseInt(currentUser, 10)) {
+    showEdit = true
+  }
 
   return (
     <div>
@@ -52,19 +92,19 @@ const AdDetails = () => {
                       />
                     </S.ArticleImg>
                     <S.ArticleImgBar>
-        {imageUrls &&
-          imageUrls.map((imageUrl, index) => (
-            <S.ArticleImgBarDiv
-              key={index}
-              onClick={() => handleImageClick(index)}
-            >
-              <S.ArticleImgBarDivImg
-                src={imageUrl}
-                alt={`Image ${index + 1}`}
-              />
-            </S.ArticleImgBarDiv>
-          ))}
-      </S.ArticleImgBar>
+                      {imageUrls &&
+                        imageUrls.map((imageUrl, index) => (
+                          <S.ArticleImgBarDiv
+                            key={index}
+                            onClick={() => handleImageClick(index)}
+                          >
+                            <S.ArticleImgBarDivImg
+                              src={imageUrl}
+                              alt={`Image ${index + 1}`}
+                            />
+                          </S.ArticleImgBarDiv>
+                        ))}
+                    </S.ArticleImgBar>
                     <S.ArticleImgBarMob>
                       <S.ImgBarMobCircleActive />
                       <S.ImgBarMobCircle />
@@ -92,10 +132,17 @@ const AdDetails = () => {
                       {data.price.toLocaleString('ru-RU')} ₽
                     </S.ArticlePrice>
 
-                    {isAuth ? (
+                    {showEdit ? (
                       <S.ArticleBtnBlock>
-                        <S.ArticleBtnReact>Редактировать</S.ArticleBtnReact>
-                        <S.ArticleBtnRemove>
+                        <S.ArticleBtnReact onClick={openModal}>
+                          Редактировать
+                        </S.ArticleBtnReact>
+                        <S.ArticleBtnRemove
+                          onClick= {
+                            DeleteAtdFunc
+                            // navigate('/')}
+                          }
+                        >
                           Снять с публикации
                         </S.ArticleBtnRemove>
                       </S.ArticleBtnBlock>
@@ -105,7 +152,6 @@ const AdDetails = () => {
                         <br />8 984 ХХХ ХХХ
                       </S.ArticleBtnReact>
                     )}
-
                     <S.ArticleAuthor>
                       <S.AuthorImg>
                         <S.AuthorImgImg src="" alt="" />
@@ -132,6 +178,7 @@ const AdDetails = () => {
 
           <Footer />
         </S.Container>
+        {isModalOpen && <EditModal data={data} onClose={closeModal} />}
       </S.Wrapper>
     </div>
   )

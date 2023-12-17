@@ -50,6 +50,42 @@ export const Api = createApi({
         return response
       },
     }),
+    addAds: builder.mutation({
+      query: ({ title, description, price}) => ({
+        url: `ads?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}&price=${encodeURIComponent(price)}`,
+        method: 'POST',
+      }),
+    }),
+    delAdsId: builder.mutation({
+      query: ({ adId }) => {
+        return { url: `ads/${adId}`, method: 'DELETE' }
+      },
+    }),
+    editAds: builder.mutation({
+      query: ({ title, description, price, id}) => ({
+        url: `ads/${id}`,
+        method: 'PATCH',
+        body: {
+          title: title,
+          description: description,
+          price: price,
+        },
+      }),
+    }),
+    addImgAds: builder.mutation({
+      query: ({id, file}) => ({
+        url: `ads/${id}/image`,
+        method: 'POST',
+        body: file,
+      }),
+    }),
+    delImgAds: builder.mutation({
+      query: (idAds) => ({
+        url: `ads/${idAds}/image`,
+        method: 'DELETE',
+        body: '',
+      }),
+    }),
   }),
 })
 
@@ -57,6 +93,6 @@ export const {
   useGetAdsQuery,
   useGetAdsIdQuery,
   useGetUserInfoQuery,
-  useRefreshTokenMutation,
+  useRefreshTokenMutation,useAddAdsMutation,useDelAdsIdMutation,useEditAdsMutation,   useAddImgAdsMutation,   useDelImgAdsMutation,
 } = Api
 // builder.mutation:POST, PUT или DELETE

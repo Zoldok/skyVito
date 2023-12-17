@@ -4,6 +4,15 @@ export const Wrapper = styled.div`
   width: 100%;
   min-height: 100%;
   overflow: hidden;
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
 `
 
 export const Container = styled.div`
@@ -34,7 +43,7 @@ export const ModalBlock = styled.div`
   pointer-events: auto;
 
   @media screen and (max-width: 600px) {
-    position: absolute;
+    // position: absolute;
     z-index: 1;
     left: -5px;
     opacity: 1;
@@ -375,7 +384,7 @@ export const FormNewArtP = styled.p`
 `
 export const FormNewArtSpan = styled.span`
   margin-left: 10px;
-  color: rgba(0, 0, 0, 0.3);
+  color: red;
   @media screen and (max-width: 600px) {
     display: block;
     margin-left: 0px;
@@ -479,6 +488,10 @@ export const FormNewArtImgImg = styled.div`
     -o-object-fit: cover;
     object-fit: cover;
   }
+`
+export const FormNewArtImgImg2 =styled.img`
+    width: 90px;
+    height: 90px;
 `
 export const FormNewArtiLabel = styled.label``
 export const FormNewArtInputPrice = styled.input`

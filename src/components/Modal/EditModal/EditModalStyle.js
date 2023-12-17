@@ -4,6 +4,15 @@ export const Wrapper = styled.div`
   width: 100%;
   min-height: 100%;
   overflow: hidden;
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
 `
 
 export const Container = styled.div`
@@ -465,7 +474,7 @@ export const FormNewArtImg = styled.div`
     margin: 0 5px;
   }
 `
-export const FormNewArtImgImg = styled.div`
+export const FormNewArtImgImg = styled.img`
   display: block;
   width: 100%;
   height: auto;
@@ -607,3 +616,28 @@ export const FormNewArtBtnPub = styled.button`
     }
   }
 `
+export const FormNewArtImgImg2 =styled.img`
+    width: 90px;
+    height: 90px;
+`
+
+
+export const DeleteImageBtn = styled.button`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 5px;
+  right: 5px;
+  border: transparent;
+  background-color: transparent;
+  color: red;
+  transition: all 0.3s;
+  color: black;
+  font-weight: 700;
+  z-index: 1;
+  &:hover {
+    scale: 1.1;
+  }
+`;
+
+
