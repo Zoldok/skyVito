@@ -46,8 +46,9 @@ const SellerProfile = () => {
             <S.MainTitle>Товары продавца</S.MainTitle>
           </S.MainCenterBlock>
 
-
+          <S.ContentCards>
           <AdsComponent/>
+          </S.ContentCards>
         </S.MainContainer>
         <Footer />
       </S.Container>

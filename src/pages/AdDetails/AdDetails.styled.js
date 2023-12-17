@@ -129,8 +129,9 @@ export const ArticleImg = styled.div`
 `
 
 export const ArticleImgImg = styled.img`
-  width: 100%;
+  // width: 100%;
   height: auto;
+    max-width: 100%;
   // display: inline-block; 
   // vertical-align: middle; 
   -o-object-fit: cover;

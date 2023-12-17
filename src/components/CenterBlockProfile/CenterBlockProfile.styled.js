@@ -84,7 +84,6 @@ export const SettingsLeft = styled.div`
   }
 `
 
-
 export const SettingsImg = styled.div`
   width: 170px;
   height: 170px;
@@ -120,7 +119,6 @@ export const SettingsChangePhoto = styled.a`
   color: #009ee4;
 `
 
-
 export const SettingsRight = styled.div`
   width: 630px;
 
@@ -146,7 +144,6 @@ export const SettingsDiv = styled.div`
     margin: 0 0px 18px;
   }
 `
-
 
 export const Label = styled.label`
   font-size: 16px;
@@ -237,6 +234,12 @@ border: 1px solid #009EE4;
 `
 export const MainTitle = styled.h3`
   margin-bottom: 20px;
+  color: #000;
+  font-family: Roboto;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 220%; /* 70.4px */
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin-bottom: 30px;
   }

@@ -1,8 +1,8 @@
 import { format, isToday, isYesterday } from 'date-fns';
-// import ruLocale from 'date-fns/locale/ru';
 
 const formatTime = (dateString) => {
   const date = new Date(dateString);
+  date.setHours(date.getHours() + 3);
 
   if (isToday(date)) {
     return `Сегодня в ${format(date, 'HH:mm')}`;
