@@ -5,6 +5,9 @@ import SellerProfile from './pages/SellerProfile/SellerProfile';
 import Main from './pages/Main/Main';
 import AdDetails from './pages/AdDetails/AdDetails';
 import Registration from './pages/Register/Register';
+import NotFound from './pages/NotFound/NotFound';
+import { ProtectedRoute } from './utils/ProtectedRoute/ProtectedRoute'
+
 
 const AppRoutes = () => {
   return (
@@ -12,9 +15,12 @@ const AppRoutes = () => {
         <Route exact path="/" Component={Main}/>
         <Route exact path="/register" Component={Registration}/>
         <Route exact path="/login" Component={Login}/>
+        <Route element={<ProtectedRoute/>}>
         <Route exact path="/profile" Component={Profile}/>
-        <Route exact path="/sellerProfile" Component={SellerProfile}/>
+        </Route>
+        <Route exact path="/seller/:idSeller" Component={SellerProfile}/>
         <Route path="/ad/:adId" Component={AdDetails} /> 
+        <Route path="*" Component={NotFound} />
 
     </Routes>
   );

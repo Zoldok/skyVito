@@ -51,8 +51,12 @@ export const Api = createApi({
       },
     }),
     addAds: builder.mutation({
-      query: ({ title, description, price}) => ({
-        url: `ads?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}&price=${encodeURIComponent(price)}`,
+      query: ({ title, description, price }) => ({
+        url: `ads?title=${encodeURIComponent(
+          title
+        )}&description=${encodeURIComponent(
+          description
+        )}&price=${encodeURIComponent(price)}`,
         method: 'POST',
       }),
     }),
@@ -62,7 +66,7 @@ export const Api = createApi({
       },
     }),
     editAds: builder.mutation({
-      query: ({ title, description, price, id}) => ({
+      query: ({ title, description, price, id }) => ({
         url: `ads/${id}`,
         method: 'PATCH',
         body: {
@@ -73,7 +77,7 @@ export const Api = createApi({
       }),
     }),
     addImgAds: builder.mutation({
-      query: ({id, file}) => ({
+      query: ({ id, file }) => ({
         url: `ads/${id}/image`,
         method: 'POST',
         body: file,
@@ -93,6 +97,11 @@ export const {
   useGetAdsQuery,
   useGetAdsIdQuery,
   useGetUserInfoQuery,
-  useRefreshTokenMutation,useAddAdsMutation,useDelAdsIdMutation,useEditAdsMutation,   useAddImgAdsMutation,   useDelImgAdsMutation,
+  useRefreshTokenMutation,
+  useAddAdsMutation,
+  useDelAdsIdMutation,
+  useEditAdsMutation,
+  useAddImgAdsMutation,
+  useDelImgAdsMutation,
 } = Api
 // builder.mutation:POST, PUT или DELETE

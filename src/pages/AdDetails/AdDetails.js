@@ -1,4 +1,4 @@
-import {   useParams } from 'react-router-dom'
+import {   useNavigate, useParams } from 'react-router-dom'
 import {
   useDelAdsIdMutation,
   useGetAdsIdQuery,
@@ -12,11 +12,13 @@ import { formatDate } from '../../utils/FormatteDate'
 import { formatTime } from '../../utils/FormatteTime'
 import { useState } from 'react'
 import EditModal from '../../components/Modal/EditModal/EditModal'
+import { Link } from 'react-router-dom'
 // import { useMutation } from 'react-query'
 
 const AdDetails = () => {
   // const [showEdit, setShowEdit] = useState(false)
   const { adId } = useParams()
+  const navigate = useNavigate()
   // console.log(adId)
   const { isAuth } = useAuth()
   // запрос на получение обьявления по Id
@@ -53,6 +55,7 @@ const AdDetails = () => {
     DeteleAds(
       {adId: adId}
     )
+    navigate('/')
   }
   console.log('текущее объявление', data)
   
@@ -69,6 +72,7 @@ const AdDetails = () => {
   if (data.user.id === parseInt(currentUser, 10)) {
     showEdit = true
   }
+  const idSeller = data.user.id
 
   return (
     <div>
@@ -157,7 +161,12 @@ const AdDetails = () => {
                         <S.AuthorImgImg src="" alt="" />
                       </S.AuthorImg>
                       <S.AuthorCont>
-                        <S.AuthorName>{data.user.name}</S.AuthorName>
+                      <S.AuthorName>
+                          {/* стилизовать линк */}
+                          <Link to={`/seller/${idSeller}`}>
+                            {data.user.name}
+                          </Link>
+                        </S.AuthorName>
                         <S.AuthorAbout>
                           {formatDate(data.user.sells_from)}
                         </S.AuthorAbout>
