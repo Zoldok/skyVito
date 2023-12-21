@@ -4,10 +4,10 @@ import * as S from './Search.styled'
 const Search = () => {
   return (
     <S.MainSearch>
-    <S.SearchLogoLink href="#" target="_blank">
+    <S.SearchLogoLink  target="_blank">
       <S.SearchLogoImg src="img/logo.png" alt="logo" />
     </S.SearchLogoLink>
-    <S.SearchLogoMobLink href="#" target="_blank">
+    <S.SearchLogoMobLink  target="_blank">
       <S.SearchLogoMobImg src="img/logo-mob.png" alt="logo" />
     </S.SearchLogoMobLink>
     <S.SearchForm action="#">

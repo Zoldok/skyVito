@@ -1,28 +1,41 @@
-import { useState } from 'react'
-import { useAddAdsMutation } from '../../../store/Service/Service'
+import { useEffect, useState } from 'react'
+import { useAddAdsMutation, useGetAdsQuery } from '../../../store/Service/Service'
 import * as S from './AddModalStyle'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { setAds } from '../../../store/slices/userSlice'
 
 export const AddModal = ({ onClose }) => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
-
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   
   const [addAds, { isLoading, isError, isSuccess }] = useAddAdsMutation()
  
+  const {data, isLoading: isis, refetch} = useGetAdsQuery()
+
+  useEffect(()=> {
+    if(!isis) {
+      dispatch(setAds(data))
+    }
+  }, [data])
+
   const handleFormSubmit = async (e) => {
     e.preventDefault()
     try {
       const result = await addAds({ title, description, price })
       console.log(result)
       console.log(isLoading, isSuccess)
-            //получить данные задиспатчить. задиспатчить
+      refetch()
+      onClose()
+      navigate('/')
     } catch (error) {
       console.log(isError)
     }
-
-    //
   }
+
 
   return (
     <S.Wrapper>
@@ -57,9 +70,9 @@ export const AddModal = ({ onClose }) => {
               ></S.FormNewArtArea>
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
-              <S.FormNewArtP>Фотографии товара</S.FormNewArtP>
+              {/* <S.FormNewArtP>Фотографии товара</S.FormNewArtP> */}
               <S.FormNewArtSpan>Фотографии можно добавить во время редактирования</S.FormNewArtSpan>
-              <S.FormNewArtBarImg>
+              {/* <S.FormNewArtBarImg>
                 {[...Array(5)].map((_, index) => (
                   <S.FormNewArtImg key={index}>
                     <S.FormNewArtImgImg src="" alt="" />
@@ -76,7 +89,7 @@ export const AddModal = ({ onClose }) => {
                     />
                   </S.FormNewArtImg>
                 ))}
-              </S.FormNewArtBarImg>
+              </S.FormNewArtBarImg> */}
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
               <S.FormNewArtiLabel>Цена</S.FormNewArtiLabel>

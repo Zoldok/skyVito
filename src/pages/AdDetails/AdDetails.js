@@ -2,6 +2,7 @@ import {   useNavigate, useParams } from 'react-router-dom'
 import {
   useDelAdsIdMutation,
   useGetAdsIdQuery,
+  useGetAdsQuery,
 } from '../../store/Service/Service'
 import * as S from './AdDetails.styled'
 import Footer from '../../components/Footer/Footer'
@@ -10,21 +11,21 @@ import { useAuth } from '../../hooks/use-auth'
 import MainMenu from '../../components/MainMenu/MainMenu'
 import { formatDate } from '../../utils/FormatteDate'
 import { formatTime } from '../../utils/FormatteTime'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import EditModal from '../../components/Modal/EditModal/EditModal'
 import { Link } from 'react-router-dom'
-// import { useMutation } from 'react-query'
+import { setAds } from '../../store/slices/userSlice'
+import { useDispatch } from 'react-redux'
 
 const AdDetails = () => {
-  // const [showEdit, setShowEdit] = useState(false)
   const { adId } = useParams()
   const navigate = useNavigate()
-  // console.log(adId)
   const { isAuth } = useAuth()
   // запрос на получение обьявления по Id
   const { data, isLoading } = useGetAdsIdQuery(adId)
   //вытащить данные из стейта
   // const ads = useSelector((state) => state.user.ads)
+  const dispatch = useDispatch()
 
   
   const [DeteleAds] = useDelAdsIdMutation(adId)
@@ -51,24 +52,44 @@ const AdDetails = () => {
     setSelectedImageIndex(index)
   }
 
-  const DeleteAtdFunc = async () => {
-    DeteleAds(
-      {adId: adId}
-    )
-    navigate('/')
+  // const DeleteAtdFunc = async () => {
+  //   DeteleAds(
+  //     {adId: adId}
+  //   )
+  //   navigate('/')
+  // }
+
+  //новый запрос на получение всех обьявлений
+  const {data: dataAll, isLoading: isis, refetch} = useGetAdsQuery()
+
+  useEffect(()=> {
+    if(!isis) {
+      dispatch(setAds(dataAll))
+    }
+  }, [data])
+
+  const DeleteAtdFunc = async (e) => {
+    e.preventDefault()
+    try {
+      const result = await DeteleAds({ adId: adId })
+      console.log(result)
+      refetch()
+
+      navigate('/')
+    } catch (error) {
+      console.log('ошибка')
+    }
   }
-  console.log('текущее объявление', data)
-  
+  // console.log('текущее объявление', data)
   const currentUser = localStorage.getItem('id_сur_user')
 
   if (isLoading || !data) return <div>идет загрузка</div>
 
   if (isAuth) {
     localStorage.setItem('id_seller', data.user.id)
-    console.log('id продавца', data.user.id)
+    // console.log('id продавца', data.user.id)
   }
-  console.log('id текущего пользователя', currentUser)
-
+  // console.log('id текущего пользователя', currentUser)
   if (data.user.id === parseInt(currentUser, 10)) {
     showEdit = true
   }
@@ -144,7 +165,6 @@ const AdDetails = () => {
                         <S.ArticleBtnRemove
                           onClick= {
                             DeleteAtdFunc
-                            // navigate('/')}
                           }
                         >
                           Снять с публикации
