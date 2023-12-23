@@ -1,4 +1,5 @@
-import {   useNavigate, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   useDelAdsIdMutation,
   useGetAdsIdQuery,
@@ -23,7 +24,7 @@ const AdDetails = () => {
   const dispatch = useDispatch()
   const { adId } = useParams()
   const { isAuth } = useAuth()
-  const { data, isLoading , refetch: refetchAdsId} = useGetAdsIdQuery(adId)
+  const { data, isLoading, refetch: refetchAdsId } = useGetAdsIdQuery(adId)
   const [DeteleAds] = useDelAdsIdMutation(adId)
   let showEdit = false
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -31,18 +32,17 @@ const AdDetails = () => {
   const [currentAds, setCurrentAds] = useState(data)
 
   const updateAdData = (updatedData) => {
-    setCurrentAds(updatedData);
-  };
+    setCurrentAds(updatedData)
+  }
 
   useEffect(() => {
     if (data) {
-      setCurrentAds(data);
+      setCurrentAds(data)
       refetchAdsId()
     }
-  }, [data]);
-  
-  console.log('текущее', currentAds);
+  }, [data])
 
+  console.log('текущее', currentAds)
 
   // useEffect(() => {
   //   refetch() // Запуск нового запроса при монтировании компонента
@@ -56,16 +56,9 @@ const AdDetails = () => {
     setIsModalOpen(false) // Закрываем модальное окно
   }
 
-
-
-
-
-
-
   const imageUrls = currentAds?.images?.map(
     (image) => `http://127.0.0.1:8090/${image.url}`
   )
-  
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
@@ -73,10 +66,10 @@ const AdDetails = () => {
     setSelectedImageIndex(index)
   }
 
-  const {data: dataAll, isLoading: isis, refetch} = useGetAdsQuery()
+  const { data: dataAll, isLoading: isis, refetch } = useGetAdsQuery()
 
-  useEffect(()=> {
-    if(!isis) {
+  useEffect(() => {
+    if (!isis) {
       dispatch(setAds(dataAll))
     }
   }, [data])
@@ -94,12 +87,8 @@ const AdDetails = () => {
     }
   }
 
-
-
-
-
   // console.log('текущее объявление', currentAds)
-  
+
   const currentUser = localStorage.getItem('id_сur_user')
 
   if (isLoading) return <div>идет загрузка</div>
@@ -112,6 +101,8 @@ const AdDetails = () => {
     showEdit = true
   }
 
+  const idSeller = data.user.id
+  
   return (
     <div>
       {/* Обьявление
@@ -129,8 +120,12 @@ const AdDetails = () => {
                   <S.ArticleFillImg>
                     <S.ArticleImg>
                       <S.ArticleImgImg
-  src={currentAds?.images && selectedImageIndex !== null ? `http://127.0.0.1:8090/${currentAds.images[selectedImageIndex]?.url}` : ''}
-  alt=""
+                        src={
+                          currentAds?.images && selectedImageIndex !== null
+                            ? `http://127.0.0.1:8090/${currentAds.images[selectedImageIndex]?.url}`
+                            : ''
+                        }
+                        alt=""
                       />
                     </S.ArticleImg>
                     <S.ArticleImgBar>
@@ -180,7 +175,7 @@ const AdDetails = () => {
                           Редактировать
                         </S.ArticleBtnReact>
                         <S.ArticleBtnRemove
-                          onClick= {
+                          onClick={
                             DeleteAtdFunc
                             // navigate('/')}
                           }
@@ -199,9 +194,15 @@ const AdDetails = () => {
                         <S.AuthorImgImg src="" alt="" />
                       </S.AuthorImg>
                       <S.AuthorCont>
-                        <S.AuthorName>{currentAds?.user.name}</S.AuthorName>
+                      <S.AuthorName>
+                          {/* стилизовать линк */}
+                          <Link to={`/seller/${idSeller}`}>
+                            {data.user.name}
+                          </Link>
+                        </S.AuthorName>
                         <S.AuthorAbout>
-                          {currentAds && formatDate(currentAds?.user.sells_from)}
+                          {currentAds &&
+                            formatDate(currentAds?.user.sells_from)}
                         </S.AuthorAbout>
                       </S.AuthorCont>
                     </S.ArticleAuthor>
@@ -220,7 +221,14 @@ const AdDetails = () => {
 
           <Footer />
         </S.Container>
-        {isModalOpen && <EditModal data={currentAds} onClose={closeModal} setCurrentAds={setCurrentAds} updateAdData={updateAdData}/>}
+        {isModalOpen && (
+          <EditModal
+            data={currentAds}
+            onClose={closeModal}
+            setCurrentAds={setCurrentAds}
+            updateAdData={updateAdData}
+          />
+        )}
       </S.Wrapper>
     </div>
   )

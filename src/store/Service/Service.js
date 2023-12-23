@@ -83,13 +83,6 @@ export const Api = createApi({
         body: file,
       }),
     }),
-    // delImgAds: builder.mutation({
-    //   query: (idAds) => ({
-    //     url: `ads/${idAds}/image`,
-    //     method: 'DELETE',
-    //     body: '',
-    //   }),
-    // }),
     delImgAds: builder.mutation({
       query: (data) => {
         const url = data.image.url

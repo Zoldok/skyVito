@@ -43,7 +43,7 @@ const Search = ({ onSearch }) => {
         name="search"
         value={searchQuery}
         onChange={handleInputChange}
-        onSearch={handleClear} 
+        // onSearch={handleClear} 
         // onReset={handleInputClear} 
         
       />
