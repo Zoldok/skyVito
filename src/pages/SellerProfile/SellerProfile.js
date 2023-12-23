@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import MainMenu from '../../components/MainMenu/MainMenu'
@@ -6,6 +6,11 @@ import * as S from './SellerProfile.styled'
 import AdsComponent from '../../components/AdsComponent/AdsComponent'
 
 const SellerProfile = () => {
+  const { idSeller } = useParams()
+
+  console.log('id продавца',idSeller);
+  //записать данные user из обьявления в состояние в AdDetail, и тут их вытащить для отображения
+  //сделать запрос на обьявления по id и передать пропсом в adsComponent
   return (
     <S.Wrapper>
       <S.Container>
