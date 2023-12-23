@@ -2,20 +2,37 @@ import AdsComponent from '../../components/AdsComponent/AdsComponent'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import Search from '../../components/Search/Search'
-import {
-  useGetUserInfoQuery,
-} from '../../store/Service/Service'
+import { useGetAdsQuery, useGetUserInfoQuery } from '../../store/Service/Service'
 import * as S from './Main.styled'
 import { useAuth } from '../../hooks/use-auth'
-import { useSelector } from 'react-redux'
-
+import {  useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { setAds } from '../../store/slices/userSlice'
 
 const Main = () => {
+  const dispatch = useDispatch()
   const { isAuth } = useAuth()
-  const {
-    data: userInfo, isLoading
-  } = useGetUserInfoQuery()
+  const { data: userInfo, isLoading, refetch } = useGetUserInfoQuery()
+  const {data, isLoading: isis, refetch: refetchAds} = useGetAdsQuery()
   const ads = useSelector((state) => state.user.ads)
+  //для поиска
+  const [searchResults, setSearchResults] = useState([]);
+  const [hasNoResults, setHasNoResults] = useState(false);
+
+  useEffect(()=> {
+    if(!isis) {
+      refetchAds()
+      dispatch(setAds(data))
+    }
+  }, [])
+  
+
+  //возможно стоит удалить
+  useEffect(() => {
+    if (!isLoading) {
+      refetch()
+    }
+  }, [])
 
   //записываем данные текущего пользователя в localStorage
   if (userInfo) {
@@ -23,19 +40,29 @@ const Main = () => {
     console.log('данные пользователя', userInfo)
   }
 
-  if (isLoading) return <div>идет загрузка</div>
+  //для поиска
+  const handleSearch = (query) => {
+    const filteredAds = ads.filter((ad) =>
+      ad.title.toLowerCase().includes(query.toLowerCase())
+    );
+    setSearchResults(filteredAds);
+    setHasNoResults(filteredAds.length === 0); // Проверяем, есть ли результаты поиска
+  };
+
+
+  if (isLoading ) return <div>идет загрузка</div>
 
   return (
     <S.Wrapper>
       <S.Container>
         <Header isAuth={isAuth} />
         <S.Main>
-          <Search />
+          <Search onSearch={handleSearch}/>
           <S.MainContainer>
             <S.MainH2>Объявления</S.MainH2>
             <S.MainContent>
               <S.ContentCards>
-                <AdsComponent ads={ads}/>
+                <AdsComponent ads={searchResults.length > 0 ? searchResults : ads} hasNoResults={hasNoResults} />
               </S.ContentCards>
             </S.MainContent>
           </S.MainContainer>

@@ -641,3 +641,24 @@ export const DeleteImageBtn = styled.button`
 `;
 
 
+export const DeleteImageBtn2 = styled.button`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 5px;
+  right: 5px;
+  border: transparent;
+  background-color: transparent;
+  color: red;
+  transition: all 0.3s;
+  color: black;
+  font-weight: 700;
+  z-index: 1;
+  &:hover {
+    scale: 1.1;
+  }
+`;
+
+export const BlurredImage = styled.img`
+filter: blur(5px); 
+`
