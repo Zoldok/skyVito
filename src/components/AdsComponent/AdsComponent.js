@@ -2,9 +2,12 @@ import { Link } from 'react-router-dom'
 import * as S from './AdsComponent.styled'
 import { formatTime } from '../../utils/FormatteTime'
 
-const AdsComponent = ({ ads }) => {
+const AdsComponent = ({ ads, hasNoResults }) => {
   if (!ads) return <div>Loading</div>
 
+  if (hasNoResults) {
+    return <div>Ничего не найдено</div>;
+  }
   // Используем метод reverse() для изменения порядка элементов в массиве
   const reversedAds = ads.slice().reverse()
 

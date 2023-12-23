@@ -1,30 +1,38 @@
-import {  useState } from 'react'
+import { useState } from 'react'
 import {
   useEditAdsMutation,
   useAddImgAdsMutation,
+  useDelImgAdsMutation,
 } from '../../../store/Service/Service'
 import * as S from './EditModalStyle'
 
-export const EditModal = ({ data, onClose }) => {
+export const EditModal = ({ data, onClose,  updateAdData
+}) => {
   // console.log('данные редактирования', data)
   const [title, setTitle] = useState(data.title)
   const [description, setDescription] = useState(data.description)
   const [price, setPrice] = useState(data.price)
   const [selectedImages, setSelectedImages] = useState([])
-  // const [images, setImages] = useState([]);
   const id = data.id //id объявления
-  // const [deleteImages] = useDelAdsImgMutation(id);
   const [postAdsImage] = useAddImgAdsMutation(id)
-  // console.log('цена из редактора', data.images)
+  // console.log('url изображений', data.images)
   const [imagesFromInput, setImagesFromInput] = useState([])
-
   const [editAds, { isLoading, isError, isSuccess }] = useEditAdsMutation()
+  const [delImgAds] = useDelImgAdsMutation()
+  const [blurredIndexes, setBlurredIndexes] = useState([]);
 
 
   const handleFormSubmit = async () => {
     try {
-      const result = await editAds({ title, description, price: Number(price), id })
-      console.log(result)
+      const result = await editAds({
+        title,
+        description,
+        price: Number(price),
+        id,
+      })
+      console.log('ответ сервера',result.data)
+      updateAdData(result.data)
+            //при добавлении можно записать в состояние т.к. ответ содержит новые изображения
       console.log(isLoading, isSuccess)
     } catch (error) {
       console.log(isError)
@@ -33,9 +41,9 @@ export const EditModal = ({ data, onClose }) => {
 
   const handleFileSelect = async (e) => {
     const files = Array.from(e.target.files)
-    // Обработка выбранных файлов и их отображение
     setImagesFromInput(files)
     const reader = new FileReader()
+
     reader.onload = () => {
       const imagesData = files.map((file) => ({
         file,
@@ -49,14 +57,29 @@ export const EditModal = ({ data, onClose }) => {
 
   const submitAds = async (e) => {
     e.preventDefault()
-    console.log('REF',imagesFromInput);
+    // console.log('REF', imagesFromInput)
     const formData = new FormData()
     formData.append('file', imagesFromInput[imagesFromInput.length - 1])
     await postAdsImage({ id, file: formData })
-    console.log(typeof price);
+    setSelectedImages((prevImages) => [...prevImages, ...imagesFromInput]);
+    // console.log(typeof price)
     handleFormSubmit()
+    onClose()
   }
 
+  const handleDeleteImage = async (index, image) => {
+    try {
+      await delImgAds({ id: data.id, image });
+      setSelectedImages((prevImages) => {
+        const newImages = [...prevImages];
+        newImages.splice(index, 1);
+        return newImages;
+      });
+    } catch (error) {
+      console.log('Ошибка при удалении изображения:', error);
+    }
+    setBlurredIndexes((prevIndexes) => [...prevIndexes, index]);
+  };
   return (
     <S.Wrapper>
       <S.ModalBlock>
@@ -66,8 +89,8 @@ export const EditModal = ({ data, onClose }) => {
             <S.ModalBtnCloseLine></S.ModalBtnCloseLine>
           </S.ModalBtnClose>
 
-          <S.ModalFormNewArt >
-            <S.FormNewArtBlock>
+          <S.ModalFormNewArt>
+          <S.FormNewArtBlock>
               <S.FormNewArtLabel htmlFor="text">Название</S.FormNewArtLabel>
               <S.FormNewArtInput
                 type="text"
@@ -97,25 +120,41 @@ export const EditModal = ({ data, onClose }) => {
                   data.images.map((image, index) => (
                     <S.FormNewArtImg key={index}>
                       <S.DeleteImageBtn
-                      // onClick={() => handleDeleteImage(image)}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          handleDeleteImage(index, image)
+                        }}
                       >
                         x
                       </S.DeleteImageBtn>
-                      <S.FormNewArtImgImg
-                        src={!image ? '' : `http://localhost:8090/${image.url}`}
-                        alt=""
-                      />
-                    </S.FormNewArtImg>
+                      {blurredIndexes.includes(index) ? (
+              <S.BlurredImage
+                src={!image ? '' : `http://localhost:8090/${image.url}`}
+                alt=""
+              />
+            ) : (
+              <S.FormNewArtImgImg
+                src={!image ? '' : `http://localhost:8090/${image.url}`}
+                alt=""
+              />
+            )}
+          </S.FormNewArtImg>
                   ))}
                 {/* добавление новых */}
                 {[...Array(5 - data.images.length)].map((_, index) => (
-                  // {[...Array(5)].map((_, index) => (
                   <S.FormNewArtImg key={index}>
                     {selectedImages[index] ? (
-                      <S.FormNewArtImgImg2
-                        src={selectedImages[index].dataURL}
-                        alt="Выбранное изображение"
-                      />
+                      <>
+                        <S.DeleteImageBtn2
+                          onClick={() => handleDeleteImage(index)}
+                        >
+                          x
+                        </S.DeleteImageBtn2>
+                        <S.FormNewArtImgImg2
+                          src={selectedImages[index].dataURL}
+                          alt="Выбранное изображение"
+                        />
+                      </>
                     ) : (
                       <S.FormNewArtImgImg src="" alt="" />
                     )}

@@ -163,43 +163,12 @@ color: #FFFFFF;
   }
 `
 
-
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
-// export const Wrapper = styled.div``
+export const ClearButton = styled.button`
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  color: #999; /* Цвет иконки очистки */
+  margin-left: 5px; /* Расстояние между полем ввода и кнопкой очистки */
+`

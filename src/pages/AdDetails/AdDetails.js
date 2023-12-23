@@ -8,31 +8,45 @@ import * as S from './AdDetails.styled'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import { useAuth } from '../../hooks/use-auth'
+// import './my-article.css'
 import MainMenu from '../../components/MainMenu/MainMenu'
 import { formatDate } from '../../utils/FormatteDate'
 import { formatTime } from '../../utils/FormatteTime'
 import { useEffect, useState } from 'react'
 import EditModal from '../../components/Modal/EditModal/EditModal'
-import { Link } from 'react-router-dom'
-import { setAds } from '../../store/slices/userSlice'
 import { useDispatch } from 'react-redux'
+import { setAds } from '../../store/slices/userSlice'
+// import { useMutation } from 'react-query'
 
 const AdDetails = () => {
-  const { adId } = useParams()
   const navigate = useNavigate()
-  const { isAuth } = useAuth()
-  // запрос на получение обьявления по Id
-  const { data, isLoading } = useGetAdsIdQuery(adId)
-  //вытащить данные из стейта
-  // const ads = useSelector((state) => state.user.ads)
   const dispatch = useDispatch()
-
-  
+  const { adId } = useParams()
+  const { isAuth } = useAuth()
+  const { data, isLoading , refetch: refetchAdsId} = useGetAdsIdQuery(adId)
   const [DeteleAds] = useDelAdsIdMutation(adId)
-
   let showEdit = false
-  // const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  // eslint-disable-next-line no-unused-vars
+  const [currentAds, setCurrentAds] = useState(data)
+
+  const updateAdData = (updatedData) => {
+    setCurrentAds(updatedData);
+  };
+
+  useEffect(() => {
+    if (data) {
+      setCurrentAds(data);
+      refetchAdsId()
+    }
+  }, [data]);
+  
+  console.log('текущее', currentAds);
+
+
+  // useEffect(() => {
+  //   refetch() // Запуск нового запроса при монтировании компонента
+  // }, [adId, refetchAdsId])
 
   const openModal = () => {
     setIsModalOpen(true) // Открываем модальное окно
@@ -42,9 +56,16 @@ const AdDetails = () => {
     setIsModalOpen(false) // Закрываем модальное окно
   }
 
-  const imageUrls = data?.images?.map(
+
+
+
+
+
+
+  const imageUrls = currentAds?.images?.map(
     (image) => `http://127.0.0.1:8090/${image.url}`
   )
+  
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
@@ -52,14 +73,6 @@ const AdDetails = () => {
     setSelectedImageIndex(index)
   }
 
-  // const DeleteAtdFunc = async () => {
-  //   DeteleAds(
-  //     {adId: adId}
-  //   )
-  //   navigate('/')
-  // }
-
-  //новый запрос на получение всех обьявлений
   const {data: dataAll, isLoading: isis, refetch} = useGetAdsQuery()
 
   useEffect(()=> {
@@ -80,20 +93,24 @@ const AdDetails = () => {
       console.log('ошибка')
     }
   }
-  // console.log('текущее объявление', data)
+
+
+
+
+
+  // console.log('текущее объявление', currentAds)
+  
   const currentUser = localStorage.getItem('id_сur_user')
 
-  if (isLoading || !data) return <div>идет загрузка</div>
+  if (isLoading) return <div>идет загрузка</div>
 
   if (isAuth) {
     localStorage.setItem('id_seller', data.user.id)
-    // console.log('id продавца', data.user.id)
   }
-  // console.log('id текущего пользователя', currentUser)
+
   if (data.user.id === parseInt(currentUser, 10)) {
     showEdit = true
   }
-  const idSeller = data.user.id
 
   return (
     <div>
@@ -112,8 +129,8 @@ const AdDetails = () => {
                   <S.ArticleFillImg>
                     <S.ArticleImg>
                       <S.ArticleImgImg
-                        src={`http://127.0.0.1:8090/${data?.images[selectedImageIndex]?.url}`}
-                        alt=""
+  src={currentAds?.images && selectedImageIndex !== null ? `http://127.0.0.1:8090/${currentAds.images[selectedImageIndex]?.url}` : ''}
+  alt=""
                       />
                     </S.ArticleImg>
                     <S.ArticleImgBar>
@@ -142,19 +159,19 @@ const AdDetails = () => {
 
                 <S.ArticleRight>
                   <S.ArticleBlock>
-                    <S.ArticleTitle>{data.title}</S.ArticleTitle>
+                    <S.ArticleTitle>{currentAds?.title}</S.ArticleTitle>
                     <S.ArticleInfo>
                       <S.ArticleDate>
                         {' '}
-                        {formatTime(data.created_on)}
+                        {currentAds && formatTime(currentAds.created_on)}
                       </S.ArticleDate>
-                      <S.ArticleCity>{data.user.city}</S.ArticleCity>
+                      <S.ArticleCity>{currentAds?.user.city}</S.ArticleCity>
                       <S.ArticleLink href="" target="_blank" rel="">
                         4 отзыва
                       </S.ArticleLink>
                     </S.ArticleInfo>
                     <S.ArticlePrice>
-                      {data.price.toLocaleString('ru-RU')} ₽
+                      {currentAds?.price.toLocaleString('ru-RU')} ₽
                     </S.ArticlePrice>
 
                     {showEdit ? (
@@ -165,6 +182,7 @@ const AdDetails = () => {
                         <S.ArticleBtnRemove
                           onClick= {
                             DeleteAtdFunc
+                            // navigate('/')}
                           }
                         >
                           Снять с публикации
@@ -181,14 +199,9 @@ const AdDetails = () => {
                         <S.AuthorImgImg src="" alt="" />
                       </S.AuthorImg>
                       <S.AuthorCont>
-                      <S.AuthorName>
-                          {/* стилизовать линк */}
-                          <Link to={`/seller/${idSeller}`}>
-                            {data.user.name}
-                          </Link>
-                        </S.AuthorName>
+                        <S.AuthorName>{currentAds?.user.name}</S.AuthorName>
                         <S.AuthorAbout>
-                          {formatDate(data.user.sells_from)}
+                          {currentAds && formatDate(currentAds?.user.sells_from)}
                         </S.AuthorAbout>
                       </S.AuthorCont>
                     </S.ArticleAuthor>
@@ -200,14 +213,14 @@ const AdDetails = () => {
             <S.MainContainer>
               <S.MainTitle>Описание товара</S.MainTitle>
               <S.MainContent>
-                <S.MainText>{data.description}</S.MainText>
+                <S.MainText>{currentAds?.description}</S.MainText>
               </S.MainContent>
             </S.MainContainer>
           </S.Main>
 
           <Footer />
         </S.Container>
-        {isModalOpen && <EditModal data={data} onClose={closeModal} />}
+        {isModalOpen && <EditModal data={currentAds} onClose={closeModal} setCurrentAds={setCurrentAds} updateAdData={updateAdData}/>}
       </S.Wrapper>
     </div>
   )

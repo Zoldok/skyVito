@@ -83,12 +83,35 @@ export const Api = createApi({
         body: file,
       }),
     }),
+    // delImgAds: builder.mutation({
+    //   query: (idAds) => ({
+    //     url: `ads/${idAds}/image`,
+    //     method: 'DELETE',
+    //     body: '',
+    //   }),
+    // }),
     delImgAds: builder.mutation({
-      query: (idAds) => ({
-        url: `ads/${idAds}/image`,
-        method: 'DELETE',
-        body: '',
+      query: (data) => {
+        const url = data.image.url
+        return {
+          url: `ads/${data.id}/image?file_url=${url}`,
+          method: 'DELETE',
+        }
+      },
+    }),
+    userUpdate: builder.mutation({
+      query: (updatedUserData) => ({
+        url: 'user',
+        method: 'PATCH',
+        body: updatedUserData,
       }),
+    }),
+    uploadUserAvatar: builder.mutation({
+      query: (formData) => ({
+        url: 'user/avatar',
+        method: 'POST',
+        body: formData,
+      })
     }),
   }),
 })
@@ -103,5 +126,7 @@ export const {
   useEditAdsMutation,
   useAddImgAdsMutation,
   useDelImgAdsMutation,
+  useUserUpdateMutation,
+  useUploadUserAvatarMutation,
 } = Api
 // builder.mutation:POST, PUT или DELETE

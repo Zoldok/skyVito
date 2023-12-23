@@ -3,16 +3,21 @@ import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import CenterBlockProfile from '../../components/CenterBlockProfile/CenterBlockProfile'
 import AdsComponent from '../../components/AdsComponent/AdsComponent'
+import { useGetUserInfoQuery } from '../../store/Service/Service'
+
 
 const Profile = () => {
-const profileKey = true
-  //сделать запрос на получение списка для юзера
+  const profileKey = true
+
+  const { data: userInfo } = useGetUserInfoQuery()
+  if (!userInfo) return <div>load</div>
+
   return (
     <S.Wrapper>
       <S.Container>
         <Header profileKey={profileKey} />
         <S.MainContainer>
-          <CenterBlockProfile />
+          <CenterBlockProfile currentUser={userInfo} />
           <S.MainContent>
             <S.ContentCards>
               <AdsComponent />
