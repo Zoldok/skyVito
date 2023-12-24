@@ -3,7 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
   useDelAdsIdMutation,
   useGetAdsIdQuery,
-  useGetAdsQuery,
+  useGetAllCommentsQuery,
+  // useGetAdsQuery,
 } from '../../store/Service/Service'
 import * as S from './AdDetails.styled'
 import Footer from '../../components/Footer/Footer'
@@ -15,13 +16,14 @@ import { formatDate } from '../../utils/FormatteDate'
 import { formatTime } from '../../utils/FormatteTime'
 import { useEffect, useState } from 'react'
 import EditModal from '../../components/Modal/EditModal/EditModal'
-import { useDispatch } from 'react-redux'
-import { setAds } from '../../store/slices/userSlice'
+import { ReviewsModal } from '../../components/Modal/ReviewsModal/ReviewsModal'
+// import { useDispatch } from 'react-redux'
+// import { setAds } from '../../store/slices/userSlice'
 // import { useMutation } from 'react-query'
 
 const AdDetails = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const { adId } = useParams()
   const { isAuth } = useAuth()
   const { data, isLoading, refetch: refetchAdsId } = useGetAdsIdQuery(adId)
@@ -31,9 +33,21 @@ const AdDetails = () => {
   // eslint-disable-next-line no-unused-vars
   const [currentAds, setCurrentAds] = useState(data)
 
+  const [isModalOpenReviews, setIsModalOpenReviews] = useState(false)
+  const [adComments, setAdComments] = useState([])
+
+  const { data: advComments } = useGetAllCommentsQuery(adId)
+
+
   const updateAdData = (updatedData) => {
     setCurrentAds(updatedData)
   }
+
+  useEffect(() => {
+    if (advComments) {
+      setAdComments(advComments)
+    }
+  }, [advComments])
 
   useEffect(() => {
     if (data) {
@@ -66,21 +80,20 @@ const AdDetails = () => {
     setSelectedImageIndex(index)
   }
 
-  const { data: dataAll, isLoading: isis, refetch } = useGetAdsQuery()
+  // const { data: dataAll, isLoading: isis, refetch } = useGetAdsQuery()
 
-  useEffect(() => {
-    if (!isis) {
-      dispatch(setAds(dataAll))
-    }
-  }, [data])
+  // useEffect(() => {
+  //   if (!isis) {
+  //     dispatch(setAds(dataAll))
+  //   }
+  // }, [data])
 
   const DeleteAtdFunc = async (e) => {
     e.preventDefault()
     try {
       const result = await DeteleAds({ adId: adId })
       console.log(result)
-      refetch()
-
+      // refetch()
       navigate('/')
     } catch (error) {
       console.log('ошибка')
@@ -100,9 +113,12 @@ const AdDetails = () => {
   if (data.user.id === parseInt(currentUser, 10)) {
     showEdit = true
   }
+  // if (data.user.id === parseInt(currentUser, 10)) {
+  //   showEdit = true
+  // }
 
   const idSeller = data.user.id
-  
+
   return (
     <div>
       {/* Обьявление
@@ -161,8 +177,16 @@ const AdDetails = () => {
                         {currentAds && formatTime(currentAds.created_on)}
                       </S.ArticleDate>
                       <S.ArticleCity>{currentAds?.user.city}</S.ArticleCity>
-                      <S.ArticleLink href="" target="_blank" rel="">
-                        4 отзыва
+                      <S.ArticleLink
+                        onClick={(e) => {
+                          e.preventDefault()
+                          setIsModalOpenReviews(true)
+                        }}
+                        href=""
+                        target="_blank"
+                        rel=""
+                      >
+                        Отзывы: {adComments ? adComments.length : '...'}
                       </S.ArticleLink>
                     </S.ArticleInfo>
                     <S.ArticlePrice>
@@ -177,7 +201,6 @@ const AdDetails = () => {
                         <S.ArticleBtnRemove
                           onClick={
                             DeleteAtdFunc
-                            // navigate('/')}
                           }
                         >
                           Снять с публикации
@@ -217,6 +240,13 @@ const AdDetails = () => {
                 <S.MainText>{currentAds?.description}</S.MainText>
               </S.MainContent>
             </S.MainContainer>
+            {isModalOpenReviews && (
+              <ReviewsModal
+                onClose={() => setIsModalOpenReviews(false)}
+                comments={advComments}
+                advId={adId}
+              />
+            )}
           </S.Main>
 
           <Footer />
