@@ -1,8 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom'
+import { useAuth } from '../../hooks/use-auth'
 
 export const ProtectedRoute = ({ redirectPath = '/' }) => {
-  const user = localStorage.getItem('refresh_token')
-  if (!user) {
+  const { isAuth } = useAuth()
+  if (!isAuth) {
     return <Navigate to={redirectPath} replace={true} />
   }
 

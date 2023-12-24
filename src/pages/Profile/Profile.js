@@ -4,14 +4,27 @@ import Header from '../../components/Header/Header'
 import CenterBlockProfile from '../../components/CenterBlockProfile/CenterBlockProfile'
 import AdsComponent from '../../components/AdsComponent/AdsComponent'
 import { useGetUserInfoQuery } from '../../store/Service/Service'
+import { useSelector } from 'react-redux'
 
 
 const Profile = () => {
   const profileKey = true
-
   const { data: userInfo } = useGetUserInfoQuery()
-  if (!userInfo) return <div>load</div>
+  const ads = useSelector((state) => state.user.ads)
+  let matchedAds = []
 
+  if (!userInfo) return <div>load</div>
+console.log(userInfo.id);
+
+ads.forEach((ad) => {
+  if (ad.user.id === userInfo.id) {
+    matchedAds.push(ad)
+  }
+})
+
+console.log('Совпавшие объявления:', matchedAds)
+
+  //прокинуть данные обьявлений в AdsComponent
   return (
     <S.Wrapper>
       <S.Container>
@@ -20,7 +33,7 @@ const Profile = () => {
           <CenterBlockProfile currentUser={userInfo} />
           <S.MainContent>
             <S.ContentCards>
-              <AdsComponent />
+              <AdsComponent ads={matchedAds} />
             </S.ContentCards>
           </S.MainContent>
         </S.MainContainer>

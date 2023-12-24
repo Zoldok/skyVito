@@ -16,6 +16,9 @@ export const Api = createApi({
     getAds: builder.query({
       query: () => 'ads',
     }),
+    getAllUser: builder.query({
+      query: () => 'user/all',
+    }),
     getAdsId: builder.query({
       query: (adId) => `ads/${adId}`,
     }),
@@ -129,6 +132,7 @@ export const Api = createApi({
 
 export const {
   useGetAdsQuery,
+  useGetAllUserQuery,
   useGetAdsIdQuery,
   useGetUserInfoQuery,
   useRefreshTokenMutation,
