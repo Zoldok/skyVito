@@ -1,20 +1,63 @@
+import { useEffect, useRef, useState } from 'react';
+import {  useParams } from 'react-router-dom';
+import { useAddCommentMutation } from '../../../store/Service/Service';
 import Footer from '../../Footer/Footer'
-import HeaderModal from '../../Header/HeaderModal'
+import { Header } from '../../Header/Header.styled';
 import * as S from './ReviewsModalStyle'
+import {ReviewItem} from './ReviewItem'
 
-export const ReviewsModal = () => {
+
+export const ReviewsModal = ({comments, onClose}) => {
+  const modalRef = useRef(null);
+  const {adId} = useParams();
+  const token = localStorage.getItem('access_token')
+
+  const [addComment, { isLoading }] = useAddCommentMutation(adId);
+  const [newComment, setNewComment] = useState("");
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (!modalRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [onClose]);
+
+  const handleAddComment = async (event) => {
+    event.preventDefault();
+
+    if (!newComment) {
+      setError("Пожалуйста, введите комментарий");
+      return;
+    }
+    if (newComment) {
+      await addComment({ text: newComment, id: adId });
+      setNewComment("");
+    }
+  };
+
   return (
-    <S.Wrapper>
-      <HeaderModal />
-      <S.Container>
-        <S.ModalBlock>
+    <S.Wrapper  >
+      <Header />
+      <S.Container ref={modalRef}>
+        <S.ModalBlock >
           <S.ModalContent>
-            <S.ModalTitle>Отзывы о товаре</S.ModalTitle>
-            <S.ModalBtnClose>
+            <S.ModalTitle onClick={onClose}>Отзывы о товаре</S.ModalTitle>
+            <S.ModalBtnClose onClick={onClose}>
               <S.ModalBtnCloseLine></S.ModalBtnCloseLine>
             </S.ModalBtnClose>
             <S.ModalScroll>
-              <S.ModalFormNewArt id="formNewArt" action="#">
+            {error && <S.Error>{error}</S.Error>}
+              <S.ModalFormNewArt >
+              {!token ? (
+              ""
+            ) : (
                 <S.FormNewArtBlock>
                   <S.FormNewArtLabel for="text">
                     Добавить отзыв
@@ -25,31 +68,36 @@ export const ReviewsModal = () => {
                     cols="auto"
                     rows="5"
                     placeholder="Введите описание"
+                    value={newComment}
+                    onChange={(e) =>
+                      setNewComment(e.target.value)}
                   ></S.FormNewArtArea>
                 </S.FormNewArtBlock>
-                <S.FormNewArtBtnPub id="btnPublish">
-                  Опубликовать
+                 )}
+                 {!token ? (
+                   ""
+                 ) : (
+                <S.FormNewArtBtnPub 
+                onClick={handleAddComment}
+                disabled={!newComment}>
+                {isLoading ? "Публикация..." : "Опубликовать"}
                 </S.FormNewArtBtnPub>
+                   )}
               </S.ModalFormNewArt>
-
               <S.ModalReviews>
                 <S.ReviewsReview>
-                  <S.ReviewItem>
-                    <S.ReviewLeft>
-                      <S.ReviewImg>
-                        <S.ReviewImgImg src="" alt="" />
-                      </S.ReviewImg>
-                    </S.ReviewLeft>
-                    <S.ReviewRight>
-                      <S.ReviewName>Олег 14 августа</S.ReviewName>
-                      <S.ReviewTitle>Комментарий</S.ReviewTitle>
-                      <S.ReviewText>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
-                      </S.ReviewText>
-                    </S.ReviewRight>
-                  </S.ReviewItem>
+                      {comments
+                  ? comments.map((item, index) => (
+                      <ReviewItem
+                        text={item.text}
+                        key={index}
+                        avatar={`http://localhost:8090/${item.author.avatar}`}
+                        author={item.author.name}
+                        time = {item.created_on}
+               
+                      />
+                    ))
+                  : ""}
                 </S.ReviewsReview>
               </S.ModalReviews>
             </S.ModalScroll>

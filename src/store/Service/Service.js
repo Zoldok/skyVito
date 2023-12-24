@@ -106,6 +106,24 @@ export const Api = createApi({
         body: formData,
       })
     }),
+    addComment: builder.mutation({
+      query: ({ id, text }) => ({
+        url: `ads/${id}/comments`,
+        method: 'POST',
+        body: { text },
+      }),
+      invalidatesTags: [{ type: 'Ads', id: 'LIST' }],
+    }),
+    getAllComments: builder.query({
+      query: (id) => `ads/${id}/comments`,
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'Ads', id })),
+              { type: 'Ads', id: 'LIST' },
+            ]
+          : [{ type: 'Ads', id: 'LIST' }],
+    }),
   }),
 })
 
@@ -121,5 +139,7 @@ export const {
   useDelImgAdsMutation,
   useUserUpdateMutation,
   useUploadUserAvatarMutation,
+  useAddCommentMutation,
+  useGetAllCommentsQuery,
 } = Api
 // builder.mutation:POST, PUT или DELETE
