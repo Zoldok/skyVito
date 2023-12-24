@@ -269,6 +269,7 @@ export const FormNewArtArea = styled.textarea`
   line-height: 1;
   height: 100px;
   max-height: 100px;
+  resize: none;
   &::-webkit-input-placeholder {
     font-family: 'Roboto', sans-serif;
     font-style: normal;

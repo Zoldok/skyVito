@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   useDelAdsIdMutation,
@@ -37,7 +36,6 @@ const AdDetails = () => {
   const [adComments, setAdComments] = useState([])
 
   const { data: advComments } = useGetAllCommentsQuery(adId)
-
 
   const updateAdData = (updatedData) => {
     setCurrentAds(updatedData)
@@ -110,7 +108,7 @@ const AdDetails = () => {
     localStorage.setItem('id_seller', data.user.id)
   }
 
-  if (data.user.id === parseInt(currentUser, 10)) {
+  if (data.user.id === parseInt(currentUser, 10) && isAuth) {
     showEdit = true
   }
   // if (data.user.id === parseInt(currentUser, 10)) {
@@ -198,11 +196,7 @@ const AdDetails = () => {
                         <S.ArticleBtnReact onClick={openModal}>
                           Редактировать
                         </S.ArticleBtnReact>
-                        <S.ArticleBtnRemove
-                          onClick={
-                            DeleteAtdFunc
-                          }
-                        >
+                        <S.ArticleBtnRemove onClick={DeleteAtdFunc}>
                           Снять с публикации
                         </S.ArticleBtnRemove>
                       </S.ArticleBtnBlock>
@@ -214,14 +208,16 @@ const AdDetails = () => {
                     )}
                     <S.ArticleAuthor>
                       <S.AuthorImg>
-                        <S.AuthorImgImg src="" alt="" />
+                        <S.AuthorImgImg
+                          src={`http://localhost:8090/${currentAds?.user.avatar}`}
+                          alt=""
+                        />
                       </S.AuthorImg>
                       <S.AuthorCont>
-                      <S.AuthorName>
-                          {/* стилизовать линк */}
-                          <Link to={`/seller/${idSeller}`}>
+                        <S.AuthorName>
+                          <S.LinkBt to={`/seller/${idSeller}`}>
                             {data.user.name}
-                          </Link>
+                          </S.LinkBt>
                         </S.AuthorName>
                         <S.AuthorAbout>
                           {currentAds &&

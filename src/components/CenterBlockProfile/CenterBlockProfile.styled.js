@@ -235,7 +235,7 @@ border: 1px solid #009EE4;
 export const MainTitle = styled.h3`
   margin-bottom: 20px;
   color: #000;
-  font-family: Roboto;
+  // font-family: Roboto;
   font-size: 32px;
   font-style: normal;
   font-weight: 500;

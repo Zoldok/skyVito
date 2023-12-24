@@ -1,8 +1,7 @@
 import styled from 'styled-components'
-
+import { Link } from 'react-router-dom'
 const maxMobileWidthTwo = '768px'
 const maxMobileWidth = '966px'
-// const maxMobileWidthThree = '1158px'
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -129,14 +128,14 @@ export const ArticleImg = styled.div`
 `
 
 export const ArticleImgImg = styled.img`
-  // width: 100%;
-  height: auto;
-    max-width: 100%;
-  // display: inline-block; 
-  // vertical-align: middle; 
-  -o-object-fit: cover;
+  width: 100%;
+  height: 100%;
+  // height: auto;
+  // max-width: 100%;
+  // display: inline-block;
+  // vertical-align: middle;
+  // -o-object-fit: cover;
   object-fit: cover;
-
 `
 
 export const ArticleImgBar = styled.div`
@@ -370,6 +369,10 @@ export const AuthorImg = styled.div`
   border-radius: 50%;
 `
 export const AuthorImgImg = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
   width: 100%;
   height: auto;
   display: block;
@@ -439,11 +442,13 @@ export const MainContent = styled.div`
 `
 
 export const MainText = styled.p`
-font-size: 16px;
-line-height: 24px;
-color: #000000;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
 `
-
+export const LinkBt = styled(Link)`
+  color: #009ee4;
+`
 // export const Container2 = styled.div`
 
 // `

@@ -4,37 +4,13 @@ import Header from '../../components/Header/Header'
 import MainMenu from '../../components/MainMenu/MainMenu'
 import * as S from './SellerProfile.styled'
 import AdsComponent from '../../components/AdsComponent/AdsComponent'
-import { useGetAllUserQuery } from '../../store/Service/Service'
-import { useSelector } from 'react-redux'
-import { formatDate } from '../../utils/FormatteDate'
 
 const SellerProfile = () => {
   const { idSeller } = useParams()
-  // console.log('id продавца', typeof idSeller) //строка а id пользователя число
-  const { data } = useGetAllUserQuery()
-  const ads = useSelector((state) => state.user.ads)
-  let userAds = null
-  let matchedAds = []
 
-  if (data) {
-    data.forEach((item) => {
-      if (item.id === parseInt(idSeller, 10)) {
-        userAds = item
-      }
-    })
-  }
-  // console.log('все обьявления ', ads)
-  if (!userAds) return <div>load</div>
-  // console.log('id продацва на странице', userAds.id)
-  // Перебор каждого объявления и сравнение с userAds.id
-  ads.forEach((ad) => {
-    if (ad.user.id === userAds.id) {
-      matchedAds.push(ad)
-    }
-  })
-
-  console.log('Совпавшие объявления:', matchedAds)
-
+  console.log('id продавца',idSeller);
+  //записать данные user из обьявления в состояние в AdDetail, и тут их вытащить для отображения
+  //сделать запрос на обьявления по id и передать пропсом в adsComponent
   return (
     <S.Wrapper>
       <S.Container>
@@ -49,19 +25,14 @@ const SellerProfile = () => {
                   <S.SellerLeft>
                     <S.SellerImg>
                       <Link href="" target="_self">
-                        <S.SellerImgImg
-                          src={`http://localhost:8090/${userAds.avatar}`}
-                          alt=""
-                        />
+                        <S.SellerImgImg src="#" alt="" />
                       </Link>
                     </S.SellerImg>
                   </S.SellerLeft>
                   <S.SellerRight>
-                    <S.SellerTitle>{userAds.name}</S.SellerTitle>
-                    <S.SellerCity>{userAds.city}</S.SellerCity>
-                    <S.SellerCity>
-                      {formatDate(userAds.sells_from)}
-                    </S.SellerCity>
+                    <S.SellerTitle>Кирилл Матвеев</S.SellerTitle>
+                    <S.SellerCity>Санкт-Петербург</S.SellerCity>
+                    <S.SellerCity>Продает товары с августа 2021</S.SellerCity>
                     <S.SellerImgMobBlock>
                       <S.SellerImgMob>
                         <Link href="" target="_self">
@@ -71,9 +42,7 @@ const SellerProfile = () => {
                     </S.SellerImgMobBlock>
                     <S.SellerBtn>
                       Показать&nbsp;телефон
-                      <S.SellerBtnSpan>
-                        8&nbsp;905&nbsp;ХХХ&nbsp;ХХ&nbsp;ХХ
-                      </S.SellerBtnSpan>
+                      <S.SellerBtnSpan>8&nbsp;905&nbsp;ХХХ&nbsp;ХХ&nbsp;ХХ</S.SellerBtnSpan>
                     </S.SellerBtn>
                   </S.SellerRight>
                 </S.ProfileSell>
@@ -83,7 +52,7 @@ const SellerProfile = () => {
           </S.MainCenterBlock>
 
           <S.ContentCards>
-            <AdsComponent ads={matchedAds} />
+          <AdsComponent/>
           </S.ContentCards>
         </S.MainContainer>
         <Footer />
@@ -93,6 +62,8 @@ const SellerProfile = () => {
 }
 
 export default SellerProfile
+
+
 
 // {/* <div className="main__content">
 // <div className="content__cards cards"></div>
