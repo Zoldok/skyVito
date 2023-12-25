@@ -3,39 +3,31 @@ import {
   useDelAdsIdMutation,
   useGetAdsIdQuery,
   useGetAllCommentsQuery,
-  // useGetAdsQuery,
 } from '../../store/Service/Service'
 import * as S from './AdDetails.styled'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import { useAuth } from '../../hooks/use-auth'
-// import './my-article.css'
 import MainMenu from '../../components/MainMenu/MainMenu'
 import { formatDate } from '../../utils/FormatteDate'
 import { formatTime } from '../../utils/FormatteTime'
 import { useEffect, useState } from 'react'
 import EditModal from '../../components/Modal/EditModal/EditModal'
 import { ReviewsModal } from '../../components/Modal/ReviewsModal/ReviewsModal'
-// import { useDispatch } from 'react-redux'
-// import { setAds } from '../../store/slices/userSlice'
-// import { useMutation } from 'react-query'
 
 const AdDetails = () => {
   const navigate = useNavigate()
-  // const dispatch = useDispatch()
   const { adId } = useParams()
   const { isAuth } = useAuth()
   const { data, isLoading, refetch: refetchAdsId } = useGetAdsIdQuery(adId)
   const [DeteleAds] = useDelAdsIdMutation(adId)
   let showEdit = false
   const [isModalOpen, setIsModalOpen] = useState(false)
-  // eslint-disable-next-line no-unused-vars
   const [currentAds, setCurrentAds] = useState(data)
-
   const [isModalOpenReviews, setIsModalOpenReviews] = useState(false)
   const [adComments, setAdComments] = useState([])
-
   const { data: advComments } = useGetAllCommentsQuery(adId)
+  const [showFullNumber, setShowFullNumber] = useState(false)
 
   const updateAdData = (updatedData) => {
     setCurrentAds(updatedData)
@@ -53,19 +45,21 @@ const AdDetails = () => {
       refetchAdsId()
     }
   }, [data])
+  const phoneNumber = currentAds?.user.phone || 'Номер отсутствует'
+  // const phoneNumber = showFullNumber
+  //     ? currentAds?.user.phone
+  //     : `${currentAds?.user.phone.slice(0, 5)}XXX XХХ`;
 
+  const handleButtonClick = () => {
+    setShowFullNumber(true)
+  }
   console.log('текущее', currentAds)
 
-  // useEffect(() => {
-  //   refetch() // Запуск нового запроса при монтировании компонента
-  // }, [adId, refetchAdsId])
-
   const openModal = () => {
-    setIsModalOpen(true) // Открываем модальное окно
+    setIsModalOpen(true)
   }
-
   const closeModal = () => {
-    setIsModalOpen(false) // Закрываем модальное окно
+    setIsModalOpen(false)
   }
 
   const imageUrls = currentAds?.images?.map(
@@ -78,27 +72,16 @@ const AdDetails = () => {
     setSelectedImageIndex(index)
   }
 
-  // const { data: dataAll, isLoading: isis, refetch } = useGetAdsQuery()
-
-  // useEffect(() => {
-  //   if (!isis) {
-  //     dispatch(setAds(dataAll))
-  //   }
-  // }, [data])
-
   const DeleteAtdFunc = async (e) => {
     e.preventDefault()
     try {
       const result = await DeteleAds({ adId: adId })
       console.log(result)
-      // refetch()
       navigate('/')
     } catch (error) {
       console.log('ошибка')
     }
   }
-
-  // console.log('текущее объявление', currentAds)
 
   const currentUser = localStorage.getItem('id_сur_user')
 
@@ -111,16 +94,11 @@ const AdDetails = () => {
   if (data.user.id === parseInt(currentUser, 10) && isAuth) {
     showEdit = true
   }
-  // if (data.user.id === parseInt(currentUser, 10)) {
-  //   showEdit = true
-  // }
 
   const idSeller = data.user.id
 
   return (
     <div>
-      {/* Обьявление
-      <h1>{data.title}</h1> */}
       <S.Wrapper>
         <S.Container>
           <Header isAuth={isAuth} />
@@ -201,9 +179,22 @@ const AdDetails = () => {
                         </S.ArticleBtnRemove>
                       </S.ArticleBtnBlock>
                     ) : (
-                      <S.ArticleBtnReact>
-                        Показать телефон
-                        <br />8 984 ХХХ ХХХ
+                      <S.ArticleBtnReact onClick={handleButtonClick}>
+                        {showFullNumber ? (
+                          phoneNumber
+                        ) : (
+                          <span>
+                            {phoneNumber === 'Номер отсутствует' ? ( // Проверка отсутствия номера
+                              phoneNumber
+                            ) : (
+                              <>
+                                Показать телефон
+                                <br />
+                                {phoneNumber.slice(0, 5)}ХХХ XXX
+                              </>
+                            )}
+                          </span>
+                        )}
                       </S.ArticleBtnReact>
                     )}
                     <S.ArticleAuthor>

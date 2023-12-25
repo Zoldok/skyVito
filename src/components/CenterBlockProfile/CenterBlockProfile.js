@@ -63,7 +63,7 @@ const CenterBlockProfile = ({ currentUser }) => {
   
   const updateButtonState = () => {
     // Проверяем, заполнены ли все поля
-    if (name && surName && city && phone) {
+    if (name || surName || city || phone) {
       setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
     } else {
       setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной

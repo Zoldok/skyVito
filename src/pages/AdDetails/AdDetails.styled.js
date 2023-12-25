@@ -44,7 +44,7 @@ export const MainArtic = styled.div`
 export const ArticContent = styled.div`
   display: flex;
   align-items: top;
-  justify-content: center;
+  // justify-content: center;
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: flex;
     flex-direction: column;
