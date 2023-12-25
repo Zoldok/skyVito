@@ -21,6 +21,7 @@ export const EditModal = ({ data, onClose,  updateAdData
   const [delImgAds] = useDelImgAdsMutation()
   const [blurredIndexes, setBlurredIndexes] = useState([]);
   const [error, setError] = useState(null)
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   const handleFormSubmit = async () => {
     try {
@@ -32,6 +33,7 @@ export const EditModal = ({ data, onClose,  updateAdData
       })
       console.log('ответ сервера',result.data)
       updateAdData(result.data)
+      setIsButtonDisabled(true);
             //при добавлении можно записать в состояние т.к. ответ содержит новые изображения
       console.log(isLoading, isSuccess)
     } catch (error) {
@@ -40,6 +42,7 @@ export const EditModal = ({ data, onClose,  updateAdData
   }
 
   const handleFileSelect = async (e) => {
+    updateButtonState();
     const files = Array.from(e.target.files)
     setImagesFromInput(files)
     const reader = new FileReader()
@@ -85,6 +88,17 @@ export const EditModal = ({ data, onClose,  updateAdData
     }
     setBlurredIndexes((prevIndexes) => [...prevIndexes, index]);
   };
+
+
+  const updateButtonState = () => {
+    // Проверяем, заполнены ли все поля
+    if (title && description && price) {
+      setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
+    } else {
+      setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной
+    }
+  }
+
   return (
     <S.Wrapper>
       <S.ModalBlock>
@@ -102,7 +116,10 @@ export const EditModal = ({ data, onClose,  updateAdData
                 name="name"
                 id="formName"
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                  updateButtonState();
+                }}
               ></S.FormNewArtInput>
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
@@ -113,7 +130,10 @@ export const EditModal = ({ data, onClose,  updateAdData
                 cols="auto"
                 rows="5"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                  updateButtonState();
+                }}
               ></S.FormNewArtArea>
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
@@ -173,6 +193,7 @@ export const EditModal = ({ data, onClose,  updateAdData
                       id={`fileInput${index}`}
                       style={{ display: 'none' }}
                       onChange={handleFileSelect}
+
                     />
                   </S.FormNewArtImg>
                 ))}
@@ -194,14 +215,17 @@ export const EditModal = ({ data, onClose,  updateAdData
                     const input = e.target.value;
                     if (input === '' || /^\d*\.?\d*$/.test(input)) {
                       setPrice(input);
+                      updateButtonState();
                     }
                   }
                 }}
               />
             </S.FormNewArtBlock>
             {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
-            <S.FormNewArtBtnPub onClick={submitAds} id="btnPublish">
-              Опубликовать
+            <S.FormNewArtBtnPub 
+            onClick={submitAds} disabled={isButtonDisabled || isLoading}
+            >
+            {isLoading ? "Публикуем" : "Опубликовать"}
             </S.FormNewArtBtnPub>
           </S.ModalFormNewArt>
         </S.ModalContent>

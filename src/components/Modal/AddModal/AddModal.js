@@ -12,6 +12,7 @@ export const AddModal = ({ onClose }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [error, setError] = useState(null)
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   
   const [addAds, { isLoading, isError, isSuccess }] = useAddAdsMutation()
  
@@ -33,6 +34,7 @@ export const AddModal = ({ onClose }) => {
       const result = await addAds({ title, description, price })
       console.log(result)
       console.log(isLoading, isSuccess)
+      setIsButtonDisabled(true);
       refetch()
       onClose()
       navigate('/')
@@ -41,7 +43,14 @@ export const AddModal = ({ onClose }) => {
     }
   }
 
-
+  const updateButtonState = () => {
+    // Проверяем, заполнены ли все поля
+    if (title && description && price) {
+      setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
+    } else {
+      setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной
+    }
+  }
   return (
     <S.Wrapper>
       <S.ModalBlock>
@@ -50,8 +59,7 @@ export const AddModal = ({ onClose }) => {
           <S.ModalBtnClose onClick={onClose}>
             <S.ModalBtnCloseLine></S.ModalBtnCloseLine>
           </S.ModalBtnClose>
-
-          <S.ModalFormNewArt onSubmit={handleFormSubmit}>
+          <S.ModalFormNewArt>
             <S.FormNewArtBlock>
               <S.FormNewArtLabel htmlFor="text">Название</S.FormNewArtLabel>
               <S.FormNewArtInput
@@ -60,7 +68,10 @@ export const AddModal = ({ onClose }) => {
                 id="formName"
                 placeholder="Введите
                   название"
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                  updateButtonState();
+                }}
               ></S.FormNewArtInput>
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
@@ -71,7 +82,10 @@ export const AddModal = ({ onClose }) => {
                 cols="auto"
                 rows="5"
                 placeholder="Введите описание"
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                  updateButtonState();
+                }}
               ></S.FormNewArtArea>
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
@@ -92,14 +106,16 @@ export const AddModal = ({ onClose }) => {
                     const value = parseFloat(input)
                     if (!isNaN(value) && value >= 0) {
                       setPrice(value.toString())
+                      updateButtonState();
                     }
                   }
                 }}
               />
             </S.FormNewArtBlock>
             {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
-            <S.FormNewArtBtnPub id="btnPublish">
-              Опубликовать
+            <S.FormNewArtBtnPub onClick={handleFormSubmit} disabled={isButtonDisabled || isLoading}
+            >
+              {isLoading ? "Публикуем" : "Опубликовать"}
             </S.FormNewArtBtnPub>
           </S.ModalFormNewArt>
         </S.ModalContent>
