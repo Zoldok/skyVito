@@ -620,3 +620,8 @@ export const FormNewArtBtnPub = styled.button`
     }
   }
 `
+export const ErrorMessage = styled.div`
+color: red;
+font-size: 14px;
+margin-top: 5px;
+`

@@ -11,6 +11,7 @@ export const AddModal = ({ onClose }) => {
   const [price, setPrice] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [error, setError] = useState(null)
   
   const [addAds, { isLoading, isError, isSuccess }] = useAddAdsMutation()
  
@@ -24,6 +25,10 @@ export const AddModal = ({ onClose }) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault()
+    if (!title || !description || !price) {
+      setError('Заполните все поля')
+      return 
+    }
     try {
       const result = await addAds({ title, description, price })
       console.log(result)
@@ -70,37 +75,29 @@ export const AddModal = ({ onClose }) => {
               ></S.FormNewArtArea>
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
-              {/* <S.FormNewArtP>Фотографии товара</S.FormNewArtP> */}
               <S.FormNewArtSpan>Фотографии можно добавить во время редактирования</S.FormNewArtSpan>
-              {/* <S.FormNewArtBarImg>
-                {[...Array(5)].map((_, index) => (
-                  <S.FormNewArtImg key={index}>
-                    <S.FormNewArtImgImg src="" alt="" />
-                    <S.FormNewArtBarImgCover
-                      // onClick={() =>
-                      //   document.getElementById(`fileInput${index}`).click()
-                      // }
-                    ></S.FormNewArtBarImgCover>
-                    <input
-                      type="file"
-                      id={`fileInput${index}`}
-                      style={{ display: 'none' }}
-                      // onChange={(e) => handleFileSelect(e)}
-                    />
-                  </S.FormNewArtImg>
-                ))}
-              </S.FormNewArtBarImg> */}
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
               <S.FormNewArtiLabel>Цена</S.FormNewArtiLabel>
               <S.FormNewArtInputPrice
                 type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
                 name="price"
                 id="formName"
                 placeholder="₽"
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={(e) => {
+                  const input = e.target.value
+                  if (/^\d*\.?\d*$/.test(input)) {
+                    const value = parseFloat(input)
+                    if (!isNaN(value) && value >= 0) {
+                      setPrice(value.toString())
+                    }
+                  }
+                }}
               />
             </S.FormNewArtBlock>
+            {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
             <S.FormNewArtBtnPub id="btnPublish">
               Опубликовать
             </S.FormNewArtBtnPub>

@@ -216,12 +216,20 @@ color: #FFFFFF;
 width: 154px;
 height: 50px;
 margin: 10px 7px 0;
-background-color: #009EE4;
 border-radius: 6px;
+background-color: #009EE4;
 border: 1px solid #009EE4;
+  
+  &:disabled {
+    background-color: #CCCCCC; /* Серый цвет для неактивной кнопки */
+    border-color: #CCCCCC; 
+    color: #777777; 
+    // cursor: not-allowed; /*значок стоп*/
+  }
 
-&:hover {
-  background-color: #0080C1;
+  &:not(:disabled):hover {
+    background-color: #0080C1; /* Изменяем цвет фона при наведении, но только если кнопка не является неактивной */
+  }
 
 @media screen and (max-width: ${maxMobileWidthTwo}) {
   font-size: 16px;
@@ -230,8 +238,8 @@ border: 1px solid #009EE4;
   height: 46px;
   margin: 8px 0px 0;
 }
-
 `
+
 export const MainTitle = styled.h3`
   margin-bottom: 20px;
   color: #000;

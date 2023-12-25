@@ -5,16 +5,17 @@ import Footer from '../../Footer/Footer'
 import { Header } from '../../Header/Header.styled';
 import * as S from './ReviewsModalStyle'
 import {ReviewItem} from './ReviewItem'
-
+import { useAuth } from '../../../hooks/use-auth'
 
 export const ReviewsModal = ({comments, onClose}) => {
   const modalRef = useRef(null);
   const {adId} = useParams();
-  const token = localStorage.getItem('access_token')
-
+  const { isAuth } = useAuth()
   const [addComment, { isLoading }] = useAddCommentMutation(adId);
   const [newComment, setNewComment] = useState("");
   const [error, setError] = useState(null);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (!modalRef.current.contains(event.target)) {
@@ -36,68 +37,75 @@ export const ReviewsModal = ({comments, onClose}) => {
       setError("Пожалуйста, введите комментарий");
       return;
     }
-    if (newComment) {
-      await addComment({ text: newComment, id: adId });
-      setNewComment("");
-    }
+    
+    await addComment({ text: newComment, id: adId });
+    setNewComment("");
+    setError(null)
+    setIsButtonDisabled(true);
   };
 
+
+  const updateButtonState = () => {
+    // Проверяем, заполнены ли все поля
+    if (newComment) {
+      setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
+    } else {
+      setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной
+    }
+  }
+
+
   return (
-    <S.Wrapper  >
+    <S.Wrapper>
       <Header />
       <S.Container ref={modalRef}>
-        <S.ModalBlock >
+        <S.ModalBlock>
           <S.ModalContent>
             <S.ModalTitle onClick={onClose}>Отзывы о товаре</S.ModalTitle>
             <S.ModalBtnClose onClick={onClose}>
               <S.ModalBtnCloseLine></S.ModalBtnCloseLine>
             </S.ModalBtnClose>
             <S.ModalScroll>
-            {error && <S.Error>{error}</S.Error>}
-              <S.ModalFormNewArt >
-              {!token ? (
-              ""
-            ) : (
-                <S.FormNewArtBlock>
-                  <S.FormNewArtLabel for="text">
-                    Добавить отзыв
-                  </S.FormNewArtLabel>
-                  <S.FormNewArtArea
-                    name="text"
-                    id="formArea"
-                    cols="auto"
-                    rows="5"
-                    placeholder="Введите описание"
-                    value={newComment}
-                    onChange={(e) =>
-                      setNewComment(e.target.value)}
-                  ></S.FormNewArtArea>
-                </S.FormNewArtBlock>
-                 )}
-                 {!token ? (
-                   ""
-                 ) : (
-                <S.FormNewArtBtnPub 
-                onClick={handleAddComment}
-                disabled={!newComment}>
-                {isLoading ? "Публикация..." : "Опубликовать"}
-                </S.FormNewArtBtnPub>
-                   )}
+              {error && <S.Error>{error}</S.Error>}
+              <S.ModalFormNewArt>
+                {isAuth && (
+                  <S.FormNewArtBlock>
+                    <S.FormNewArtLabel for="text">Добавить отзыв</S.FormNewArtLabel>
+                    <S.FormNewArtArea
+                      name="text"
+                      id="formArea"
+                      cols="auto"
+                      rows="5"
+                      placeholder="Введите описание"
+                      value={newComment}
+                      onChange={(e) => {
+                        setNewComment(e.target.value);
+                        updateButtonState();
+                      }}
+                    ></S.FormNewArtArea>
+                  </S.FormNewArtBlock>
+                )}
+                {isAuth && (
+                  <S.FormNewArtBtnPub 
+                  // onClick={handleAddComment}
+                  // disabled={!newComment}
+                  onClick={handleAddComment} disabled={isButtonDisabled || isLoading}
+                  >
+                  {isLoading ? "Публикация" : "Опубликовать"}
+                  </S.FormNewArtBtnPub>
+                )}
               </S.ModalFormNewArt>
               <S.ModalReviews>
                 <S.ReviewsReview>
-                      {comments
-                  ? comments.map((item, index) => (
+                  {comments && comments.map((item, index) => (
                       <ReviewItem
                         text={item.text}
                         key={index}
                         avatar={`http://localhost:8090/${item.author.avatar}`}
                         author={item.author.name}
-                        time = {item.created_on}
-               
+                        time={item.created_on}
                       />
-                    ))
-                  : ""}
+                  ))}
                 </S.ReviewsReview>
               </S.ModalReviews>
             </S.ModalScroll>

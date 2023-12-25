@@ -8,14 +8,14 @@ import {
 
 
 const CenterBlockProfile = ({ currentUser }) => {
-  const [UpdateUser] = useUserUpdateMutation()
+  const [UpdateUser, { isLoading }] = useUserUpdateMutation()
   const [uploadUserAvatar] = useUploadUserAvatarMutation()
   const [name, setName] = useState(currentUser.name || '')
   const [surName, setSurName] = useState(currentUser.surname || '')
   const [city, setCity] = useState(currentUser.city || '')
   const [phone, setPhone] = useState(currentUser.phone || '')
   const [avatarUrl, setAvatarUrl] = useState(currentUser.avatar)
-
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -31,7 +31,9 @@ const CenterBlockProfile = ({ currentUser }) => {
       .then((data) => {
 
         console.log('Данные пользователя успешно обновлены', data)
+        //Зачем?уже наверное не актуально. вроде итак обновляем
         setName(data.name)
+        setIsButtonDisabled(true);
       })
       .catch((error) => {
         console.error('Ошибка при обновлении данных пользователя', error)
@@ -58,6 +60,16 @@ const CenterBlockProfile = ({ currentUser }) => {
       console.error('Ошибка при изменении фото профиля', error)
     }
   }
+  
+  const updateButtonState = () => {
+    // Проверяем, заполнены ли все поля
+    if (name && surName && city && phone) {
+      setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
+    } else {
+      setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной
+    }
+  }
+
   return (
     <S.MainCenterBlock>
       <MainMenu />
@@ -92,7 +104,10 @@ const CenterBlockProfile = ({ currentUser }) => {
                     name="fname"
                     type="text"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                      updateButtonState();
+                    }}
                   />
                 </S.SettingsDiv>
                 <S.SettingsDiv>
@@ -102,7 +117,10 @@ const CenterBlockProfile = ({ currentUser }) => {
                     name="lname"
                     type="text"
                     value={surName}
-                    onChange={(e) => setSurName(e.target.value)}
+                    onChange={(e) => {
+                      setSurName(e.target.value);
+                      updateButtonState();
+                    }}
                   />
                 </S.SettingsDiv>
                 <S.SettingsDiv>
@@ -112,7 +130,10 @@ const CenterBlockProfile = ({ currentUser }) => {
                     name="city"
                     type="text"
                     value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    onChange={(e) => {
+                      setCity(e.target.value);
+                      updateButtonState();
+                    }}
                   />
                 </S.SettingsDiv>
                 <S.SettingsDiv>
@@ -123,10 +144,13 @@ const CenterBlockProfile = ({ currentUser }) => {
                     type="tel"
                     placeholder="введите номер"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                      updateButtonState();
+                    }}
                   />
                 </S.SettingsDiv>
-                <S.SettingBtn onClick={handleSubmit}>Сохранить</S.SettingBtn>
+                <S.SettingBtn onClick={handleSubmit} disabled={isButtonDisabled || isLoading}>{isLoading ? "Сохранение" : "Сохранить"}</S.SettingBtn>
               </S.SettingForm>
             </S.SettingsRight>
           </S.ProfileSettings>

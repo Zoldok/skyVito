@@ -662,3 +662,8 @@ export const DeleteImageBtn2 = styled.button`
 export const BlurredImage = styled.img`
 filter: blur(5px); 
 `
+export const ErrorMessage = styled.div`
+color: red;
+font-size: 14px;
+margin-top: 5px;
+`
