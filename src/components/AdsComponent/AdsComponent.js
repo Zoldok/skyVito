@@ -3,7 +3,7 @@ import * as S from './AdsComponent.styled'
 import { formatTime } from '../../utils/FormatteTime'
 
 const AdsComponent = ({ ads, hasNoResults }) => {
-  if (!ads) return <div>Loading</div>
+  if (!ads) return <div>Обьявлений не наидено</div>
 
   if (hasNoResults) {
     return <div>Ничего не найдено</div>;

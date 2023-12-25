@@ -8,6 +8,7 @@ import { useGetAllUserQuery } from '../../store/Service/Service'
 import { useSelector } from 'react-redux'
 import { formatDate } from '../../utils/FormatteDate'
 import { useState } from 'react'
+import Preloader from '../../components/Preloader/Preloader'
 
 const SellerProfile = () => {
   const { idSeller } = useParams()
@@ -27,7 +28,9 @@ const SellerProfile = () => {
     })
   }
   // console.log('все обьявления ', ads)
-  if (!userAds) return <div>load</div>
+  if (!userAds ) {
+    return <Preloader/>
+  }
   const phoneNumber = userAds?.phone || 'Номер отсутствует'
   // const phoneNumber = showFullNumber
   //   ? userAds?.phone
@@ -44,7 +47,7 @@ const SellerProfile = () => {
     }
   })
 
-  console.log('Совпавшие объявления:', matchedAds)
+  // console.log('Совпавшие объявления:', matchedAds)
 
   return (
     <S.Wrapper>

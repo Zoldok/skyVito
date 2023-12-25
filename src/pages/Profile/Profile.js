@@ -5,6 +5,7 @@ import CenterBlockProfile from '../../components/CenterBlockProfile/CenterBlockP
 import AdsComponent from '../../components/AdsComponent/AdsComponent'
 import { useGetUserInfoQuery } from '../../store/Service/Service'
 import { useSelector } from 'react-redux'
+import Preloader from '../../components/Preloader/Preloader'
 
 
 const Profile = () => {
@@ -13,7 +14,10 @@ const Profile = () => {
   const ads = useSelector((state) => state.user.ads)
   let matchedAds = []
 
-  if (!userInfo) return <div>load</div>
+  if (!userInfo ) {
+    return <Preloader/>
+  }
+
 console.log(userInfo.id);
 
 ads.forEach((ad) => {
@@ -22,7 +26,7 @@ ads.forEach((ad) => {
   }
 })
 
-console.log('Совпавшие объявления:', matchedAds)
+// console.log('Совпавшие объявления:', matchedAds)
 
   //прокинуть данные обьявлений в AdsComponent
   return (

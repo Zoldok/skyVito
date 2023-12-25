@@ -8,6 +8,7 @@ import { useAuth } from '../../hooks/use-auth'
 import {  useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { setAds } from '../../store/slices/userSlice'
+import Preloader from '../../components/Preloader/Preloader'
 
 const Main = () => {
   const dispatch = useDispatch()
@@ -50,7 +51,9 @@ const Main = () => {
   };
 
 
-  if (isLoading ) return <div>идет загрузка</div>
+  if (isLoading ) {
+    return <Preloader/>
+  }
 
   return (
     <S.Wrapper>
