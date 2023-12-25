@@ -20,13 +20,15 @@ const AdsComponent = ({ ads, hasNoResults }) => {
           {/* Создаем ссылку на новую страницу */}
           <S.CardsItem>
             <S.CardsCard>
-              <S.CardsImage>
-                {ad.images[0] && ad.images[0].url && (
-                  <S.CardsImageImg
-                    src={`http://127.0.0.1:8090/${ad.images[0].url}`}
-                    alt="picture"
-                  />
-                )}
+            <S.CardsImage>
+                <S.CardsImageImg
+                  src={
+                    ad.images[0]?.url
+                      ? `http://127.0.0.1:8090/${ad.images[0].url}`
+                      : '../img/NoPhoto.png'
+                  }
+                  alt="picture"
+                />
               </S.CardsImage>
               <S.CardContent>
                 <S.CardTitle>{ad.title}</S.CardTitle>

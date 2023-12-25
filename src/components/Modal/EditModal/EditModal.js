@@ -147,6 +147,7 @@ export const EditModal = ({ data, onClose,  updateAdData
                       <S.DeleteImageBtn
                         onClick={(e) => {
                           e.preventDefault()
+                          updateButtonState();
                           handleDeleteImage(index, image)
                         }}
                       >
