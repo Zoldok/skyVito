@@ -34,7 +34,6 @@ export const EditModal = ({ data, onClose,  updateAdData
       console.log('ответ сервера',result.data)
       updateAdData(result.data)
       setIsButtonDisabled(true);
-            //при добавлении можно записать в состояние т.к. ответ содержит новые изображения
       console.log(isLoading, isSuccess)
     } catch (error) {
       console.log(isError)

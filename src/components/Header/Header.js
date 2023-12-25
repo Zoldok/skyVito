@@ -31,7 +31,7 @@ const Header = ({ profileKey }) => {
       <S.HeaderNav>
         <S.Logo>
           <S.LogoMobLink>
-            <S.LogoMobImg src="img/logo-mob.png" alt="logo" />
+            <S.LogoMobImg src="../img/logo-mob.png" alt="logo" />
           </S.LogoMobLink>
         </S.Logo>
         {profileKey ? (

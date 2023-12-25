@@ -14,6 +14,7 @@ import { formatTime } from '../../utils/FormatteTime'
 import { useEffect, useState } from 'react'
 import EditModal from '../../components/Modal/EditModal/EditModal'
 import { ReviewsModal } from '../../components/Modal/ReviewsModal/ReviewsModal'
+import Preloader from '../../components/Preloader/Preloader'
 
 const AdDetails = () => {
   const navigate = useNavigate()
@@ -28,6 +29,7 @@ const AdDetails = () => {
   const [adComments, setAdComments] = useState([])
   const { data: advComments } = useGetAllCommentsQuery(adId)
   const [showFullNumber, setShowFullNumber] = useState(false)
+  
 
   const updateAdData = (updatedData) => {
     setCurrentAds(updatedData)
@@ -85,7 +87,10 @@ const AdDetails = () => {
 
   const currentUser = localStorage.getItem('id_сur_user')
 
-  if (isLoading) return <div>идет загрузка</div>
+  if (isLoading ) {
+    return <Preloader/>
+  }
+
 
   if (isAuth) {
     localStorage.setItem('id_seller', data.user.id)
