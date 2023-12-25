@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+const maxMobileWidthTwo = '620px'
 
 export const Wrapper = styled.div`
 position: fixed;
@@ -20,7 +21,7 @@ export const Container = styled.div`
   margin: 0 auto;
   position: relative;
   background-color: #f4f5f6;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
     background-color: #ffffff;
   
 `
@@ -36,7 +37,7 @@ export const ModalBlock = styled.div`
 
 
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
     position: absolute;
     z-index: 1;
     left: -179px;
@@ -62,7 +63,7 @@ export const ModalContent = styled.div`
   background-color: #ffffff;
   border-radius: 12px;
   position: relative;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -87,7 +88,7 @@ export const ModalTitle = styled.h3`
   font-weight: 500;
   color: #000000;
   margin-bottom: 15px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 32px;
     line-height: 46px;
     font-weight: 500;
@@ -139,7 +140,7 @@ export const ModalBtnClose = styled.div`
   right: 50px;
   z-index: 3;
   cursor: pointer;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin-top: 10px;
   }
 `
@@ -175,7 +176,7 @@ export const ModalBtnCloseLine = styled.div`
   &:hover {
     background-color: #0080c1;
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: none;
   }
 `
@@ -215,7 +216,7 @@ export const ModalFormNewArt = styled.form`
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin-top: 22px;
   }
 `
@@ -235,7 +236,7 @@ export const FormNewArtBlock = styled.div`
   -ms-flex-direction: column;
   flex-direction: column;
   margin-bottom: 14px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -254,7 +255,7 @@ export const FormNewArtLabel = styled.label`
   line-height: 32px;
   font-weight: 600;
   color: #000000;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: none;
   }
 `
@@ -302,7 +303,7 @@ export const FormNewArtArea = styled.textarea`
     line-height: 24px;
     color: #0000004d;
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-family: 'Roboto', sans-serif;
     width: 100%;
     max-height: 107px;
@@ -336,24 +337,37 @@ export const FormNewArtArea = styled.textarea`
 `
 
 export const FormNewArtBtnPub = styled.button`
-  width: 181px;
-  height: 50px;
-  background: #d9d9d9;
-  border: 1px solid #d9d9d9;
-  border-radius: 6px;
+
+font-size: 16px;
+line-height: 1;
+color: #FFFFFF;
+width: 154px;
+height: 50px;
+margin: 10px 7px 0;
+border-radius: 6px;
+background-color: #009EE4;
+border: 1px solid #009EE4;
+  
+  &:disabled {
+    background-color: #CCCCCC; /* Серый цвет для неактивной кнопки */
+    border-color: #CCCCCC; 
+    color: #777777; 
+    // cursor: not-allowed; /*значок стоп*/
+  }
+
+  &:not(:disabled):hover {
+    background-color: #0080C1; /* Изменяем цвет фона при наведении, но только если кнопка не является неактивной */
+  }
+
+@media screen and (max-width: ${maxMobileWidthTwo}) {
   font-size: 16px;
-  line-height: 24px;
-  color: #ffffff;
-  &:hover {
-    background-color: #0080c1;
-  }
-  @media screen and (max-width: 600px) {
-    margin-top: 0px;
-    width: 100%;
-    height: 46px;
-    background-color: #009ee4;
-  }
+  line-height: 1;
+  width: 100%;
+  height: 46px;
+  margin: 8px 0px 0;
+}
 `
+
 
 export const ReviewsReview = styled.div`
   display: -webkit-box;
@@ -417,7 +431,7 @@ export const ReviewName = styled.p`
 export const ReviewNameSpan = styled.span`
   margin-left: 10px;
   color: #5f5f5f;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 14px;
     line-height: 28px;
     color: #5f5f5f;
@@ -438,12 +452,11 @@ export const ReviewText = styled.p`
   color: #000000;
 `
 export const Error = styled.div`
-  color: black;
+  color: red;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
   margin-top: 20px;
-  height: 300px;
   text-align: center;
   display: flex;
   flex-direction: column;

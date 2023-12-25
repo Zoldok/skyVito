@@ -20,7 +20,7 @@ export const EditModal = ({ data, onClose,  updateAdData
   const [editAds, { isLoading, isError, isSuccess }] = useEditAdsMutation()
   const [delImgAds] = useDelImgAdsMutation()
   const [blurredIndexes, setBlurredIndexes] = useState([]);
-
+  const [error, setError] = useState(null)
 
   const handleFormSubmit = async () => {
     try {
@@ -57,6 +57,11 @@ export const EditModal = ({ data, onClose,  updateAdData
 
   const submitAds = async (e) => {
     e.preventDefault()
+
+    if (!title || !description || !price) {
+      setError('Заполните все поля')
+      return 
+    }
     // console.log('REF', imagesFromInput)
     const formData = new FormData()
     formData.append('file', imagesFromInput[imagesFromInput.length - 1])
@@ -176,13 +181,25 @@ export const EditModal = ({ data, onClose,  updateAdData
             <S.FormNewArtBlock>
               <S.FormNewArtiLabel>Цена</S.FormNewArtiLabel>
               <S.FormNewArtInputPrice
-                type="number"
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
                 name="price"
-                id="formName"
                 value={price}
-                onChange={(e) => setPrice(e.target.value)}
+                id="formName"
+                placeholder="₽"
+                onChange={(e) => {
+                  const input = e.target.value
+                  if (/^\d*\.?\d*$/.test(input)) {
+                    const input = e.target.value;
+                    if (input === '' || /^\d*\.?\d*$/.test(input)) {
+                      setPrice(input);
+                    }
+                  }
+                }}
               />
             </S.FormNewArtBlock>
+            {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
             <S.FormNewArtBtnPub onClick={submitAds} id="btnPublish">
               Опубликовать
             </S.FormNewArtBtnPub>
