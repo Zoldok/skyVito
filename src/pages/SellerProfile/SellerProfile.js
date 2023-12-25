@@ -7,12 +7,15 @@ import AdsComponent from '../../components/AdsComponent/AdsComponent'
 import { useGetAllUserQuery } from '../../store/Service/Service'
 import { useSelector } from 'react-redux'
 import { formatDate } from '../../utils/FormatteDate'
+import { useState } from 'react'
 
 const SellerProfile = () => {
   const { idSeller } = useParams()
   // console.log('id продавца', typeof idSeller) //строка а id пользователя число
   const { data } = useGetAllUserQuery()
   const ads = useSelector((state) => state.user.ads)
+  const [showFullNumber, setShowFullNumber] = useState(false)
+
   let userAds = null
   let matchedAds = []
 
@@ -25,6 +28,14 @@ const SellerProfile = () => {
   }
   // console.log('все обьявления ', ads)
   if (!userAds) return <div>load</div>
+  const phoneNumber = userAds?.phone || 'Номер отсутствует'
+  // const phoneNumber = showFullNumber
+  //   ? userAds?.phone
+  //   : `${userAds?.phone.slice(0, 4)}XXXX`
+
+  const handleButtonClick = () => {
+    setShowFullNumber(true)
+  }
   // console.log('id продацва на странице', userAds.id)
   // Перебор каждого объявления и сравнение с userAds.id
   ads.forEach((ad) => {
@@ -69,11 +80,22 @@ const SellerProfile = () => {
                         </Link>
                       </S.SellerImgMob>
                     </S.SellerImgMobBlock>
-                    <S.SellerBtn>
-                      Показать&nbsp;телефон
-                      <S.SellerBtnSpan>
-                        8&nbsp;905&nbsp;ХХХ&nbsp;ХХ&nbsp;ХХ
-                      </S.SellerBtnSpan>
+                    <S.SellerBtn onClick={handleButtonClick}>
+                      {showFullNumber ? (
+                        phoneNumber
+                      ) : (
+                        <span>
+                          {phoneNumber === 'Номер отсутствует' ? ( // Проверка отсутствия номера
+                            phoneNumber
+                          ) : (
+                            <>
+                              Показать телефон
+                              <br />
+                              {phoneNumber.slice(0, 5)}XXX ХХХ
+                            </>
+                          )}
+                        </span>
+                      )}
                     </S.SellerBtn>
                   </S.SellerRight>
                 </S.ProfileSell>
@@ -93,7 +115,3 @@ const SellerProfile = () => {
 }
 
 export default SellerProfile
-
-// {/* <div className="main__content">
-// <div className="content__cards cards"></div>
-// </div> */}
