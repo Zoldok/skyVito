@@ -60,9 +60,13 @@ const SellerProfile = () => {
                   <S.SellerLeft>
                     <S.SellerImg>
                       <Link href="" target="_self">
-                        <S.SellerImgImg
-                          src={`http://localhost:8090/${userAds.avatar}`}
-                          alt=""
+                      <S.SellerImgImg
+                          src={
+                            userAds.avatar
+                              ? `http://127.0.0.1:8090/${userAds.avatar}`
+                              : '../img/noAva.png'
+                          }
+                          alt="avatar"
                         />
                       </Link>
                     </S.SellerImg>

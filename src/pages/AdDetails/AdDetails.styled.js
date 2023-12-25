@@ -322,6 +322,36 @@ export const ArticleBtnReact = styled.button`
   }
 `
 
+export const ArticleBtnReact2 = styled.button`
+  margin-top: 20px;
+  background-color: #009ee4;
+  border-radius: 6px;
+  border: 1px solid #009ee4;
+  width: 214px;
+  height: 62px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
+
+  &:hover {
+    background-color: #0080c1;
+  }
+
+  @media screen and (max-width: ${maxMobileWidth}) {
+    width: 225px;
+    margin-right: 0;
+  }
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    width: 100%;
+    height: 57px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #ffffff;
+  }
+`
+
 export const ArticleBtnRemove = styled.button`
   background-color: #009ee4;
   border-radius: 6px;

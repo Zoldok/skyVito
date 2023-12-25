@@ -113,11 +113,11 @@ const AdDetails = () => {
                     <S.ArticleImg>
                       <S.ArticleImgImg
                         src={
-                          currentAds?.images && selectedImageIndex !== null
+                          currentAds?.images && currentAds.images.length > 0
                             ? `http://127.0.0.1:8090/${currentAds.images[selectedImageIndex]?.url}`
-                            : ''
+                            : '../img/NoPhoto.png'
                         }
-                        alt=""
+                        alt="photo"
                       />
                     </S.ArticleImg>
                     <S.ArticleImgBar>
@@ -179,7 +179,7 @@ const AdDetails = () => {
                         </S.ArticleBtnRemove>
                       </S.ArticleBtnBlock>
                     ) : (
-                      <S.ArticleBtnReact onClick={handleButtonClick}>
+                      <S.ArticleBtnReact2 onClick={handleButtonClick}>
                         {showFullNumber ? (
                           phoneNumber
                         ) : (
@@ -195,13 +195,17 @@ const AdDetails = () => {
                             )}
                           </span>
                         )}
-                      </S.ArticleBtnReact>
+                      </S.ArticleBtnReact2>
                     )}
                     <S.ArticleAuthor>
                       <S.AuthorImg>
                         <S.AuthorImgImg
-                          src={`http://localhost:8090/${currentAds?.user.avatar}`}
-                          alt=""
+                          src={
+                            currentAds?.user.avatar
+                              ? `http://127.0.0.1:8090/${currentAds?.user.avatar}`
+                              : '../img/noAva.png'
+                          }
+                          alt="avatar"
                         />
                       </S.AuthorImg>
                       <S.AuthorCont>
