@@ -7,7 +7,9 @@ import {
 import * as S from './EditModalStyle'
 import useButtonState from '../../../hooks/uesButtonState'
 
+
 export const EditModal = ({ data, onClose, updateAdData }) => {
+
   const [title, setTitle] = useState(data.title)
   const [description, setDescription] = useState(data.description)
   const [price, setPrice] = useState(data.price)
@@ -82,6 +84,7 @@ export const EditModal = ({ data, onClose, updateAdData }) => {
     <S.Wrapper>
       <S.ModalBlock>
         <S.ModalContent>
+        <S.ArticleFillImgArrow src={'../img/back.svg'} onClick={onClose} />
           <S.ModalTitle>Редактировать объявление</S.ModalTitle>
           <S.ModalBtnClose onClick={onClose}>
             <S.ModalBtnCloseLine></S.ModalBtnCloseLine>

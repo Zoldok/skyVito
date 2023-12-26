@@ -14,6 +14,9 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  @media screen and (max-width: 380px) {
+    background-color: transparent; /* Убираем задний фон */
+  }
 `
 
 export const ModalBlock = styled.div`
@@ -35,7 +38,7 @@ export const ModalBlock = styled.div`
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     // position: absolute;
     z-index: 1;
-    left: -5px;
+    // left: -5px;
     opacity: 1;
   }
 `
@@ -70,8 +73,10 @@ export const ModalContent = styled.div`
     align-items: center;
     width: 100%;
     min-width: 320px;
-    height: auto;
+    // height: auto;
+    height: 560px;
     padding: 0 20px 0;
+    border-radius: 0px;
   }
 `
 
@@ -105,7 +110,9 @@ export const ModalTitle = styled.h3`
     font-size: 24px;
     line-height: 29px;
     position: relative;
-    left: -20px;
+    // left: -20px;
+    margin-top: 30px;
+    padding-bottom: 20px;
     &:before {
       content: '';
       display: block;
@@ -217,10 +224,23 @@ export const FormNewArtLabel = styled.label`
   line-height: 24px;
   color: #000000;
   @media screen and (max-width: ${maxMobileWidthTwo}) {
-    margin-bottom: 4px;
     font-size: 16px;
     line-height: 24px;
-    color: #000000;
+    color: #009EE4; 
+    padding-bottom: 6px;
+  }
+`
+
+export const FormNewArtLabel2 = styled.label`
+  margin-bottom: 4px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    font-size: 16px;
+    line-height: 24px; 
+    padding-top: 18px;  
+    padding-bottom: 6px;
   }
 `
 export const FormNewArtInput = styled.input`
@@ -292,6 +312,7 @@ export const FormNewArtArea = styled.textarea`
   border-radius: 6px;
   font-size: 16px;
   line-height: 1;
+      resize: none;
   &::-webkit-input-placeholder {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -364,12 +385,15 @@ export const FormNewArtSpan = styled.span`
     display: block;
     margin-left: 0px;
     margin-bottom: 9px;
-    margin-top: -9px;
+    margin-top: 25px;
     color: rgba(0, 0, 0, 0.3);
+
   }
 `
 
-export const FormNewArtiLabel = styled.label``
+export const FormNewArtiLabel = styled.label`
+padding-bottom: 6px;
+`
 
 export const FormNewArtInputPrice = styled.input`
   width: 200px;
@@ -472,7 +496,7 @@ border: 1px solid #009EE4;
   line-height: 1;
   width: 100%;
   height: 46px;
-  margin: 8px 0px 0;
+  margin: 20px 0px 0;
 }
 `
 

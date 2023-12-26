@@ -160,7 +160,7 @@ export const ArticleImgBarDiv = styled.div`
   background-color: #f0f0f0;
   border: 2px solid #f0f0f0;
   margin: 0 5px;
-display: flex;
+  display: flex;
 
   &:hover {
     border: 2px solid #009ee4;
@@ -481,19 +481,21 @@ export const LinkBt = styled(Link)`
   color: #009ee4;
 `
 export const ArticleFillImgArrow = styled.img`
-width: 60px;
-height: 60px; 
-transform: scaleX(-1);
-position: absolute;
-left: 10px;
-top: 5px;
-&:hover {
-  color: red
-}
+  display: none;
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    display: block;
+    width: 60px;
+    height: 60px;
+    transform: scaleX(-1);
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    &:hover {
+      color: red;
+    }
+  }
 `
-// export const Container2 = styled.div`
 
-// `
 // export const Container2 = styled.div`
 
 // `

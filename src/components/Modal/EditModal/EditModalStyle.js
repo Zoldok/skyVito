@@ -47,7 +47,7 @@ export const ModalBlock = styled.div`
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     position: absolute;
     z-index: 1;
-    left: -5px;
+    // left: -5px;
     opacity: 1;
   }
 `
@@ -82,8 +82,9 @@ export const ModalContent = styled.div`
     align-items: center;
     width: 100%;
     min-width: 320px;
-    height: auto;
+    // height: auto;
     padding: 0 20px 0;
+    padding-bottom: 60px;
   }
 `
 
@@ -92,47 +93,69 @@ export const ModalTitle = styled.h3`
   line-height: 46px;
   font-weight: 500;
   color: #000000;
+  white-space: nowrap; /* предотвращает перенос слова на новую строку */
+  // position: relative; 
+ 
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 32px;
     line-height: 46px;
     font-weight: 500;
     color: #000000;
-    &:before {
-      content: '';
-      display: block;
-      width: 15px;
-      height: 15px;
-      background-color: transparent;
-      border-top: 2px solid #000000;
-      border-left: 2px solid #000000;
-      -webkit-transform: rotate(-45deg);
-      transform: rotate(-45deg);
-      position: absolute;
-      top: 77px;
-      left: 30px;
-      cursor: pointer;
-    }
+    padding-top: 50px;
+    padding-left: 40px;
+    // &:before {
+    //   content: '';
+    //   display: block;
+    //   width: 15px;
+    //   height: 15px;
+    //   background-color: transparent;
+    //   border-top: 2px solid #000000;
+    //   border-left: 2px solid #000000;
+    //   -webkit-transform: rotate(-45deg);
+    //   transform: rotate(-45deg);
+    //   position: absolute;
+    //   top: 77px;
+    //   left: 30px;
+    //   cursor: pointer;
+    // }
   }
+
   @media screen and (max-width: 380px) {
     font-size: 24px;
     line-height: 29px;
-    position: relative;
-    left: -20px;
-    &:before {
-      content: '';
-      display: block;
-      width: 12px;
-      height: 12px;
-      background-color: transparent;
-      border-top: 2px solid #000000;
-      border-left: 2px solid #000000;
-      -webkit-transform: rotate(-45deg);
-      transform: rotate(-45deg);
-      position: absolute;
-      top: 9px;
-      left: -67px;
-      cursor: pointer;
+    // position: relative;
+    // white-space: nowrap;
+     padding-top: 70px;
+     padding-left: 40px;
+    // &:before {
+    //    content: '';
+    //   display: block;
+    //   width: 15px;
+    //   height: 15px;
+    //   background-color: transparent;
+    //   border-top: 2px solid #000000;
+    //   border-left: 2px solid #000000;
+    //   -webkit-transform: rotate(-45deg);
+    //   transform: rotate(-45deg);
+    //   position: absolute;
+    //   top: 77px;
+    //   left: -30px;
+    //   cursor: pointer;
     }
+  }
+
+`
+export const ArticleFillImgArrow = styled.img`
+  display: none;
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    display: block;
+    width: 60px;
+    height: 60px;
+    transform: scaleX(-1);
+    position: absolute;
+    left: 0px;
+    top: 54px;
   }
 `
 
@@ -149,7 +172,7 @@ export const ModalBtnClose = styled.div`
   }
 `
 
-export const ModalBtnCloseLine = styled.div`
+export const ModalBtnCloseLine = styled.img`
   position: relative;
   width: 100%;
   height: 100%;
