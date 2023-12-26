@@ -8,11 +8,11 @@ const Footer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = () => {
-    setIsModalOpen(true) // Открываем модальное окно
+    setIsModalOpen(true)
   }
 
   const closeModal = () => {
-    setIsModalOpen(false) // Закрываем модальное окно
+    setIsModalOpen(false)
   }
 
   return (

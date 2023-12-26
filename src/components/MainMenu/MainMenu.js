@@ -6,7 +6,7 @@ const MainMenu = () => {
 
   return (
     <S.MainMenu>
-      <S.MenuLogoLink  target="_blank">
+      <S.MenuLogoLink target="_blank">
         <S.MenuLogoImg src="../img/logo.png" alt="logo" />
       </S.MenuLogoLink>
       <S.MenuForm action="#">

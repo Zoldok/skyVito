@@ -1,12 +1,11 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components'
 
 export const HeaderStyleMyProfile = styled.div`
-display: flex;
-justify-content: center;
-height: 100vh;
-align-items: center; 
-margin-right: 70px;
-}
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  margin-right: 70px;
 `
 const rippleAnimation = keyframes`
   0% {
@@ -23,7 +22,7 @@ const rippleAnimation = keyframes`
     height: 156px;
     opacity: 0;
   }
-`;
+`
 
 export const RippleLoaderContainer = styled.div`
   width: 200px;
@@ -31,7 +30,7 @@ export const RippleLoaderContainer = styled.div`
   display: inline-block;
   overflow: hidden;
   background: #f1f2f3;
-`;
+`
 
 export const RippleLoader = styled.div`
   width: 100%;
@@ -40,7 +39,7 @@ export const RippleLoader = styled.div`
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
   transform-origin: 0 0;
-`;
+`
 
 export const RippleDiv = styled.div`
   position: absolute;
@@ -59,4 +58,4 @@ export const RippleDiv = styled.div`
     border-color: #33aaf9;
     animation-delay: -0.5s;
   }
-`;
+`

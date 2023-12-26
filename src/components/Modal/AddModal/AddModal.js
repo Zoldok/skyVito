@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useAddAdsMutation, useGetAdsQuery } from '../../../store/Service/Service'
+import {
+  useAddAdsMutation,
+  useGetAdsQuery,
+} from '../../../store/Service/Service'
 import * as S from './AddModalStyle'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -13,14 +16,12 @@ export const AddModal = ({ onClose }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [error, setError] = useState(null)
-  // const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const [addAds, { isLoading, isError, isSuccess }] = useAddAdsMutation()
-  const {data, isLoading: isis, refetch} = useGetAdsQuery()
+  const { data, isLoading: isis, refetch } = useGetAdsQuery()
   const { isButtonDisabled, updateButtonState } = useButtonState()
 
-
-  useEffect(()=> {
-    if(!isis) {
+  useEffect(() => {
+    if (!isis) {
       dispatch(setAds(data))
     }
   }, [data])
@@ -29,13 +30,12 @@ export const AddModal = ({ onClose }) => {
     e.preventDefault()
     if (!title || !description || !price) {
       setError('Заполните все поля')
-      return 
+      return
     }
     try {
       const result = await addAds({ title, description, price })
       console.log(result)
       console.log(isLoading, isSuccess)
-      // setIsButtonDisabled(true);
       refetch()
       onClose()
       navigate('/')
@@ -44,14 +44,6 @@ export const AddModal = ({ onClose }) => {
     }
   }
 
-  // const updateButtonState = () => {
-  //   // Проверяем, заполнены ли все поля
-  //   if (title && description && price) {
-  //     setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
-  //   } else {
-  //     setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной
-  //   }
-  // }
   return (
     <S.Wrapper>
       <S.ModalBlock>
@@ -70,8 +62,8 @@ export const AddModal = ({ onClose }) => {
                 placeholder="Введите
                   название"
                 onChange={(e) => {
-                  setTitle(e.target.value);
-                  updateButtonState();
+                  setTitle(e.target.value)
+                  updateButtonState()
                 }}
               ></S.FormNewArtInput>
             </S.FormNewArtBlock>
@@ -82,16 +74,17 @@ export const AddModal = ({ onClose }) => {
                 id="formArea"
                 cols="auto"
                 rows="5"
-                
                 placeholder="Введите описание"
                 onChange={(e) => {
-                  setDescription(e.target.value);
-                  updateButtonState();
+                  setDescription(e.target.value)
+                  updateButtonState()
                 }}
               ></S.FormNewArtArea>
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
-              <S.FormNewArtSpan>Фотографии можно добавить во время редактирования</S.FormNewArtSpan>
+              <S.FormNewArtSpan>
+                Фотографии можно добавить во время редактирования
+              </S.FormNewArtSpan>
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
               <S.FormNewArtiLabel>Цена</S.FormNewArtiLabel>
@@ -108,16 +101,18 @@ export const AddModal = ({ onClose }) => {
                     const value = parseFloat(input)
                     if (!isNaN(value) && value >= 0) {
                       setPrice(value.toString())
-                      updateButtonState();
+                      updateButtonState()
                     }
                   }
                 }}
               />
             </S.FormNewArtBlock>
             {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
-            <S.FormNewArtBtnPub onClick={handleFormSubmit} disabled={isButtonDisabled || isLoading}
+            <S.FormNewArtBtnPub
+              onClick={handleFormSubmit}
+              disabled={isButtonDisabled || isLoading}
             >
-              {isLoading ? "Публикуем" : "Опубликовать"}
+              {isLoading ? 'Публикуем' : 'Опубликовать'}
             </S.FormNewArtBtnPub>
           </S.ModalFormNewArt>
         </S.ModalContent>

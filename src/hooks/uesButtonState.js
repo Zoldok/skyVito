@@ -7,7 +7,6 @@ const useButtonState = () => {
     const areAllFieldsFilled = args.every((field) => Boolean(field))
     setIsButtonDisabled(!areAllFieldsFilled)
   }
-
   return { isButtonDisabled, updateButtonState }
 }
 

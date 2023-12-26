@@ -16,7 +16,6 @@ import EditModal from '../../components/Modal/EditModal/EditModal'
 import { ReviewsModal } from '../../components/Modal/ReviewsModal/ReviewsModal'
 import Preloader from '../../components/Preloader/Preloader'
 
-
 const AdDetails = () => {
   const navigate = useNavigate()
   const { adId } = useParams()
@@ -30,11 +29,10 @@ const AdDetails = () => {
   const [adComments, setAdComments] = useState([])
   const { data: advComments } = useGetAllCommentsQuery(adId)
   const [showFullNumber, setShowFullNumber] = useState(false)
-  
 
   const handleGoBack = () => {
-    navigate(-1); 
-  };
+    navigate(-1)
+  }
 
   const updateAdData = (updatedData) => {
     setCurrentAds(updatedData)
@@ -88,8 +86,8 @@ const AdDetails = () => {
 
   const currentUser = localStorage.getItem('id_сur_user')
 
-  if (isLoading ) {
-    return <Preloader/>
+  if (isLoading) {
+    return <Preloader />
   }
 
   if (isAuth) {
@@ -114,8 +112,11 @@ const AdDetails = () => {
             <S.MainArtic>
               <S.ArticContent>
                 <S.ArticleLeft>
-                  <S.ArticleFillImg >
-                  <S.ArticleFillImgArrow src={'../img/back.svg'} onClick={handleGoBack} />
+                  <S.ArticleFillImg>
+                    <S.ArticleFillImgArrow
+                      src={'../img/back.svg'}
+                      onClick={handleGoBack}
+                    />
                     <S.ArticleImg>
                       <S.ArticleImgImg
                         src={
@@ -154,7 +155,6 @@ const AdDetails = () => {
                     <S.ArticleTitle>{currentAds?.title}</S.ArticleTitle>
                     <S.ArticleInfo>
                       <S.ArticleDate>
-                        {' '}
                         {currentAds && formatTime(currentAds.created_on)}
                       </S.ArticleDate>
                       <S.ArticleCity>{currentAds?.user.city}</S.ArticleCity>
@@ -173,7 +173,6 @@ const AdDetails = () => {
                     <S.ArticlePrice>
                       {currentAds?.price.toLocaleString('ru-RU')} ₽
                     </S.ArticlePrice>
-
                     {showEdit ? (
                       <S.ArticleBtnBlock>
                         <S.ArticleBtnReact onClick={openModal}>
@@ -229,7 +228,6 @@ const AdDetails = () => {
                 </S.ArticleRight>
               </S.ArticContent>
             </S.MainArtic>
-
             <S.MainContainer>
               <S.MainTitle>Описание товара</S.MainTitle>
               <S.MainContent>

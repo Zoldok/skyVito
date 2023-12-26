@@ -6,7 +6,7 @@ const AdsComponent = ({ ads, hasNoResults }) => {
   if (!ads) return <div>Обьявлений не наидено</div>
 
   if (hasNoResults) {
-    return <div>Ничего не найдено</div>;
+    return <div>Ничего не найдено</div>
   }
 
   const reversedAds = ads.slice().reverse()
@@ -17,7 +17,7 @@ const AdsComponent = ({ ads, hasNoResults }) => {
         <Link to={`/ad/${ad.id}`} key={index}>
           <S.CardsItem>
             <S.CardsCard>
-            <S.CardsImage>
+              <S.CardsImage>
                 <S.CardsImageImg
                   src={
                     ad.images[0]?.url

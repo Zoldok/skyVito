@@ -1,10 +1,7 @@
 import styled from 'styled-components'
 
 const maxMobileWidthTwo = '768px'
-// @media screen and (max-width: ${maxMobileWidthTwo}) {
-//     left: calc(50% - 160px);
-//     top: 55px;
-//   }
+
 export const Wrapper = styled.div`
   width: 100%;
   min-height: 100%;
@@ -24,6 +21,7 @@ export const ModalBlock = styled.div`
   left: calc(50% - 183px);
   top: calc(50% - 219.5px);
   opacity: 1;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     position: absolute;
     z-index: 2;
@@ -32,6 +30,7 @@ export const ModalBlock = styled.div`
     opacity: 1;
   }
 `
+
 export const ModalFormLogin = styled.form`
   width: 366px;
   height: 439px;
@@ -41,6 +40,7 @@ export const ModalFormLogin = styled.form`
   flex-direction: column;
   align-items: center;
   padding: 43px 47px 47px 40px;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 320px;
     height: auto;
@@ -68,6 +68,7 @@ export const ModalLogo = styled.div`
 export const ModalLogoImg = styled.img`
   width: 140px;
   height: auto;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 120px;
     height: auto;
@@ -136,6 +137,7 @@ export const ModalBtnEnter = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
   &:hover {
     background-color: #0080c1;
   }
@@ -163,6 +165,7 @@ export const ModalBtnEnterA = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 16px;
     line-height: 24px;
@@ -200,67 +203,29 @@ export const ModalBtnSingup = styled.button`
   }
 `
 export const ModalBtnSingupA = styled.a`
-width: 100%;
-height: 100%;
-font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 24px;
-letter-spacing: -0.05px;
-color: #000000;
-display: flex;
-align-items: center;
-justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.05px;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-@media screen and (max-width: ${maxMobileWidthTwo}) {
-font-size: 16px;
-line-height: 24px;
-}
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    font-size: 16px;
+    line-height: 24px;
+  }
 `
 
 export const Div = styled.div`
-color: red;
-bgc: blue;
+  color: red;
+  bgc: blue;
 `
 
 export const ErrorDiv = styled.div`
-color: red;`
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-
-// export const ContentCards = styled.div``
-
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-
-// export const ContentCards = styled.div``
-
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-
-// export const ContentCards = styled.div``
-
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-
-// export const ContentCards = styled.div``
-
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
-// export const ContentCards = styled.div``
+  color: red;
+`

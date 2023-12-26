@@ -2,17 +2,17 @@ import { styled } from 'styled-components'
 const maxMobileWidthTwo = '620px'
 
 export const Wrapper = styled.div`
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0, 0, 0, 0.5); /* Прозрачный серый фон */
-display: flex;
-justify-content: center;
-align-items: center;
-overflow-x: hidden;
-overflow-y: scroll;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Прозрачный серый фон */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
 `
 
 export const Container = styled.div`
@@ -21,6 +21,7 @@ export const Container = styled.div`
   margin: 0 auto;
   position: relative;
   background-color: #f4f5f6;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     background-color: #ffffff;
   
@@ -34,8 +35,6 @@ export const ModalBlock = styled.div`
   left: calc(50% - (800px / 2));
   top: 20px;
   opacity: 1;
-
-
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     position: absolute;
@@ -63,6 +62,7 @@ export const ModalContent = styled.div`
   background-color: #ffffff;
   border-radius: 12px;
   position: relative;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -88,6 +88,7 @@ export const ModalTitle = styled.h3`
   font-weight: 500;
   color: #000000;
   margin-bottom: 15px;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 32px;
     line-height: 46px;
@@ -109,6 +110,7 @@ export const ModalTitle = styled.h3`
       cursor: pointer;
     }
   }
+
   @media screen and (max-width: 380px) {
     font-size: 24px;
     line-height: 29px;
@@ -126,7 +128,7 @@ export const ModalTitle = styled.h3`
       -webkit-transform: rotate(-45deg);
       transform: rotate(-45deg);
       position: absolute;
-       top: 9px;
+      top: 9px;
       left: -61px;
       cursor: pointer;
     }
@@ -141,6 +143,7 @@ export const ModalBtnClose = styled.div`
   right: 50px;
   z-index: 3;
   cursor: pointer;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin-top: 10px;
   }
@@ -150,6 +153,7 @@ export const ModalBtnCloseLine = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+
   &::after {
     content: '';
     position: absolute;
@@ -196,7 +200,7 @@ export const ModalScroll = styled.div`
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
- 
+
   &::-webkit-scrollbar {
     width: 0px;
     background-color: #ffffff;
@@ -217,6 +221,7 @@ export const ModalFormNewArt = styled.form`
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin-top: 22px;
   }
@@ -237,6 +242,7 @@ export const FormNewArtBlock = styled.div`
   -ms-flex-direction: column;
   flex-direction: column;
   margin-bottom: 14px;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
     display: -webkit-box;
@@ -272,6 +278,7 @@ export const FormNewArtArea = styled.textarea`
   height: 100px;
   max-height: 100px;
   resize: none;
+
   &::-webkit-input-placeholder {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -304,6 +311,7 @@ export const FormNewArtArea = styled.textarea`
     line-height: 24px;
     color: #0000004d;
   }
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-family: 'Roboto', sans-serif;
     width: 100%;
@@ -338,37 +346,35 @@ export const FormNewArtArea = styled.textarea`
 `
 
 export const FormNewArtBtnPub = styled.button`
+  font-size: 16px;
+  line-height: 1;
+  color: #ffffff;
+  width: 154px;
+  height: 50px;
+  margin: 10px 7px 0;
+  border-radius: 6px;
+  background-color: #009ee4;
+  border: 1px solid #009ee4;
 
-font-size: 16px;
-line-height: 1;
-color: #FFFFFF;
-width: 154px;
-height: 50px;
-margin: 10px 7px 0;
-border-radius: 6px;
-background-color: #009EE4;
-border: 1px solid #009EE4;
-  
   &:disabled {
-    background-color: #CCCCCC; /* Серый цвет для неактивной кнопки */
-    border-color: #CCCCCC; 
-    color: #777777; 
+    background-color: #cccccc;
+    border-color: #cccccc;
+    color: #777777;
     // cursor: not-allowed; /*значок стоп*/
   }
 
   &:not(:disabled):hover {
-    background-color: #0080C1; /* Изменяем цвет фона при наведении, но только если кнопка не является неактивной */
+    background-color: #0080c1;
   }
 
-@media screen and (max-width: ${maxMobileWidthTwo}) {
-  font-size: 16px;
-  line-height: 1;
-  width: 100%;
-  height: 46px;
-  margin: 8px 0px 0;
-}
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    font-size: 16px;
+    line-height: 1;
+    width: 100%;
+    height: 46px;
+    margin: 8px 0px 0;
+  }
 `
-
 
 export const ReviewsReview = styled.div`
   display: -webkit-box;
@@ -437,7 +443,7 @@ export const ReviewNameSpan = styled.span`
     line-height: 28px;
     color: #5f5f5f;
   }
-`;
+`
 
 export const ReviewTitle = styled.h5`
   font-weight: 600;
@@ -462,4 +468,4 @@ export const Error = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
+`

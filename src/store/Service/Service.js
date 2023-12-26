@@ -26,10 +26,9 @@ export const Api = createApi({
       query: () => `user`,
       onError: (error) => {
         if (error.status === 401) {
-          // Обработка ошибки авторизации
           console.log(error)
         } else {
-          throw error // Проброс остальных ошибок
+          throw error
         }
       },
     }),
@@ -39,14 +38,6 @@ export const Api = createApi({
         method: 'PUT',
         body: { access_token, refresh_token },
       }),
-      // onError: (error) => {
-      //   if (error.status === 401) {
-      //     // Обработка ошибки авторизации при обновлении токена
-
-      //   } else {
-      //     throw error; // Проброс остальных ошибок
-      //   }
-      // },
       transformResponse: (response) => {
         localStorage.setItem('access_token', response.access_token)
         localStorage.setItem('refresh_token', response.refresh_token)
@@ -107,7 +98,7 @@ export const Api = createApi({
         url: 'user/avatar',
         method: 'POST',
         body: formData,
-      })
+      }),
     }),
     addComment: builder.mutation({
       query: ({ id, text }) => ({
@@ -146,4 +137,3 @@ export const {
   useAddCommentMutation,
   useGetAllCommentsQuery,
 } = Api
-// builder.mutation:POST, PUT или DELETE

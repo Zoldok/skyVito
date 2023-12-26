@@ -16,7 +16,7 @@ export const Container = styled.div`
   width: 100%;
   margin: 0 auto;
   background-color: #ffffff;
-  // height: 100vh;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
     min-width: 320px;
@@ -44,7 +44,7 @@ export const MainArtic = styled.div`
 export const ArticContent = styled.div`
   display: flex;
   align-items: top;
-  // justify-content: center;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: flex;
     flex-direction: column;
@@ -56,6 +56,7 @@ export const ArticContent = styled.div`
 export const ArticleLeft = styled.div`
   max-width: 480px;
   margin-right: 54px;
+
   @media screen and (max-width: ${maxMobileWidth}) {
     margin-right: 20px;
   }
@@ -78,11 +79,6 @@ export const ArticleFillImg = styled.div`
   flex-direction: column;
   align-items: center;
 
-  // &:hover:: {
-  //   border-top: 2px solid #0080c1;
-  //   border-left: 2px solid #0080c1;
-  // }
-
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     max-width: 100%;
     width: 100%;
@@ -92,20 +88,6 @@ export const ArticleFillImg = styled.div`
     align-items: center;
     justify-content: center;
     position: relative;
-    // &::before {
-    //   content: '';
-    //   display: block;
-    //   width: 23px;
-    //   height: 23px;
-    //   background-color: transparent;
-    //   border-top: 2px solid #000000;
-    //   border-left: 2px solid #000000;
-    //   transform: rotate(-45deg);
-    //   position: absolute;
-    //   top: 24px;
-    //   left: 32px;
-    //   cursor: pointer;
-    // }
   }
 `
 
@@ -130,11 +112,6 @@ export const ArticleImg = styled.div`
 export const ArticleImgImg = styled.img`
   width: 100%;
   height: 100%;
-  // height: auto;
-  // max-width: 100%;
-  // display: inline-block;
-  // vertical-align: middle;
-  // -o-object-fit: cover;
   object-fit: cover;
 `
 
@@ -243,6 +220,7 @@ export const ArticleDate = styled.p`
   line-height: 21px;
   color: #5f5f5f;
   margin-bottom: 4px;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 14px;
     line-height: 17px;
@@ -268,6 +246,7 @@ export const ArticleLink = styled.a`
   font-size: 16px;
   line-height: 21px;
   color: #009ee4;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 14px;
     line-height: 19px;
@@ -280,6 +259,7 @@ export const ArticlePrice = styled.p`
   line-height: 39px;
   font-weight: 700;
   margin-bottom: 20px;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 18px;
     line-height: 25px;
@@ -387,6 +367,7 @@ export const ArticleAuthor = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -431,6 +412,7 @@ export const AuthorAbout = styled.p`
   font-size: 16px;
   line-height: 32px;
   color: #5f5f5f;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 14px;
     line-height: 28px;
@@ -441,6 +423,7 @@ export const MainContainer = styled.div`
   max-width: 1178px;
   margin: 0 auto;
   padding: 0px 5px;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     padding: 0 20px 0;
   }
@@ -453,6 +436,7 @@ export const MainTitle = styled.h3`
   line-height: 46px;
   font-weight: 500;
   color: #000000;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin-bottom: 14px;
     padding: 0;
@@ -465,6 +449,7 @@ export const MainContent = styled.div`
   max-width: 792px;
   width: 100%;
   padding: 0 5px 117px;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
     margin: 0 auto;
@@ -482,6 +467,7 @@ export const LinkBt = styled(Link)`
 `
 export const ArticleFillImgArrow = styled.img`
   display: none;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: block;
     width: 60px;
@@ -495,35 +481,3 @@ export const ArticleFillImgArrow = styled.img`
     }
   }
 `
-
-// export const Container2 = styled.div`
-
-// `
-
-// export const Container2 = styled.div`
-
-// `
-
-// export const Container2 = styled.div`
-
-// `
-
-// export const Container2 = styled.div`
-
-// `
-
-// export const Container2 = styled.div`
-
-// `
-
-// export const Container2 = styled.div`
-
-// `
-
-// export const Container2 = styled.div`
-
-// `
-
-// export const Container2 = styled.div`
-
-// `

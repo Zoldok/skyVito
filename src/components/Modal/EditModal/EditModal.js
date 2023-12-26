@@ -7,16 +7,13 @@ import {
 import * as S from './EditModalStyle'
 import useButtonState from '../../../hooks/uesButtonState'
 
-
 export const EditModal = ({ data, onClose, updateAdData }) => {
-
   const [title, setTitle] = useState(data.title)
   const [description, setDescription] = useState(data.description)
   const [price, setPrice] = useState(data.price)
   const [selectedImages, setSelectedImages] = useState(data.images ?? [])
   const id = data.id
   const [postAdsImage] = useAddImgAdsMutation(id)
-  // const [imagesFromInput, setImagesFromInput] = useState([])
   const [editAds, { isLoading, isError }] = useEditAdsMutation()
   const [delImgAds] = useDelImgAdsMutation()
   const [error, setError] = useState(null)
@@ -38,8 +35,6 @@ export const EditModal = ({ data, onClose, updateAdData }) => {
 
   const handleFileSelect = async (e) => {
     const files = Array.from(e.target.files)
-    console.log('Выбранные файлы:', files)
-    // Отправка каждого файла на сервер сразу после выбора
     for (const file of files) {
       const formData = new FormData()
       formData.append('file', file)
@@ -55,24 +50,16 @@ export const EditModal = ({ data, onClose, updateAdData }) => {
       setError('Заполните все поля')
       return
     }
-    // const formData = new FormData()
-    // imagesFromInput.forEach((image) => {
-    //   formData.append('file', image)
-    // })
     handleFormSubmit()
     onClose()
   }
 
   const handleDeleteImage = async (index, image) => {
-    console.log('данные', index)
-    console.log('данные2', image)
     try {
       await delImgAds({ id: data.id, image })
       setSelectedImages((prevImages) => {
-        console.log('prevImages', prevImages)
         const newImages = [...prevImages]
         newImages.splice(index, 1)
-        console.log('newImages', newImages)
         return newImages
       })
     } catch (error) {
@@ -84,12 +71,11 @@ export const EditModal = ({ data, onClose, updateAdData }) => {
     <S.Wrapper>
       <S.ModalBlock>
         <S.ModalContent>
-        <S.ArticleFillImgArrow src={'../img/back.svg'} onClick={onClose} />
+          <S.ArticleFillImgArrow src={'../img/back.svg'} onClick={onClose} />
           <S.ModalTitle>Редактировать объявление</S.ModalTitle>
           <S.ModalBtnClose onClick={onClose}>
             <S.ModalBtnCloseLine></S.ModalBtnCloseLine>
           </S.ModalBtnClose>
-
           <S.ModalFormNewArt>
             <S.FormNewArtBlock>
               <S.FormNewArtLabel htmlFor="text">Название</S.FormNewArtLabel>
@@ -123,11 +109,9 @@ export const EditModal = ({ data, onClose, updateAdData }) => {
               <S.FormNewArtSpan>не более 5 фотографий</S.FormNewArtSpan>
 
               <S.FormNewArtBarImg>
-                {/* Отображение выбранных изображений */}
                 {Array.from({ length: Math.min(selectedImages.length, 5) }).map(
                   (_, index) => (
                     <S.FormNewArtImg key={index}>
-                      {/* Проверка наличия изображения по индексу */}
                       {selectedImages[index] && (
                         <>
                           <S.DeleteImageBtn
@@ -156,7 +140,6 @@ export const EditModal = ({ data, onClose, updateAdData }) => {
                     </S.FormNewArtImg>
                   )
                 )}
-                {/* Добавление новых */}
                 {Array.from({
                   length: Math.max(0, 5 - selectedImages.length),
                 }).map((_, index) => (

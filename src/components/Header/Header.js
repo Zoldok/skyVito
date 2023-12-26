@@ -1,30 +1,26 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as S from './Header.styled'
 import { useAuth } from '../../hooks/use-auth'
 import AddModal from '../Modal/AddModal/AddModal'
 
 const Header = ({ profileKey }) => {
-  //ключь из хука, авторизован ли пользователь
   const { isAuth } = useAuth()
-  // console.log(isAuth)
   const navigate = useNavigate()
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  //выход из приложения
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   const Logut = () => {
     navigate('/')
     localStorage.clear()
-    // window.location.reload() // Перезагрузка страницы
   }
-  // console.log(profileKey)
 
   const openModal = () => {
-    setIsModalOpen(true); // Открываем модальное окно
-  };
+    setIsModalOpen(true)
+  }
 
   const closeModal = () => {
-    setIsModalOpen(false); // Закрываем модальное окно
-  };
+    setIsModalOpen(false)
+  }
 
   return (
     <S.Header>
@@ -36,12 +32,16 @@ const Header = ({ profileKey }) => {
         </S.Logo>
         {profileKey ? (
           <>
-            <S.HeaderBtnPutAd onClick={openModal}>Разместить объявление</S.HeaderBtnPutAd>
+            <S.HeaderBtnPutAd onClick={openModal}>
+              Разместить объявление
+            </S.HeaderBtnPutAd>
             <S.HeaderBtnLk onClick={Logut}>Выйти</S.HeaderBtnLk>
           </>
         ) : isAuth ? (
           <>
-            <S.HeaderBtnPutAd onClick={openModal}>Разместить объявление</S.HeaderBtnPutAd>
+            <S.HeaderBtnPutAd onClick={openModal}>
+              Разместить объявление
+            </S.HeaderBtnPutAd>
             <S.HeaderBtnLk
               onClick={() => {
                 navigate('/profile')
@@ -60,8 +60,7 @@ const Header = ({ profileKey }) => {
           </S.HeaderBtnLkEnter>
         )}
       </S.HeaderNav>
-      {isModalOpen && 
-        <AddModal onClose={closeModal}/>}
+      {isModalOpen && <AddModal onClose={closeModal} />}
     </S.Header>
   )
 }

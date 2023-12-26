@@ -12,7 +12,6 @@ import Preloader from '../../components/Preloader/Preloader'
 
 const SellerProfile = () => {
   const { idSeller } = useParams()
-  // console.log('id продавца', typeof idSeller) //строка а id пользователя число
   const { data } = useGetAllUserQuery()
   const ads = useSelector((state) => state.user.ads)
   const [showFullNumber, setShowFullNumber] = useState(false)
@@ -27,27 +26,21 @@ const SellerProfile = () => {
       }
     })
   }
-  // console.log('все обьявления ', ads)
-  if (!userAds ) {
-    return <Preloader/>
+
+  if (!userAds) {
+    return <Preloader />
   }
   const phoneNumber = userAds?.phone || 'Номер отсутствует'
-  // const phoneNumber = showFullNumber
-  //   ? userAds?.phone
-  //   : `${userAds?.phone.slice(0, 4)}XXXX`
 
   const handleButtonClick = () => {
     setShowFullNumber(true)
   }
-  // console.log('id продацва на странице', userAds.id)
-  // Перебор каждого объявления и сравнение с userAds.id
+
   ads.forEach((ad) => {
     if (ad.user.id === userAds.id) {
       matchedAds.push(ad)
     }
   })
-
-  // console.log('Совпавшие объявления:', matchedAds)
 
   return (
     <S.Wrapper>
@@ -63,7 +56,7 @@ const SellerProfile = () => {
                   <S.SellerLeft>
                     <S.SellerImg>
                       <Link href="" target="_self">
-                      <S.SellerImgImg
+                        <S.SellerImgImg
                           src={
                             userAds.avatar
                               ? `http://127.0.0.1:8090/${userAds.avatar}`
@@ -92,7 +85,7 @@ const SellerProfile = () => {
                         phoneNumber
                       ) : (
                         <span>
-                          {phoneNumber === 'Номер отсутствует' ? ( // Проверка отсутствия номера
+                          {phoneNumber === 'Номер отсутствует' ? (
                             phoneNumber
                           ) : (
                             <>
@@ -110,7 +103,6 @@ const SellerProfile = () => {
             </S.MainProfileSell>
             <S.MainTitle>Товары продавца</S.MainTitle>
           </S.MainCenterBlock>
-
           <S.ContentCards>
             <AdsComponent ads={matchedAds} />
           </S.ContentCards>

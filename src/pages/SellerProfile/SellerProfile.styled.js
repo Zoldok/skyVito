@@ -33,6 +33,7 @@ export const MainContainer = styled.div`
 `
 export const MainCenterBlock = styled.div`
   margin: 0 auto;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin: 0 auto;
     padding: 0 20px;
@@ -51,8 +52,6 @@ export const ContentCards = styled.div`
   scrollbar-color: #ffffff #2e2e2e;
   scrollbar-width: thin;
   scrollbar-width: 0px;
-  // height: 600px;
-  // height: 100vh;
 
   &::-webkit-scrollbar {
     width: 0px;
@@ -92,11 +91,6 @@ export const MainH2 = styled.h2`
   color: #000000;
   margin-bottom: 30px;
 
-  //   &:hover::before {
-  //     border-top: 2px solid #0080c1;
-  //     border-left: 2px solid #0080c1;
-  //   }
-
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 24px;
     line-height: 29px;
@@ -127,6 +121,7 @@ export const MainTitle = styled.h3`
   line-height: 40px;
   font-weight: 500;
   color: #000000;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 18px;
     line-height: 1;
@@ -136,6 +131,7 @@ export const MainTitle = styled.h3`
 export const MainProfileSell = styled.div`
   width: 100%;
   padding: 0 0 70px;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
     padding: 0 0 40px;
@@ -143,6 +139,7 @@ export const MainProfileSell = styled.div`
 `
 export const ProfileSellContent = styled.div`
   width: 100%;
+
   @media screen and (max-width: ${maxMobileWidth}) {
     max-width: 834px;
     width: 100%;
@@ -156,6 +153,7 @@ export const ProfileSell = styled.div`
   display: flex;
   align-items: top;
   justify-content: start;
+
   @media screen and (max-width: ${maxMobileWidth}) {
     flex-wrap: wrap;
   }
@@ -169,6 +167,7 @@ export const SellerLeft = styled.div`
   flex-direction: column;
   align-items: center;
   margin-right: 50px;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: none;
     margin-right: 0px;
@@ -179,6 +178,7 @@ export const SellerImg = styled.div`
   height: 170px;
   border-radius: 50%;
   background-color: #f0f0f0;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: none;
   }
@@ -196,6 +196,7 @@ export const SellerImgImg = styled.img`
 `
 export const SellerRight = styled.div`
   width: auto;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
   }
@@ -228,6 +229,7 @@ export const SellerCity = styled.p`
 `
 export const SellerImgMobBlock = styled.div`
   display: none;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: flex;
     width: 100%;
@@ -282,6 +284,7 @@ export const SellerBtnSpan = styled.span`
   display: block;
   font-size: 14px;
   font-weight: 400;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 12px;
   }
