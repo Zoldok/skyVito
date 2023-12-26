@@ -6,6 +6,7 @@ import { Header } from '../../Header/Header.styled';
 import * as S from './ReviewsModalStyle'
 import {ReviewItem} from './ReviewItem'
 import { useAuth } from '../../../hooks/use-auth'
+import useButtonState from '../../../hooks/uesButtonState';
 
 export const ReviewsModal = ({comments, onClose}) => {
   const modalRef = useRef(null);
@@ -14,7 +15,8 @@ export const ReviewsModal = ({comments, onClose}) => {
   const [addComment, { isLoading }] = useAddCommentMutation(adId);
   const [newComment, setNewComment] = useState("");
   const [error, setError] = useState(null);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+  // const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+  const { isButtonDisabled, updateButtonState } = useButtonState()
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -41,18 +43,18 @@ export const ReviewsModal = ({comments, onClose}) => {
     await addComment({ text: newComment, id: adId });
     setNewComment("");
     setError(null)
-    setIsButtonDisabled(true);
+    updateButtonState(false);
   };
 
 
-  const updateButtonState = () => {
-    // Проверяем, заполнены ли все поля
-    if (newComment) {
-      setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
-    } else {
-      setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной
-    }
-  }
+  // const updateButtonState = () => {
+  //   // Проверяем, заполнены ли все поля
+  //   if (newComment) {
+  //     setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
+  //   } else {
+  //     setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной
+  //   }
+  // }
 
 
   return (
@@ -70,7 +72,7 @@ export const ReviewsModal = ({comments, onClose}) => {
               <S.ModalFormNewArt>
                 {isAuth && (
                   <S.FormNewArtBlock>
-                    <S.FormNewArtLabel for="text">Добавить отзыв</S.FormNewArtLabel>
+                    <S.FormNewArtLabel htmlFor="text">Добавить отзыв</S.FormNewArtLabel>
                     <S.FormNewArtArea
                       name="text"
                       id="formArea"

@@ -34,7 +34,8 @@ const Login = () => {
     <S.Wrapper>
       <S.ContainerEnter>
         <S.ModalBlock>
-          <S.ModalFormLogin onSubmit={handleLogin}>
+          {/* <S.ModalFormLogin onSubmit={handleLogin}> */}
+          <S.ModalFormLogin >
             <S.ModalLogo>
               <S.ModalLogoImg src="../img/logo-reg.png" alt="logo" />
             </S.ModalLogo>
@@ -44,6 +45,7 @@ const Login = () => {
               name="login"
               id="formlogin"
               placeholder="email"
+              autoComplete="username"
               onChange={(e) => setEmail(e.target.value)}
             />
             <S.ModalInput
@@ -51,11 +53,12 @@ const Login = () => {
               name="password"
               id="formpassword"
               placeholder="Пароль"
+              autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
             />
             <S.ErrorDiv>{errorMessage}</S.ErrorDiv>
             <S.ModalBtnEnter id="btnEnter" onClick={handleLogin}>
-              <S.ModalBtnEnterA href="#">Войти</S.ModalBtnEnterA>
+              <S.ModalBtnEnterA href="#" >Войти</S.ModalBtnEnterA>
             </S.ModalBtnEnter>
             <S.ModalBtnSingup id="btnSignUp">
               <S.ModalBtnSingupA href="/register">

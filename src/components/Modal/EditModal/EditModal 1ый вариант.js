@@ -5,7 +5,6 @@ import {
   useDelImgAdsMutation,
 } from '../../../store/Service/Service'
 import * as S from './EditModalStyle'
-import useButtonState from '../../../hooks/uesButtonState'
 
 export const EditModal = ({ data, onClose,  updateAdData
 }) => {
@@ -22,7 +21,7 @@ export const EditModal = ({ data, onClose,  updateAdData
   const [delImgAds] = useDelImgAdsMutation()
   const [blurredIndexes, setBlurredIndexes] = useState([]);
   const [error, setError] = useState(null)
-  const { isButtonDisabled, updateButtonState } = useButtonState()
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   const handleFormSubmit = async () => {
     try {
@@ -32,50 +31,44 @@ export const EditModal = ({ data, onClose,  updateAdData
         price: Number(price),
         id,
       })
-      // console.log('ответ сервера',result.data)
+      console.log('ответ сервера',result.data)
       updateAdData(result.data)
-      // setIsButtonDisabled(true);
-      // console.log(isLoading, isSuccess)
+      setIsButtonDisabled(true);
     } catch (error) {
       setError(isError)
     }
   }
 
   const handleFileSelect = async (e) => {
-    const files = Array.from(e.target.files);
-    console.log('Выбранные файлы:', files);
-    // Отправка каждого файла на сервер сразу после выбора
-    for (const file of files) {
-      const formData = new FormData();
-      formData.append('file', file);
-      await postAdsImage({ id, file: formData });
-  
-      setImagesFromInput((prevImages) => [...prevImages, file]);
-  
-      const reader = new FileReader();
-      reader.onload = () => {
-        const imagesData = [{ file, dataURL: reader.result }];
-        setSelectedImages((prevImages) => [...prevImages, ...imagesData]);
-      };
-  
-      reader.readAsDataURL(file);
-      await new Promise((resolve) => {
-        reader.onloadend = resolve;
-      });
+    updateButtonState();
+    const files = Array.from(e.target.files)
+    setImagesFromInput(files)
+    const reader = new FileReader()
+
+    reader.onload = () => {
+      const imagesData = files.map((file) => ({
+        file,
+        dataURL: reader.result,
+      }))
+      console.log('данные', imagesData)
+      setSelectedImages((prevImages) => [...prevImages, ...imagesData])
     }
+    files.forEach((file) => reader.readAsDataURL(file))
   }
 
   const submitAds = async (e) => {
     e.preventDefault()
+
     if (!title || !description || !price) {
       setError('Заполните все поля')
       return 
     }
     // console.log('REF', imagesFromInput)
     const formData = new FormData()
-    imagesFromInput.forEach((image) => {
-      formData.append('file', image)
-    })
+    formData.append('file', imagesFromInput[imagesFromInput.length - 1])
+    await postAdsImage({ id, file: formData })
+    setSelectedImages((prevImages) => [...prevImages, ...imagesFromInput]);
+    // console.log(typeof price)
     handleFormSubmit()
     onClose()
   }
@@ -89,10 +82,20 @@ export const EditModal = ({ data, onClose,  updateAdData
         return newImages;
       });
     } catch (error) {
-      setError(error);
+      console.log('Ошибка при удалении изображения:', error);
     }
     setBlurredIndexes((prevIndexes) => [...prevIndexes, index]);
   };
+
+
+  const updateButtonState = () => {
+    // Проверяем, заполнены ли все поля
+    if (title || description || price) {
+      setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
+    } else {
+      setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной
+    }
+  }
 
   return (
     <S.Wrapper>
@@ -180,17 +183,16 @@ export const EditModal = ({ data, onClose,  updateAdData
                       <S.FormNewArtImgImg src="" alt="" />
                     )}
                     <S.FormNewArtBarImgCover
-                      onClick={(e) =>{
-                        e.preventDefault()
+                      onClick={() =>
                         document.getElementById(`fileInput${index}`).click()
-                        updateButtonState();
-                      }}
+                      }
                     ></S.FormNewArtBarImgCover>
                     <input
                       type="file"
                       id={`fileInput${index}`}
                       style={{ display: 'none' }}
                       onChange={handleFileSelect}
+
                     />
                   </S.FormNewArtImg>
                 ))}

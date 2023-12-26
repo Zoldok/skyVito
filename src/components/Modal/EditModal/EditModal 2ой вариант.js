@@ -5,7 +5,6 @@ import {
   useDelImgAdsMutation,
 } from '../../../store/Service/Service'
 import * as S from './EditModalStyle'
-import useButtonState from '../../../hooks/uesButtonState'
 
 export const EditModal = ({ data, onClose,  updateAdData
 }) => {
@@ -18,11 +17,11 @@ export const EditModal = ({ data, onClose,  updateAdData
   const [postAdsImage] = useAddImgAdsMutation(id)
   // console.log('url изображений', data.images)
   const [imagesFromInput, setImagesFromInput] = useState([])
-  const [editAds, { isLoading, isError }] = useEditAdsMutation()
+  const [editAds, { isLoading, isError, isSuccess }] = useEditAdsMutation()
   const [delImgAds] = useDelImgAdsMutation()
   const [blurredIndexes, setBlurredIndexes] = useState([]);
   const [error, setError] = useState(null)
-  const { isButtonDisabled, updateButtonState } = useButtonState()
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   const handleFormSubmit = async () => {
     try {
@@ -32,18 +31,19 @@ export const EditModal = ({ data, onClose,  updateAdData
         price: Number(price),
         id,
       })
-      // console.log('ответ сервера',result.data)
+      console.log('ответ сервера',result.data)
       updateAdData(result.data)
       // setIsButtonDisabled(true);
-      // console.log(isLoading, isSuccess)
+      console.log(isLoading, isSuccess)
     } catch (error) {
-      setError(isError)
+      console.log(isError)
     }
   }
 
   const handleFileSelect = async (e) => {
     const files = Array.from(e.target.files);
     console.log('Выбранные файлы:', files);
+    
     // Отправка каждого файла на сервер сразу после выбора
     for (const file of files) {
       const formData = new FormData();
@@ -71,7 +71,7 @@ export const EditModal = ({ data, onClose,  updateAdData
       setError('Заполните все поля')
       return 
     }
-    // console.log('REF', imagesFromInput)
+    console.log('REF', imagesFromInput)
     const formData = new FormData()
     imagesFromInput.forEach((image) => {
       formData.append('file', image)
@@ -79,6 +79,7 @@ export const EditModal = ({ data, onClose,  updateAdData
     handleFormSubmit()
     onClose()
   }
+
 
   const handleDeleteImage = async (index, image) => {
     try {
@@ -89,10 +90,20 @@ export const EditModal = ({ data, onClose,  updateAdData
         return newImages;
       });
     } catch (error) {
-      setError(error);
+      console.log('Ошибка при удалении изображения:', error);
     }
     setBlurredIndexes((prevIndexes) => [...prevIndexes, index]);
   };
+
+
+  const updateButtonState = () => {
+    // Проверяем, заполнены ли все поля
+    if (title || description || price || selectedImages) {
+      setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
+    } else {
+      setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной
+    }
+  }
 
   return (
     <S.Wrapper>

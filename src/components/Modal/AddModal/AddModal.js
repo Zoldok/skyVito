@@ -4,6 +4,7 @@ import * as S from './AddModalStyle'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setAds } from '../../../store/slices/userSlice'
+import useButtonState from '../../../hooks/uesButtonState'
 
 export const AddModal = ({ onClose }) => {
   const [title, setTitle] = useState('')
@@ -12,11 +13,11 @@ export const AddModal = ({ onClose }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [error, setError] = useState(null)
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-  
+  // const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const [addAds, { isLoading, isError, isSuccess }] = useAddAdsMutation()
- 
   const {data, isLoading: isis, refetch} = useGetAdsQuery()
+  const { isButtonDisabled, updateButtonState } = useButtonState()
+
 
   useEffect(()=> {
     if(!isis) {
@@ -34,7 +35,7 @@ export const AddModal = ({ onClose }) => {
       const result = await addAds({ title, description, price })
       console.log(result)
       console.log(isLoading, isSuccess)
-      setIsButtonDisabled(true);
+      // setIsButtonDisabled(true);
       refetch()
       onClose()
       navigate('/')
@@ -43,14 +44,14 @@ export const AddModal = ({ onClose }) => {
     }
   }
 
-  const updateButtonState = () => {
-    // Проверяем, заполнены ли все поля
-    if (title && description && price) {
-      setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
-    } else {
-      setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной
-    }
-  }
+  // const updateButtonState = () => {
+  //   // Проверяем, заполнены ли все поля
+  //   if (title && description && price) {
+  //     setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
+  //   } else {
+  //     setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной
+  //   }
+  // }
   return (
     <S.Wrapper>
       <S.ModalBlock>
