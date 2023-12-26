@@ -17,8 +17,6 @@ const Profile = () => {
     return <Preloader />
   }
 
-  console.log(userInfo.id)
-
   ads.forEach((ad) => {
     if (ad.user.id === userInfo.id) {
       matchedAds.push(ad)

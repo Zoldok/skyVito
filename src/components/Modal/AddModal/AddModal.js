@@ -29,8 +29,8 @@ export const AddModal = ({ onClose }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault()
     if (!title || !description || !price) {
-      setError('Заполните все поля')
-      return
+      setError('Заполните все поля');
+      return;
     }
     try {
       const result = await addAds({ title, description, price })
@@ -89,21 +89,15 @@ export const AddModal = ({ onClose }) => {
             <S.FormNewArtBlock>
               <S.FormNewArtiLabel>Цена</S.FormNewArtiLabel>
               <S.FormNewArtInputPrice
-                type="text"
+                type="number"
                 inputMode="numeric"
                 pattern="[0-9]*"
                 name="price"
                 id="formName"
                 placeholder="₽"
                 onChange={(e) => {
-                  const input = e.target.value
-                  if (/^\d*\.?\d*$/.test(input)) {
-                    const value = parseFloat(input)
-                    if (!isNaN(value) && value >= 0) {
-                      setPrice(value.toString())
-                      updateButtonState()
-                    }
-                  }
+                    setPrice(e.target.value)
+                    updateButtonState()
                 }}
               />
             </S.FormNewArtBlock>

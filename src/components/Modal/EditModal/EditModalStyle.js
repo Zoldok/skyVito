@@ -140,11 +140,10 @@ export const ModalBtnClose = styled.div`
   }
 `
 
-export const ModalBtnCloseLine = styled.img`
+export const ModalBtnCloseLine = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-
   &::after {
     content: '';
     position: absolute;
