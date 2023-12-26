@@ -56,7 +56,7 @@ export const AddModal = ({ onClose }) => {
     <S.Wrapper>
       <S.ModalBlock>
         <S.ModalContent>
-          <S.ModalTitle>Новое объявление</S.ModalTitle>
+          <S.ModalTitle onClick={onClose}>Новое объявление</S.ModalTitle>
           <S.ModalBtnClose onClick={onClose}>
             <S.ModalBtnCloseLine></S.ModalBtnCloseLine>
           </S.ModalBtnClose>

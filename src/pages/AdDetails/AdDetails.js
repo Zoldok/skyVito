@@ -16,8 +16,10 @@ import EditModal from '../../components/Modal/EditModal/EditModal'
 import { ReviewsModal } from '../../components/Modal/ReviewsModal/ReviewsModal'
 import Preloader from '../../components/Preloader/Preloader'
 
+
 const AdDetails = () => {
   const navigate = useNavigate()
+
   const { adId } = useParams()
   const { isAuth } = useAuth()
   const { data, isLoading, refetch: refetchAdsId } = useGetAdsIdQuery(adId)
@@ -30,6 +32,10 @@ const AdDetails = () => {
   const { data: advComments } = useGetAllCommentsQuery(adId)
   const [showFullNumber, setShowFullNumber] = useState(false)
   
+
+  const handleGoBack = () => {
+    navigate(-1); 
+  };
 
   const updateAdData = (updatedData) => {
     setCurrentAds(updatedData)
@@ -55,7 +61,7 @@ const AdDetails = () => {
   const handleButtonClick = () => {
     setShowFullNumber(true)
   }
-  console.log('текущее', currentAds)
+  // console.log('текущее', currentAds)
 
   const openModal = () => {
     setIsModalOpen(true)
@@ -114,7 +120,8 @@ const AdDetails = () => {
             <S.MainArtic>
               <S.ArticContent>
                 <S.ArticleLeft>
-                  <S.ArticleFillImg>
+                  <S.ArticleFillImg >
+                  <S.ArticleFillImgArrow src={'../img/back.svg'} onClick={handleGoBack} />
                     <S.ArticleImg>
                       <S.ArticleImgImg
                         src={
@@ -147,6 +154,7 @@ const AdDetails = () => {
                       <S.ImgBarMobCircle />
                     </S.ArticleImgBarMob>
                   </S.ArticleFillImg>
+
                 </S.ArticleLeft>
 
                 <S.ArticleRight>

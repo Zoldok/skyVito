@@ -63,7 +63,7 @@ export const ContentCards = styled.div`
   scrollbar-color: #ffffff #2e2e2e;
   scrollbar-width: thin;
   scrollbar-width: 0px;
-  height: 600px;
+  // height: 600px;
   // height: 100vh;
 
   &::-webkit-scrollbar {

@@ -38,7 +38,7 @@ const Main = () => {
   //записываем данные текущего пользователя в localStorage
   if (userInfo) {
     localStorage.setItem('id_сur_user', userInfo.id)
-    console.log('данные пользователя', userInfo)
+    // console.log('данные пользователя', userInfo)
   }
 
   //для поиска
