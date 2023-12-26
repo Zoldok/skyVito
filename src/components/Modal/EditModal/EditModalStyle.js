@@ -428,9 +428,46 @@ export const FormNewArtBarImg = styled.div`
     justify-content: start;
     margin: 0px -5px 10px;
     overflow: hidden;
+        overflow: auto;
   }
 `
 export const FormNewArtBarImgCover = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #f0f0f0;
+  z-index: -1;
+  display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: #d9d9d9;
+    top: 50%;
+    right: calc(50% - (30px / 2));
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: #d9d9d9;
+    top: 50%;
+    right: calc(50% - (30px / 2));
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+`
+
+export const FormNewArtBarImgCover2 = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -462,13 +499,13 @@ export const FormNewArtBarImgCover = styled.div`
   }
 `
 export const FormNewArtImg = styled.div`
-  width: 90px;
+  width: 154px;
   height: 90px;
   margin-right: 10px;
   position: relative;
   z-index: 0;
   // display: flex;
-  
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: block;
     width: 100px;
@@ -478,10 +515,29 @@ export const FormNewArtImg = styled.div`
     margin: 0 5px;
   }
 `
+
+export const FormNewArtImg2 = styled.div`
+  width: 100%;
+  height: 90px;
+  margin-right: 10px;
+  position: relative;
+  z-index: 0;
+  // display: flex;
+
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    display: block;
+    width: 100px;
+    min-width: 90px;
+    height: 90px;
+    background-color: #f0f0f0;
+    margin: 0 5px;
+  }
+`
+
 export const FormNewArtImgImg = styled.img`
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 90px;
+  height: 90px;
   height: auto;
   -o-object-fit: cover;
   object-fit: cover;
@@ -600,27 +656,6 @@ background-color: #FFFFFF;
  
 }
 `
-// export const FormNewArtBtnPub = styled.button`
-//   width: 181px;
-//   height: 50px;
-//   background: #d9d9d9;
-//   border: 1px solid #d9d9d9;
-//   border-radius: 6px;
-//   font-size: 16px;
-//   line-height: 24px;
-//   color: #ffffff;
-//   &:hover {
-//     background-color: #0080c1;
-//   }
-//   @media screen and (max-width: 600px) {
-//     margin-top: 10px;
-//     width: 100%;
-//     height: 46px;
-//     &:hover {
-//       background-color: #0080c1;
-//     }
-//   }
-// `
 
 export const FormNewArtBtnPub = styled.button`
   font-size: 16px;
@@ -653,17 +688,13 @@ export const FormNewArtBtnPub = styled.button`
   }
 `
 
-export const FormNewArtImgImg2 = styled.img`
-  width: 90px;
-  height: 90px;
-`
-
 export const DeleteImageBtn = styled.button`
-  position: absolute;
+  // position: absolute;
+  position: fixed;
   width: 20px;
   height: 20px;
-  top: 5px;
-  right: 5px;
+  // top: 5px;
+  // right: 5px;
   border: transparent;
   background-color: transparent;
   color: red;
