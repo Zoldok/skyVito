@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import * as S from './Login.styled'
-import { loginUser } from '../../api'
+import { loginUser } from '../../store/Service/api'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {

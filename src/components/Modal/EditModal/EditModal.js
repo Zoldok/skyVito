@@ -180,7 +180,7 @@ export const EditModal = ({ data, onClose, updateAdData }) => {
                   if (/^\d*\.?\d*$/.test(input)) {
                     const input = e.target.value
                     if (input === '' || /^\d*\.?\d*$/.test(input)) {
-                      setPrice(input)
+                      setPrice(e.target.value)
                       updateButtonState()
                     }
                   }

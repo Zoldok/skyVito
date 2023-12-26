@@ -142,13 +142,17 @@ const CenterBlockProfile = ({ currentUser }) => {
                 <S.SettingsDiv>
                   <S.Label htmlFor="phone">Телефон</S.Label>
                   <S.SettingInputPhone
-                    id="settings-phone"
+                    id="number"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     name="phone"
                     type="tel"
                     placeholder="введите номер"
                     value={phone}
                     onChange={(e) => {
-                      setPhone(e.target.value)
+                      const input = e.target.value
+                      const filteredInput = input.replace(/\D/g, '')
+                      setPhone(filteredInput)
                       updateButtonState()
                     }}
                   />

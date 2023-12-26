@@ -416,6 +416,12 @@ export const FormNewArtInputPrice = styled.input`
   font-size: 16px;
   line-height: 1;
 
+  -moz-appearance: textfield; /* Firefox */
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
   &::-webkit-input-placeholder {
     text-align: end;
     font-style: normal;
