@@ -19,7 +19,6 @@ import Preloader from '../../components/Preloader/Preloader'
 
 const AdDetails = () => {
   const navigate = useNavigate()
-
   const { adId } = useParams()
   const { isAuth } = useAuth()
   const { data, isLoading, refetch: refetchAdsId } = useGetAdsIdQuery(adId)
@@ -54,14 +53,10 @@ const AdDetails = () => {
     }
   }, [data])
   const phoneNumber = currentAds?.user.phone || 'Номер отсутствует'
-  // const phoneNumber = showFullNumber
-  //     ? currentAds?.user.phone
-  //     : `${currentAds?.user.phone.slice(0, 5)}XXX XХХ`;
 
   const handleButtonClick = () => {
     setShowFullNumber(true)
   }
-  // console.log('текущее', currentAds)
 
   const openModal = () => {
     setIsModalOpen(true)
@@ -96,7 +91,6 @@ const AdDetails = () => {
   if (isLoading ) {
     return <Preloader/>
   }
-
 
   if (isAuth) {
     localStorage.setItem('id_seller', data.user.id)
@@ -154,9 +148,7 @@ const AdDetails = () => {
                       <S.ImgBarMobCircle />
                     </S.ArticleImgBarMob>
                   </S.ArticleFillImg>
-
                 </S.ArticleLeft>
-
                 <S.ArticleRight>
                   <S.ArticleBlock>
                     <S.ArticleTitle>{currentAds?.title}</S.ArticleTitle>
@@ -252,7 +244,6 @@ const AdDetails = () => {
               />
             )}
           </S.Main>
-
           <Footer />
         </S.Container>
         {isModalOpen && (

@@ -11,14 +11,14 @@ export const Wrapper = styled.div`
   background-color: #f1f1f1;
   display: flex;
   flex-direction: column;
-  // overflow-y: auto;
+    // overflow: auto;
 `
 export const Container = styled.div`
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  height: 100vh;
   background-color: #ffffff;
+  // overflow: auto;
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
     min-width: 320px;

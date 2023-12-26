@@ -8,16 +8,13 @@ const AdsComponent = ({ ads, hasNoResults }) => {
   if (hasNoResults) {
     return <div>Ничего не найдено</div>;
   }
-  // Используем метод reverse() для изменения порядка элементов в массиве
+
   const reversedAds = ads.slice().reverse()
 
   return (
     <>
       {reversedAds.map((ad, index) => (
-        //ad.id соответствует id обьявления
         <Link to={`/ad/${ad.id}`} key={index}>
-          {' '}
-          {/* Создаем ссылку на новую страницу */}
           <S.CardsItem>
             <S.CardsCard>
             <S.CardsImage>

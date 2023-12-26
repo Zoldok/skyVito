@@ -40,7 +40,7 @@ export const ModalBlock = styled.div`
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     position: absolute;
     z-index: 1;
-    left: -179px;
+    left: -188px;
     top: 55px;
     opacity: 1;
   }
@@ -114,6 +114,7 @@ export const ModalTitle = styled.h3`
     line-height: 29px;
     position: relative;
     left: 10px;
+    margin-top: 30px;
     &:before {
       content: '';
       display: block;
@@ -125,7 +126,7 @@ export const ModalTitle = styled.h3`
       -webkit-transform: rotate(-45deg);
       transform: rotate(-45deg);
       position: absolute;
-      top: 9px;
+       top: 9px;
       left: -61px;
       cursor: pointer;
     }

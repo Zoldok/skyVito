@@ -76,12 +76,13 @@ export const AddModal = ({ onClose }) => {
               ></S.FormNewArtInput>
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
-              <S.FormNewArtLabel htmlFor="text">Описание</S.FormNewArtLabel>
+              <S.FormNewArtLabel2 htmlFor="text">Описание</S.FormNewArtLabel2>
               <S.FormNewArtArea
                 name="text"
                 id="formArea"
                 cols="auto"
                 rows="5"
+                
                 placeholder="Введите описание"
                 onChange={(e) => {
                   setDescription(e.target.value);

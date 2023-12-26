@@ -265,3 +265,22 @@ export const Message = styled.div`
   flex-direction: column;
   justify-content: center;
 `
+
+export const ArticleFillImgArrow = styled.img`
+  display: none;
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    display: block;
+    width: 60px;
+    height: 60px;
+    transform: scaleX(-1);
+    left: 10px;
+    top: 5px;
+    &:hover {
+      color: red;
+    }
+  }
+`
+
+export const ContainerHeadBtn = styled.div`
+display: flex;
+`

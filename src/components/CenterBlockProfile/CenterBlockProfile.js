@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import MainMenu from '../MainMenu/MainMenu'
 import * as S from './CenterBlockProfile.styled'
@@ -8,6 +9,7 @@ import {
 import useButtonState from '../../hooks/uesButtonState'
 
 const CenterBlockProfile = ({ currentUser }) => {
+  const navigate = useNavigate()
   const [UpdateUser, { isLoading }] = useUserUpdateMutation()
   const [uploadUserAvatar] = useUploadUserAvatarMutation()
   const [name, setName] = useState(currentUser.name || '')
@@ -19,12 +21,16 @@ const CenterBlockProfile = ({ currentUser }) => {
   const { isButtonDisabled, updateButtonState } = useButtonState()
   const [message, setMessage] = useState(null)
 
+  const handleGoBack = () => {
+    navigate(-1)
+  }
+
   const showMessage = (text, duration = 3000) => {
-    setMessage(text);
+    setMessage(text)
     setTimeout(() => {
-      setMessage(null);
-    }, duration);
-  };
+      setMessage(null)
+    }, duration)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -43,7 +49,7 @@ const CenterBlockProfile = ({ currentUser }) => {
         // setName(data.name)
         updateButtonState(false)
       })
- 
+
       .catch(() => {
         showMessage('Ошибка при обновлении данных пользователя', 2000)
       })
@@ -70,7 +76,6 @@ const CenterBlockProfile = ({ currentUser }) => {
     }
   }
 
-
   // const updateButtonState = () => {
   //   // Проверяем, заполнены ли все поля
   //   if (name || surName || city || phone) {
@@ -83,7 +88,10 @@ const CenterBlockProfile = ({ currentUser }) => {
   return (
     <S.MainCenterBlock>
       <MainMenu />
-      <S.MainH2>Здравствуйте, {name}!</S.MainH2>
+      <S.ContainerHeadBtn>
+        <S.ArticleFillImgArrow src={'../img/back.svg'} onClick={handleGoBack} />
+        <S.MainH2>Здравствуйте, {name}!</S.MainH2>
+      </S.ContainerHeadBtn>
       <S.MainProlile>
         <S.ProfileContent>
           <S.ProfileTitle>Настройки профиля</S.ProfileTitle>

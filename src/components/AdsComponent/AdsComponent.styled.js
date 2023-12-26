@@ -3,8 +3,6 @@ const maxMobileWidth = '890px'
 const maxMobileWidthTwo = '620px'
 const maxMobileWidthThree = '1158px'
 
-
-
 export const CardsItem = styled.div`
   margin: 0;
   @media screen and (max-width: ${maxMobileWidthTwo}) {
