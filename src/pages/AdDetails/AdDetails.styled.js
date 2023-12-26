@@ -78,10 +78,10 @@ export const ArticleFillImg = styled.div`
   flex-direction: column;
   align-items: center;
 
-  &:hover::before {
-    border-top: 2px solid #0080c1;
-    border-left: 2px solid #0080c1;
-  }
+  // &:hover:: {
+  //   border-top: 2px solid #0080c1;
+  //   border-left: 2px solid #0080c1;
+  // }
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     max-width: 100%;
@@ -92,20 +92,20 @@ export const ArticleFillImg = styled.div`
     align-items: center;
     justify-content: center;
     position: relative;
-    &::before {
-      content: '';
-      display: block;
-      width: 23px;
-      height: 23px;
-      background-color: transparent;
-      border-top: 2px solid #000000;
-      border-left: 2px solid #000000;
-      transform: rotate(-45deg);
-      position: absolute;
-      top: 24px;
-      left: 32px;
-      cursor: pointer;
-    }
+    // &::before {
+    //   content: '';
+    //   display: block;
+    //   width: 23px;
+    //   height: 23px;
+    //   background-color: transparent;
+    //   border-top: 2px solid #000000;
+    //   border-left: 2px solid #000000;
+    //   transform: rotate(-45deg);
+    //   position: absolute;
+    //   top: 24px;
+    //   left: 32px;
+    //   cursor: pointer;
+    // }
   }
 `
 
@@ -480,9 +480,17 @@ export const MainText = styled.p`
 export const LinkBt = styled(Link)`
   color: #009ee4;
 `
-// export const Container2 = styled.div`
-
-// `
+export const ArticleFillImgArrow = styled.img`
+width: 60px;
+height: 60px; 
+transform: scaleX(-1);
+position: absolute;
+left: 10px;
+top: 5px;
+&:hover {
+  color: red
+}
+`
 // export const Container2 = styled.div`
 
 // `
