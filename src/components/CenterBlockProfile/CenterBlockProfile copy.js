@@ -7,6 +7,7 @@ import {
 } from '../../store/Service/Service'
 import useButtonState from '../../hooks/uesButtonState'
 
+
 const CenterBlockProfile = ({ currentUser }) => {
   const [UpdateUser, { isLoading }] = useUserUpdateMutation()
   const [uploadUserAvatar] = useUploadUserAvatarMutation()
@@ -19,13 +20,6 @@ const CenterBlockProfile = ({ currentUser }) => {
   const { isButtonDisabled, updateButtonState } = useButtonState()
   const [message, setMessage] = useState(null)
 
-  const showMessage = (text, duration = 3000) => {
-    setMessage(text);
-    setTimeout(() => {
-      setMessage(null);
-    }, duration);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     const updatedUserData = {
@@ -37,15 +31,14 @@ const CenterBlockProfile = ({ currentUser }) => {
 
     await UpdateUser(updatedUserData)
       .unwrap()
-      .then(() => {
-        showMessage('Данные пользователя успешно обновлены', 2000)
+      .then((data) => {
+        setMessage('Данные пользователя успешно обновлены', data)
         //Зачем?уже наверное не актуально. вроде итак обновляем
         // setName(data.name)
-        updateButtonState(false)
+        updateButtonState(false);
       })
- 
-      .catch(() => {
-        showMessage('Ошибка при обновлении данных пользователя', 2000)
+      .catch((error) => {
+        setMessage('Ошибка при обновлении данных пользователя', error)
       })
   }
 
@@ -69,8 +62,7 @@ const CenterBlockProfile = ({ currentUser }) => {
       console.error('Ошибка при изменении фото профиля', error)
     }
   }
-
-
+  
   // const updateButtonState = () => {
   //   // Проверяем, заполнены ли все поля
   //   if (name || surName || city || phone) {
@@ -115,8 +107,8 @@ const CenterBlockProfile = ({ currentUser }) => {
                     type="text"
                     value={name}
                     onChange={(e) => {
-                      setName(e.target.value)
-                      updateButtonState()
+                      setName(e.target.value);
+                      updateButtonState();
                     }}
                   />
                 </S.SettingsDiv>
@@ -128,8 +120,8 @@ const CenterBlockProfile = ({ currentUser }) => {
                     type="text"
                     value={surName}
                     onChange={(e) => {
-                      setSurName(e.target.value)
-                      updateButtonState()
+                      setSurName(e.target.value);
+                      updateButtonState();
                     }}
                   />
                 </S.SettingsDiv>
@@ -141,8 +133,8 @@ const CenterBlockProfile = ({ currentUser }) => {
                     type="text"
                     value={city}
                     onChange={(e) => {
-                      setCity(e.target.value)
-                      updateButtonState()
+                      setCity(e.target.value);
+                      updateButtonState();
                     }}
                   />
                 </S.SettingsDiv>
@@ -155,18 +147,13 @@ const CenterBlockProfile = ({ currentUser }) => {
                     placeholder="введите номер"
                     value={phone}
                     onChange={(e) => {
-                      setPhone(e.target.value)
-                      updateButtonState()
+                      setPhone(e.target.value);
+                      updateButtonState();
                     }}
                   />
                 </S.SettingsDiv>
-
-                <S.SettingBtn
-                  onClick={handleSubmit}
-                  disabled={isButtonDisabled || isLoading}
-                >
-                  {isLoading ? 'Сохранение' : 'Сохранить'}
-                </S.SettingBtn>
+                
+                <S.SettingBtn onClick={handleSubmit} disabled={isButtonDisabled || isLoading}>{isLoading ? "Сохранение" : "Сохранить"}</S.SettingBtn>
                 {message && <S.Message>{message}</S.Message>}
               </S.SettingForm>
             </S.SettingsRight>

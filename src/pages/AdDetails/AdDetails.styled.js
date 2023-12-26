@@ -160,6 +160,7 @@ export const ArticleImgBarDiv = styled.div`
   background-color: #f0f0f0;
   border: 2px solid #f0f0f0;
   margin: 0 5px;
+display: flex;
 
   &:hover {
     border: 2px solid #009ee4;

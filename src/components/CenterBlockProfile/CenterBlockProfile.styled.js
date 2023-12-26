@@ -210,34 +210,34 @@ export const SettingInputPhone = styled(SettingInput)`
 `
 
 export const SettingBtn = styled.button`
-font-size: 16px;
-line-height: 1;
-color: #FFFFFF;
-width: 154px;
-height: 50px;
-margin: 10px 7px 0;
-border-radius: 6px;
-background-color: #009EE4;
-border: 1px solid #009EE4;
-  
+  font-size: 16px;
+  line-height: 1;
+  color: #ffffff;
+  width: 154px;
+  height: 50px;
+  margin: 10px 7px 0;
+  border-radius: 6px;
+  background-color: #009ee4;
+  border: 1px solid #009ee4;
+
   &:disabled {
-    background-color: #CCCCCC; /* Серый цвет для неактивной кнопки */
-    border-color: #CCCCCC; 
-    color: #777777; 
+    background-color: #cccccc; /* Серый цвет для неактивной кнопки */
+    border-color: #cccccc;
+    color: #777777;
     // cursor: not-allowed; /*значок стоп*/
   }
 
   &:not(:disabled):hover {
-    background-color: #0080C1; /* Изменяем цвет фона при наведении, но только если кнопка не является неактивной */
+    background-color: #0080c1; /* Изменяем цвет фона при наведении, но только если кнопка не является неактивной */
   }
 
-@media screen and (max-width: ${maxMobileWidthTwo}) {
-  font-size: 16px;
-  line-height: 1;
-  width: 100%;
-  height: 46px;
-  margin: 8px 0px 0;
-}
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    font-size: 16px;
+    line-height: 1;
+    width: 100%;
+    height: 46px;
+    margin: 8px 0px 0;
+  }
 `
 
 export const MainTitle = styled.h3`
@@ -251,4 +251,17 @@ export const MainTitle = styled.h3`
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin-bottom: 30px;
   }
+`
+
+export const Message = styled.div`
+  display: flex;
+  color: red;
+  height: 50px;
+  margin-top: 5px;
+  color: #009ee4;
+  font-family: Roboto;
+  font-size: 18px;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
 `
