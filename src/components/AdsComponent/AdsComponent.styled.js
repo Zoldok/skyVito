@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-const maxMobileWidth = '890px'
+
 const maxMobileWidthTwo = '620px'
-const maxMobileWidthThree = '1158px'
 
 export const CardsItem = styled.div`
   margin: 0;
@@ -15,20 +14,12 @@ export const CardsCard = styled.div`
   display: flex;
   flex-direction: column;
 
-  // @media screen and (max-width: ${maxMobileWidth}) {
-  //   display: grid;
-  //   grid-template-columns: repeat(2, 270px);
-  // }
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 137px;
     height: 293px;
     display: flex;
     flex-direction: column;
   }
-  // @media screen and (max-width: ${maxMobileWidthThree}) {
-  //   display: grid;
-  //   grid-template-columns: repeat(3, 270px);
-  // }
 `
 export const CardsImage = styled.div`
   width: 270px;
@@ -57,10 +48,9 @@ export const CardsImageImg = styled.img`
   }
 `
 
-
 export const CardContent = styled.div``
+
 export const CardTitle = styled.h3`
-  // height: 52px;
   height: 25px;
   font-size: 22px;
   font-weight: 500;
@@ -80,9 +70,7 @@ export const CardTitle = styled.h3`
     margin-bottom: 10px;
     margin-top: 10px;
   }
-
 `
-
 
 export const CardPrice = styled.p`
   color: #000000;

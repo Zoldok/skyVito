@@ -12,7 +12,6 @@ export const Footer = styled.footer`
     z-index: 3;
     display: flex;
     align-items: center;
-    // justify-content: footer__imgcenter;
     height: 54px;
     width: 100%;
     background-color: #ffffff;
@@ -29,17 +28,17 @@ export const FooterContainer = styled.div`
   }
 `
 export const FooterImg = styled.div`
-@media screen and (max-width: ${maxMobileWidthTwo}) {
-width: 42px;
-height: 42px;
-}
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    width: 42px;
+    height: 42px;
+  }
 `
 export const FooterImgImg = styled.img`
-@media screen and (max-width: ${maxMobileWidthTwo}) {
-width: 100%;
-height: 100%;
-display: block;
--o-object-fit: cover;
-   object-fit: cover;
-}
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    width: 100%;
+    height: 100%;
+    display: block;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
 `

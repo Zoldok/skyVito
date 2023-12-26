@@ -1,39 +1,38 @@
-import { useState } from 'react';
-import * as S from './Register.styled';
-import { registerUser } from '../../api';
+import { useState } from 'react'
+import * as S from './Register.styled'
+import { registerUser } from '../../api'
 import { useNavigate } from 'react-router-dom'
 
 const Registration = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [surname, setSurname] = useState('');
-  const [city, setCity] = useState('');
-  const [passwordTwo, setPasswordTwo] = useState('');
-  const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [surname, setSurname] = useState('')
+  const [city, setCity] = useState('')
+  const [passwordTwo, setPasswordTwo] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!email || !password || !passwordTwo) {
-      setErrorMessage('Заполните обязательные поля');
-      return;
+      setErrorMessage('Заполните обязательные поля')
+      return
     }
     if (password !== passwordTwo) {
-      setErrorMessage('Пароли не совпадают');
-      return;
+      setErrorMessage('Пароли не совпадают')
+      return
     }
 
     try {
-      const response = await registerUser(email, password, name, surname, city);
-      console.log('Registration successful:', response);
+      const response = await registerUser(email, password, name, surname, city)
+      setErrorMessage('Registration successful:', response)
       navigate('/login')
     } catch (error) {
-      console.log('Registration error:', error);
-      setErrorMessage(error.message);
+      setErrorMessage(error.message)
     }
-  };
+  }
 
   return (
     <S.Wrapper>
@@ -43,8 +42,6 @@ const Registration = () => {
             <S.ModalLogo>
               <S.ModalLogoImg src="../img/logo-reg.png" alt="logo" />
             </S.ModalLogo>
-            {/* {isError && error && <S.Div>{error.message}</S.Div>} */}
-
             <S.ModalInput
               type="text"
               name="login"
@@ -88,10 +85,9 @@ const Registration = () => {
               onChange={(e) => setCity(e.target.value)}
             />
             <S.ErrorDiv>{errorMessage}</S.ErrorDiv>
-
-                          <S.ModalBtnSignupEnt>
-                <S.ModalBtnLink>Зарегистрироваться</S.ModalBtnLink>
-              </S.ModalBtnSignupEnt>
+            <S.ModalBtnSignupEnt>
+              <S.ModalBtnLink>Зарегистрироваться</S.ModalBtnLink>
+            </S.ModalBtnSignupEnt>
           </S.ModalFormLogin>
         </S.ModalBlock>
       </S.ContainerSignup>

@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 const maxMobileWidth = '890px'
 const maxMobileWidthTwo = '620px'
-
 const maxMobileWidthThree = '1158px'
 
 export const Wrapper = styled.div`
@@ -11,21 +10,18 @@ export const Wrapper = styled.div`
   background-color: #f1f1f1;
   display: flex;
   flex-direction: column;
-  // overflow-y: auto;
 `
 export const Container = styled.div`
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  height: 100vh;
   background-color: #ffffff;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
     min-width: 320px;
   }
 `
-
-// export const Main = styled.main``
 
 export const MainContainer = styled.div`
   max-width: 1178px;
@@ -42,14 +38,12 @@ export const MainContainer = styled.div`
 
 export const MainContent = styled.div`
   width: 100%;
-  // height: 100%;
   margin: 0 auto;
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
     margin: 0 auto;
   }
 `
-
 
 export const ContentCards = styled.div`
   max-width: 1158px;
@@ -63,8 +57,6 @@ export const ContentCards = styled.div`
   scrollbar-color: #ffffff #2e2e2e;
   scrollbar-width: thin;
   scrollbar-width: 0px;
-  // height: 600px;
-  // height: 100vh;
 
   &::-webkit-scrollbar {
     width: 0px;

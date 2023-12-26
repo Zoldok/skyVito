@@ -6,15 +6,10 @@ import { useGetAdsQuery } from './store/Service/Service';
 import { setAds } from './store/slices/userSlice';
 import { useDispatch } from 'react-redux';
 import Preloader from './components/Preloader/Preloader';
-// import { useRefreshTokenMutation } from './store/Service/Service';
-
 
 function App() {
   const dispatch = useDispatch()
   const { handleRefreshToken } = useTokenRefresh();
-
-  // const token = localStorage.getItem('access_token')
-  // console.log("текущий токен", token);
 
   useEffect(() => {
     handleRefreshToken();
@@ -29,7 +24,7 @@ function App() {
 
   useEffect(() => {
     if (!isLoading) {
-      dispatch(setAds(data)) // Отправляем полученные данные в состояние
+      dispatch(setAds(data))
     }
   }, [data, isLoading])
 

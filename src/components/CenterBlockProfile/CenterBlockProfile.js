@@ -17,7 +17,6 @@ const CenterBlockProfile = ({ currentUser }) => {
   const [city, setCity] = useState(currentUser.city || '')
   const [phone, setPhone] = useState(currentUser.phone || '')
   const [avatarUrl, setAvatarUrl] = useState(currentUser.avatar)
-  // const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const { isButtonDisabled, updateButtonState } = useButtonState()
   const [message, setMessage] = useState(null)
 
@@ -45,11 +44,8 @@ const CenterBlockProfile = ({ currentUser }) => {
       .unwrap()
       .then(() => {
         showMessage('Данные пользователя успешно обновлены', 2000)
-        //Зачем?уже наверное не актуально. вроде итак обновляем
-        // setName(data.name)
         updateButtonState(false)
       })
-
       .catch(() => {
         showMessage('Ошибка при обновлении данных пользователя', 2000)
       })
@@ -62,28 +58,17 @@ const CenterBlockProfile = ({ currentUser }) => {
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0]
-
     const formData = new FormData()
     formData.append('file', file)
-
     try {
       const response = await uploadUserAvatar(formData)
       const updatedUserData = response.data
       setAvatarUrl(updatedUserData.avatar)
-      console.log('Фото профиля успешно изменено')
+      showMessage('Фото профиля успешно изменено')
     } catch (error) {
-      console.error('Ошибка при изменении фото профиля', error)
+      showMessage('Ошибка при изменении фото профиля', error)
     }
   }
-
-  // const updateButtonState = () => {
-  //   // Проверяем, заполнены ли все поля
-  //   if (name || surName || city || phone) {
-  //     setIsButtonDisabled(false); // Если все поля заполнены, активируем кнопку
-  //   } else {
-  //     setIsButtonDisabled(true); // Если хотя бы одно поле пустое, делаем кнопку неактивной
-  //   }
-  // }
 
   return (
     <S.MainCenterBlock>
@@ -168,7 +153,6 @@ const CenterBlockProfile = ({ currentUser }) => {
                     }}
                   />
                 </S.SettingsDiv>
-
                 <S.SettingBtn
                   onClick={handleSubmit}
                   disabled={isButtonDisabled || isLoading}

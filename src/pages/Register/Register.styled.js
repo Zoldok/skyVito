@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 
 const maxMobileWidthTwo = '768px'
-// const maxMobileWidth = '890px'
-// const maxMobileWidthThree = '1158px'
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -22,6 +20,7 @@ export const ModalBlock = styled.div`
   left: calc(50% - 183px);
   top: calc(50% - 323.5px);
   opacity: 1;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     left: calc(50% - 160px);
     top: 55px;
@@ -51,6 +50,7 @@ export const ModalLogo = styled.div`
   height: 21px;
   margin-bottom: 42px;
   background-color: transparent;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 120px;
     height: 18px;
@@ -115,83 +115,71 @@ export const ModalInput = styled.input`
   }
 `
 export const ModalBtnSignupEnt = styled.button`
-width: 278px;
-height: 62px;
-background-color: #009EE4;
-border-radius: 6px;
-border: none;
-// margin-top: 30px;
-display: flex;
-align-items: center;
-justify-content: center;
+  width: 278px;
+  height: 62px;
+  background-color: #009ee4;
+  border-radius: 6px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-&:hover {
-    background-color: #0080C1;
+  &:hover {
+    background-color: #0080c1;
   }
 
   &:active {
-    background-color: #0080C1;
+    background-color: #0080c1;
   }
 
-@media screen and (max-width: ${maxMobileWidthTwo}) {
-height: 46px;
-border: none;
-margin-top: 26px;
-}
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    height: 46px;
+    border: none;
+    margin-top: 26px;
+  }
 `
-
-
-
 
 export const ModalBtnSignupEntOff = styled.button`
-width: 278px;
-height: 62px;
-background-color: #D9D9D9;
-border-radius: 6px;
-border: none;
-// margin-top: 30px;
-display: flex;
-align-items: center;
-justify-content: center;
+  width: 278px;
+  height: 62px;
+  background-color: #d9d9d9;
+  border-radius: 6px;
+  border: none;
+  // margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-// &:hover {
-//     background-color: #0080C1;
-//   }
-
-//   &:active {
-//     background-color: #0080C1;
-//   }
-
-@media screen and (max-width: ${maxMobileWidthTwo}) {
-height: 46px;
-border: none;
-margin-top: 26px;
-}
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    height: 46px;
+    border: none;
+    margin-top: 26px;
+  }
 `
 
-
-
 export const ModalBtnLink = styled.a`
-width: 100%;
-height: 100%;
-font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 24px;
-letter-spacing: -0.05px;
-color: #FFFFFF;
-display: flex;
-align-items: center;
-justify-content: center;
-@media screen and (max-width: ${maxMobileWidthTwo}) {
-font-size: 16px;
-line-height: 24px;
-}
+  width: 100%;
+  height: 100%;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.05px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    font-size: 16px;
+    line-height: 24px;
+  }
 `
 
 export const Div = styled.div`
-color: red;
-bgc: blue;`
+  color: red;
+  bgc: blue;
+`
 export const ErrorDiv = styled.div`
-color: red;`
-
+  color: red;
+`

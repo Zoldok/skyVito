@@ -3,7 +3,7 @@ import * as S from './ReviewsModalStyle'
 import { formatTime } from '../../../utils/FormatteTime'
 
 export const ReviewItem = ({ author, text, avatar, time }) => {
-  const formattedDateOnly = formatTime(time).split(' в ')[0];
+  const formattedDateOnly = formatTime(time).split(' в ')[0]
 
   return (
     <>

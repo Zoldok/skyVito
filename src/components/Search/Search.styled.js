@@ -1,6 +1,4 @@
-
 import styled from 'styled-components'
-// const maxMobileWidth = '890px'
 const maxMobileWidthTwo = '620px'
 
 export const MainSearch = styled.div`
@@ -27,7 +25,6 @@ export const MainSearch = styled.div`
   }
 `
 
-
 export const SearchLogoLink = styled.a`
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: none;
@@ -40,6 +37,7 @@ export const SearchLogoImg = styled.img`
 
 export const SearchLogoMobLink = styled.a`
   display: none;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: block;
     width: 32px;
@@ -57,7 +55,6 @@ export const SearchLogoMobImg = styled.img`
   }
 `
 
-
 export const SearchForm = styled.form`
   margin-left: 60px;
   max-width: 1044px;
@@ -70,6 +67,7 @@ export const SearchForm = styled.form`
     display: flex;
   }
 `
+
 export const SearchText = styled.input`
   width: 100%;
   height: 50px;
@@ -108,7 +106,6 @@ export const SearchText = styled.input`
   }
 `
 
-
 export const SearchTextMob = styled.input`
   display: none;
 
@@ -142,17 +139,16 @@ export const SearchTextMob = styled.input`
   }
 `
 
-
 export const SearchBtn = styled.button`
-margin-left: 10px;
-width: 158px;
-height: 50px;
-background-color: #009EE4;
-border: 1px solid #009EE4;
-border-radius: 6px;
-font-size: 16px;
-line-height: 24px;
-color: #FFFFFF;
+  margin-left: 10px;
+  width: 158px;
+  height: 50px;
+  background-color: #009ee4;
+  border: 1px solid #009ee4;
+  border-radius: 6px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
 
   &:hover {
     background-color: #0080c1;

@@ -7,28 +7,24 @@ import { useGetUserInfoQuery } from '../../store/Service/Service'
 import { useSelector } from 'react-redux'
 import Preloader from '../../components/Preloader/Preloader'
 
-
 const Profile = () => {
   const profileKey = true
   const { data: userInfo } = useGetUserInfoQuery()
   const ads = useSelector((state) => state.user.ads)
   let matchedAds = []
 
-  if (!userInfo ) {
-    return <Preloader/>
+  if (!userInfo) {
+    return <Preloader />
   }
 
-console.log(userInfo.id);
+  console.log(userInfo.id)
 
-ads.forEach((ad) => {
-  if (ad.user.id === userInfo.id) {
-    matchedAds.push(ad)
-  }
-})
+  ads.forEach((ad) => {
+    if (ad.user.id === userInfo.id) {
+      matchedAds.push(ad)
+    }
+  })
 
-// console.log('Совпавшие объявления:', matchedAds)
-
-  //прокинуть данные обьявлений в AdsComponent
   return (
     <S.Wrapper>
       <S.Container>

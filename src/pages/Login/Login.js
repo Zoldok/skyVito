@@ -20,12 +20,11 @@ const Login = () => {
     try {
       const response = await loginUser(email, password)
       console.log(response)
-      localStorage.setItem('email', email);
-      localStorage.setItem('access_token', response.access_token);
-      localStorage.setItem('refresh_token', response.refresh_token);
+      localStorage.setItem('email', email)
+      localStorage.setItem('access_token', response.access_token)
+      localStorage.setItem('refresh_token', response.refresh_token)
       navigate('/')
     } catch (error) {
-      // console.error(error)
       setErrorMessage(error.message)
     }
   }
@@ -34,12 +33,10 @@ const Login = () => {
     <S.Wrapper>
       <S.ContainerEnter>
         <S.ModalBlock>
-          {/* <S.ModalFormLogin onSubmit={handleLogin}> */}
-          <S.ModalFormLogin >
+          <S.ModalFormLogin>
             <S.ModalLogo>
               <S.ModalLogoImg src="../img/logo-reg.png" alt="logo" />
             </S.ModalLogo>
-            {/* {isError && error && <S.Div>{error.message}</S.Div>} */}
             <S.ModalInputLogin
               type="text"
               name="login"
@@ -58,7 +55,7 @@ const Login = () => {
             />
             <S.ErrorDiv>{errorMessage}</S.ErrorDiv>
             <S.ModalBtnEnter id="btnEnter" onClick={handleLogin}>
-              <S.ModalBtnEnterA href="#" >Войти</S.ModalBtnEnterA>
+              <S.ModalBtnEnterA href="#">Войти</S.ModalBtnEnterA>
             </S.ModalBtnEnter>
             <S.ModalBtnSingup id="btnSignUp">
               <S.ModalBtnSingupA href="/register">

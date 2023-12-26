@@ -102,6 +102,7 @@ export const SettingImgImg = styled.img`
   display: block;
   -o-object-fit: cover;
   object-fit: cover;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
     height: auto;
@@ -130,6 +131,7 @@ export const SettingForm = styled.form`
   width: 630px;
   display: flex;
   flex-wrap: wrap;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
     display: flex;
@@ -139,6 +141,7 @@ export const SettingForm = styled.form`
 export const SettingsDiv = styled.div`
   display: inline-block;
   margin: 0 7px 20px;
+
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: inline-block;
     margin: 0 0px 18px;
@@ -243,7 +246,6 @@ export const SettingBtn = styled.button`
 export const MainTitle = styled.h3`
   margin-bottom: 20px;
   color: #000;
-  // font-family: Roboto;
   font-size: 32px;
   font-style: normal;
   font-weight: 500;
@@ -282,5 +284,5 @@ export const ArticleFillImgArrow = styled.img`
 `
 
 export const ContainerHeadBtn = styled.div`
-display: flex;
+  display: flex;
 `
