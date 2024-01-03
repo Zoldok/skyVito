@@ -83,6 +83,25 @@ export const ContentCards = styled.div`
   }
 `
 
+export const ContainerHeadBtn = styled.div`
+  display: flex;
+`
+
+export const ArticleFillImgArrow = styled.img`
+  display: none;
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    display: block;
+    width: 30px;
+    height: 30px;
+    transform: scaleX(-1);
+    left: 10px;
+    top: 5px;
+    &:hover {
+      color: red;
+    }
+  }
+`
+
 export const MainH2 = styled.h2`
   font-style: normal;
   font-weight: 500;
@@ -95,24 +114,10 @@ export const MainH2 = styled.h2`
     font-size: 24px;
     line-height: 29px;
     color: #000000;
-    padding: 0 0 0 26px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     position: relative;
-
-    &::before {
-      content: '';
-      display: block;
-      width: 12px;
-      height: 12px;
-      background-color: transparent;
-      border-top: 2px solid #000000;
-      border-left: 2px solid #000000;
-      transform: rotate(-45deg);
-      position: absolute;
-      top: 9px;
-      left: 0;
-      cursor: pointer;
-    }
+    display: flex;
+    align-items: center;
   }
 `
 export const MainTitle = styled.h3`
@@ -212,6 +217,7 @@ export const SellerTitle = styled.h3`
     font-size: 20px;
     line-height: 26px;
     margin-bottom: 6px;
+    margin-top: 20px;
   }
 `
 export const SellerCity = styled.p`

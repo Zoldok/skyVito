@@ -21,6 +21,14 @@ const Search = ({ onSearch }) => {
     setSearchQuery('')
     onSearch('')
   }
+
+  const handleInputKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      handleSearch(e)
+    }
+  }
+
   return (
     <S.MainSearch>
       <S.SearchLogoLink target="_blank">
@@ -31,12 +39,14 @@ const Search = ({ onSearch }) => {
       </S.SearchLogoMobLink>
       <S.SearchForm onSubmit={handleSearch}>
         <S.SearchText
+          onKeyDown={handleInputKeyDown}
           placeholder="Поиск по объявлениям"
           name="search"
           value={searchQuery}
           onChange={handleInputChange}
         />
         <S.SearchTextMob
+          onKeyDown={handleInputKeyDown}
           onSubmit={handleSearch}
           placeholder="Поиск"
           name="search-mob"

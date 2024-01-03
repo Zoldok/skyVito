@@ -537,7 +537,6 @@ export const FormNewArtImgImg = styled.img`
   display: block;
   width: 90px;
   height: 90px;
-  height: auto;
   -o-object-fit: cover;
   object-fit: cover;
   z-index: 2;
@@ -545,7 +544,6 @@ export const FormNewArtImgImg = styled.img`
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: block;
     width: 100%;
-    height: auto;
     -o-object-fit: cover;
     object-fit: cover;
   }

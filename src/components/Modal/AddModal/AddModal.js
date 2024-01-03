@@ -16,7 +16,7 @@ export const AddModal = ({ onClose }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [error, setError] = useState(null)
-  const [addAds, { isLoading, isError, isSuccess }] = useAddAdsMutation()
+  const [addAds, { isLoading, isError }] = useAddAdsMutation()
   const { data, isLoading: isis, refetch } = useGetAdsQuery()
   const { isButtonDisabled, updateButtonState } = useButtonState()
 
@@ -29,13 +29,11 @@ export const AddModal = ({ onClose }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault()
     if (!title || !description || !price) {
-      setError('Заполните все поля');
-      return;
+      setError('Заполните все поля')
+      return
     }
     try {
-      const result = await addAds({ title, description, price })
-      console.log(result)
-      console.log(isLoading, isSuccess)
+      await addAds({ title, description, price })
       refetch()
       onClose()
       navigate('/')
@@ -96,8 +94,8 @@ export const AddModal = ({ onClose }) => {
                 id="formName"
                 placeholder="₽"
                 onChange={(e) => {
-                    setPrice(e.target.value)
-                    updateButtonState()
+                  setPrice(e.target.value)
+                  updateButtonState()
                 }}
               />
             </S.FormNewArtBlock>

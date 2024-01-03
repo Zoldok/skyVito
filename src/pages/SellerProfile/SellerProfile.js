@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import MainMenu from '../../components/MainMenu/MainMenu'
@@ -11,6 +11,7 @@ import { useState } from 'react'
 import Preloader from '../../components/Preloader/Preloader'
 
 const SellerProfile = () => {
+  const navigate = useNavigate()
   const { idSeller } = useParams()
   const { data } = useGetAllUserQuery()
   const ads = useSelector((state) => state.user.ads)
@@ -19,6 +20,10 @@ const SellerProfile = () => {
   let userAds = null
   let matchedAds = []
 
+  const handleGoBack = () => {
+    navigate(-1)
+  }
+  
   if (data) {
     data.forEach((item) => {
       if (item.id === parseInt(idSeller, 10)) {
@@ -49,7 +54,10 @@ const SellerProfile = () => {
         <S.MainContainer>
           <S.MainCenterBlock>
             <MainMenu />
+            <S.ContainerHeadBtn>
+            <S.ArticleFillImgArrow src={'../img/back1.svg'} onClick={handleGoBack} />
             <S.MainH2>Профиль продавца</S.MainH2>
+            </S.ContainerHeadBtn>
             <S.MainProfileSell>
               <S.ProfileSellContent>
                 <S.ProfileSell>
@@ -75,8 +83,15 @@ const SellerProfile = () => {
                     </S.SellerCity>
                     <S.SellerImgMobBlock>
                       <S.SellerImgMob>
-                        <Link href="" target="_self">
-                          <S.SellerImgMobImg src="#" alt="" />
+                      <Link href="" target="_self">
+                          <S.SellerImgMobImg
+                            src={
+                              userAds.avatar
+                                ? `http://127.0.0.1:8090/${userAds.avatar}`
+                                : '../img/noAva.png'
+                            }
+                            alt="avatar"
+                          />
                         </Link>
                       </S.SellerImgMob>
                     </S.SellerImgMobBlock>
