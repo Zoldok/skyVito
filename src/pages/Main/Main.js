@@ -7,7 +7,6 @@ import {
   useGetUserInfoQuery,
 } from '../../store/Service/Service'
 import * as S from './Main.styled'
-import { useAuth } from '../../hooks/use-auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { setAds } from '../../store/slices/userSlice'
@@ -15,7 +14,6 @@ import Preloader from '../../components/Preloader/Preloader'
 
 const Main = () => {
   const dispatch = useDispatch()
-  const { isAuth } = useAuth()
   const { data: userInfo, isLoading, refetch } = useGetUserInfoQuery()
   const { data, isLoading: isis, refetch: refetchAds } = useGetAdsQuery()
   const ads = useSelector((state) => state.user.ads)
@@ -54,7 +52,7 @@ const Main = () => {
   return (
     <S.Wrapper>
       <S.Container>
-        <Header isAuth={isAuth} />
+        <Header/>
         <S.Main>
           <Search onSearch={handleSearch} />
           <S.MainContainer>

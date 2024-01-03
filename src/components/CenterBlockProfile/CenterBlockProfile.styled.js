@@ -28,7 +28,9 @@ export const MainH2 = styled.h2`
     font-size: 24px;
     line-height: 29px;
     color: #000000;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
   }
 `
 export const MainProlile = styled.div`
@@ -54,6 +56,7 @@ export const ProfileTitle = styled.h3`
   font-weight: 500;
   color: #000000;
   margin-bottom: 20px;
+  margin-top: 20px;
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin-bottom: 20px;
@@ -272,8 +275,8 @@ export const ArticleFillImgArrow = styled.img`
   display: none;
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: block;
-    width: 60px;
-    height: 60px;
+    width: 30px;
+    height: 30px;
     transform: scaleX(-1);
     left: 10px;
     top: 5px;

@@ -76,8 +76,7 @@ const AdDetails = () => {
   const DeleteAtdFunc = async (e) => {
     e.preventDefault()
     try {
-      const result = await DeteleAds({ adId: adId })
-      console.log(result)
+      await DeteleAds({ adId: adId })
       navigate('/')
     } catch (error) {
       console.log('ошибка')

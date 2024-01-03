@@ -74,7 +74,7 @@ const CenterBlockProfile = ({ currentUser }) => {
     <S.MainCenterBlock>
       <MainMenu />
       <S.ContainerHeadBtn>
-        <S.ArticleFillImgArrow src={'../img/back.svg'} onClick={handleGoBack} />
+        <S.ArticleFillImgArrow src={'../img/back1.svg'} onClick={handleGoBack} />
         <S.MainH2>Здравствуйте, {name}!</S.MainH2>
       </S.ContainerHeadBtn>
       <S.MainProlile>
