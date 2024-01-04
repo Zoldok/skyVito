@@ -52,7 +52,6 @@ const GlobalStyles = createGlobalStyle`
     &::-webkit-scrollbar-thumb {
       background-color: transparent; /* Цвет полосы прокрутки */
     }
-
   }
   
   div,
