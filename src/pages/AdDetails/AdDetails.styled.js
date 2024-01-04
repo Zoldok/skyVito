@@ -97,8 +97,8 @@ export const ArticleImg = styled.div`
   background-color: #f0f0f0;
   margin: 0 5px;
   display: flex;
-  justify-content: center; /* Центрируем по горизонтали */
-  align-items: center; /* Центрируем по вертикали */
+  justify-content: center;
+  align-items: center;
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
@@ -160,7 +160,6 @@ export const ArticleImgBarMob = styled.div`
     left: calc(50% - 34px);
     display: flex;
     justify-content: center;
-    // justify-content: space-between;
   }
 `
 

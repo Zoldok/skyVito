@@ -8,7 +8,7 @@ export const CardsItem = styled.div`
     margin: 0;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1)
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
 `
 export const CardsCard = styled.div`
@@ -53,12 +53,12 @@ export const CardsImageImg = styled.img`
 `
 
 export const CardContent = styled.div`
-display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-left: 10px;
-    padding-right: 10px;
-    `
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 10px;
+  padding-right: 10px;
+`
 
 export const CardTitle = styled.h3`
   height: 25px;
@@ -80,7 +80,6 @@ export const CardTitle = styled.h3`
     color: #009ee4;
     margin-bottom: 10px;
     margin-top: 10px;
-    //вот как то так
     width: 135px;
     display: -webkit-box;
     overflow: hidden;
@@ -112,11 +111,9 @@ export const CardPlaceDate = styled.div`
 `
 
 export const CardPlace = styled(CardPlaceDate)`
-@media screen and (max-width: ${maxMobileWidthTwo}) {
-  margin-bottom: 4px;
-  font-size: 14px;
-}
-  `
-export const CardDate = styled(CardPlaceDate)`
-
+  @media screen and (max-width: ${maxMobileWidthTwo}) {
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
 `
+export const CardDate = styled(CardPlaceDate)``
