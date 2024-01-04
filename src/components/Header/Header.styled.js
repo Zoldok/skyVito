@@ -85,7 +85,7 @@ export const HeaderBtnLk = styled(HeaderBtn)`
   }
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
-    display: none;
+    margin-left: 120px;
   }
 `
 

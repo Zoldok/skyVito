@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import {
   useAddAdsMutation,
+  useAddImgAdsMutation,
   useGetAdsQuery,
 } from '../../../store/Service/Service'
 import * as S from './AddModalStyle'
@@ -16,15 +17,38 @@ export const AddModal = ({ onClose }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [error, setError] = useState(null)
+  const [selectedImages, setSelectedImages] = useState([])
   const [addAds, { isLoading, isError }] = useAddAdsMutation()
   const { data, isLoading: isis, refetch } = useGetAdsQuery()
   const { isButtonDisabled, updateButtonState } = useButtonState()
+  const [addAdsImage] = useAddImgAdsMutation()
 
   useEffect(() => {
     if (!isis) {
       dispatch(setAds(data))
     }
   }, [data])
+
+   const handlePhoto = async (e) => {
+    const files = Array.from(e.target.files)
+    for (const file of files) {
+      const dataURL = await fileInfoURL(file)
+      const imageData = {
+        file,
+        dataURL,
+      }
+      setSelectedImages((prevImages) => [...prevImages, imageData])
+    }
+  }
+
+  const fileInfoURL = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => resolve(reader.result)
+      reader.onerror = reject
+      reader.readAsDataURL(file)
+    })
+  }
 
   const handleFormSubmit = async (e) => {
     e.preventDefault()
@@ -33,13 +57,23 @@ export const AddModal = ({ onClose }) => {
       return
     }
     try {
-      await addAds({ title, description, price })
+      const result = await addAds({ title, description, price })
+      for (let i = 0; i < selectedImages.length; i++) {
+        const formData = new FormData()
+        formData.append('file', selectedImages[i].file)
+        await addAdsImage({ id: result.data.id, file: formData })
+      }
       refetch()
       onClose()
       navigate('/')
     } catch (error) {
       console.log(isError)
     }
+  }
+
+  const handleRemoveImage = (index, e) => {
+    e.preventDefault()
+    setSelectedImages((prevImages) => prevImages.filter((_, i) => i !== index))
   }
 
   return (
@@ -80,9 +114,45 @@ export const AddModal = ({ onClose }) => {
               ></S.FormNewArtArea>
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
-              <S.FormNewArtSpan>
-                Фотографии можно добавить во время редактирования
-              </S.FormNewArtSpan>
+              <S.FormNewArtP>Фотографии товара</S.FormNewArtP>
+              <S.FormNewArtSpan>не более 5 фотографий</S.FormNewArtSpan>
+              <S.FormNewArtBarImg>
+                {[...Array(5)].map((_, index) => (
+                  <S.FormNewArtImg key={index}>
+                    {selectedImages[index] ? (
+                      <>
+                        <S.FormNewArtImgImg2
+                          src={selectedImages[index].dataURL}
+                          alt="Выбранное изображение"
+                        />
+                        <S.DelBtnImg
+                          type="button"
+                          onClick={(e) => handleRemoveImage(index, e)}
+                        >
+                          <img
+                            style={{ width: '25px' }}
+                            src={'../img/basket2.svg'}
+                            alt="Delete"
+                          />
+                        </S.DelBtnImg>
+                      </>
+                    ) : (
+                      <S.FormNewArtImgImg src="" alt="" />
+                    )}
+                    <S.FormNewArtBarImgCover
+                      onClick={() =>
+                        document.getElementById(`fileInput${index}`).click()
+                      }
+                    ></S.FormNewArtBarImgCover>
+                    <input
+                      type="file"
+                      id={`fileInput${index}`}
+                      style={{ display: 'none' }}
+                      onChange={(e) => handlePhoto(e)}
+                    />
+                  </S.FormNewArtImg>
+                ))}
+              </S.FormNewArtBarImg>
             </S.FormNewArtBlock>
             <S.FormNewArtBlock>
               <S.FormNewArtiLabel>Цена</S.FormNewArtiLabel>

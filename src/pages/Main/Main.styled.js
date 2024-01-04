@@ -104,10 +104,10 @@ export const ContentCards = styled.div`
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     display: grid;
-    grid-template-columns: repeat(2, 137px);
-    grid-auto-rows: 293px;
+    grid-template-columns: repeat(2, 157px);
+    grid-auto-rows: 320px;
     grid-gap: 10px 10px;
     justify-content: center;
-    height: 596px;
+    // height: 596px;
   }
 `

@@ -140,12 +140,17 @@ const AdDetails = () => {
                           </S.ArticleImgBarDiv>
                         ))}
                     </S.ArticleImgBar>
+
                     <S.ArticleImgBarMob>
-                      <S.ImgBarMobCircleActive />
-                      <S.ImgBarMobCircle />
-                      <S.ImgBarMobCircle />
-                      <S.ImgBarMobCircle />
-                      <S.ImgBarMobCircle />
+                      {imageUrls &&
+                        imageUrls.map((imageUrl, index) => (
+                          <S.ArticleImgBarDivMob
+                            key={index}
+                            onClick={() => handleImageClick(index)}
+                          >
+                            <S.ImgBarMobCircle alt={`Image ${index + 1}`} />
+                          </S.ArticleImgBarDivMob>
+                        ))}
                     </S.ArticleImgBarMob>
                   </S.ArticleFillImg>
                 </S.ArticleLeft>

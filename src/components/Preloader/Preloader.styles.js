@@ -5,7 +5,6 @@ export const HeaderStyleMyProfile = styled.div`
   justify-content: center;
   height: 100vh;
   align-items: center;
-  margin-right: 70px;
 `
 const rippleAnimation = keyframes`
   0% {
