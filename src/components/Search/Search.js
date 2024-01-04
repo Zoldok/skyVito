@@ -37,7 +37,7 @@ const Search = ({ onSearch }) => {
       <S.SearchLogoMobLink target="_blank">
         <S.SearchLogoMobImg src="img/logo-mob.png" alt="logo" />
       </S.SearchLogoMobLink>
-      <S.SearchForm onSubmit={handleSearch}>
+      <S.SearchForm>
         <S.SearchText
           onKeyDown={handleInputKeyDown}
           placeholder="Поиск по объявлениям"
@@ -54,7 +54,7 @@ const Search = ({ onSearch }) => {
           onChange={handleInputChange}
         />
         {searchQuery && <S.ClearButton onClick={handleClear}>✖️</S.ClearButton>}
-        <S.SearchBtn>Найти</S.SearchBtn>
+        <S.SearchBtn onClick={handleSearch}>Найти</S.SearchBtn>
       </S.SearchForm>
     </S.MainSearch>
   )

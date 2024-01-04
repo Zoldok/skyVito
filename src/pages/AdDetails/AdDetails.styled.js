@@ -102,9 +102,7 @@ export const ArticleImg = styled.div`
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     width: 100%;
-    min-width: 320px;
-    height: auto;
-    min-height: 320px;
+    height: 320px;
     margin: 0 0px;
   }
 `
@@ -161,7 +159,8 @@ export const ArticleImgBarMob = styled.div`
     bottom: 20px;
     left: calc(50% - 34px);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    // justify-content: space-between;
   }
 `
 
@@ -169,10 +168,14 @@ export const ImgBarMobCircle = styled.div`
   background-color: #ffffff;
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
-    width: 8px;
-    height: 8px;
+    background-color: #0080c1;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     border: 1px solid #ffffff;
+    &:hover {
+      background-color: red;
+    }
   }
 `
 
@@ -182,6 +185,14 @@ export const ImgBarMobCircleActive = styled(ImgBarMobCircle)`
   }
 `
 
+export const ArticleImgBarDivMob = styled.div`
+  margin: 0 5px;
+  display: flex;
+
+  &:hover {
+    border: 2px solid #009ee4;
+  }
+`
 export const ArticleRight = styled.div`
   max-width: 621px;
   @media screen and (max-width: ${maxMobileWidthTwo}) {
@@ -200,7 +211,6 @@ export const ArticleTitle = styled.h3`
   margin-bottom: 10px;
   font-size: 32px;
   line-height: 46px;
-  font-weight: 500;
   color: #000000;
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin-bottom: 10px;

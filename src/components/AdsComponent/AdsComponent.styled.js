@@ -6,6 +6,9 @@ export const CardsItem = styled.div`
   margin: 0;
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1)
   }
 `
 export const CardsCard = styled.div`
@@ -15,8 +18,9 @@ export const CardsCard = styled.div`
   flex-direction: column;
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
-    width: 137px;
-    height: 293px;
+    width: 157px;
+    // height: 293px;
+    height: 320px;
     display: flex;
     flex-direction: column;
   }
@@ -27,8 +31,8 @@ export const CardsImage = styled.div`
   background-color: #f0f0f0;
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
-    width: 137px;
-    height: 132px;
+    width: 157px;
+    height: 152px;
     background-color: #d9d9d9;
   }
 `
@@ -48,13 +52,19 @@ export const CardsImageImg = styled.img`
   }
 `
 
-export const CardContent = styled.div``
+export const CardContent = styled.div`
+display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 10px;
+    padding-right: 10px;
+    `
 
 export const CardTitle = styled.h3`
   height: 25px;
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 26px;
+  // font-size: 22px;
+  // font-weight: 500;
+  // line-height: 26px;
   color: #009ee4;
   margin-bottom: 10px;
   margin-top: 20px;
@@ -62,13 +72,22 @@ export const CardTitle = styled.h3`
   text-overflow: ellipsis;
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
-    height: 16px;
+    // height: 16px;
+    height: 43px;
     // height: auto;
-    font-size: 14px;
-    line-height: 17px;
+    // font-size: 14px;
+    // line-height: 17px;
     color: #009ee4;
     margin-bottom: 10px;
     margin-top: 10px;
+    //вот как то так
+    width: 135px;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
   }
 `
 
@@ -79,7 +98,6 @@ export const CardPrice = styled.p`
   line-height: 33px;
   margin-bottom: 10px;
   @media screen and (max-width: ${maxMobileWidthTwo}) {
-    font-size: 16px;
     line-height: 24px;
   }
 `
@@ -89,13 +107,16 @@ export const CardPlaceDate = styled.div`
   line-height: 21px;
   color: #5f5f5f;
   @media screen and (max-width: ${maxMobileWidthTwo}) {
-    font-size: 12px;
-    line-height: 16px;
     color: #5f5f5f;
   }
 `
 
 export const CardPlace = styled(CardPlaceDate)`
+@media screen and (max-width: ${maxMobileWidthTwo}) {
   margin-bottom: 4px;
+  font-size: 14px;
+}
+  `
+export const CardDate = styled(CardPlaceDate)`
+
 `
-export const CardDate = styled(CardPlaceDate)``
