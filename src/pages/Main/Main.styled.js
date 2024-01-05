@@ -37,7 +37,7 @@ export const MainContainer = styled.div`
 `
 export const MainH2 = styled.h2`
   font-style: normal;
-  font-weight: 500;
+  // font-weight: 500;
   font-size: 40px;
   line-height: 42px;
   color: #000000;
@@ -48,11 +48,13 @@ export const MainH2 = styled.h2`
   }
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
+    display: flex;
+    align-items: flex-start;
+    margin-left: 15px;
     font-size: 24px;
     line-height: 29px;
     color: #000000;
     margin-bottom: 20px;
-    text-align: center;
     position: relative;
   }
 `

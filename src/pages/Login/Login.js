@@ -3,7 +3,7 @@ import * as S from './Login.styled'
 import { loginUser } from '../../store/Service/api'
 import { useNavigate } from 'react-router-dom'
 
-const Login = () => {
+export const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
@@ -68,5 +68,3 @@ const Login = () => {
     </S.Wrapper>
   )
 }
-
-export default Login

@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import MainMenu from '../MainMenu/MainMenu'
+import {MainMenu} from '../MainMenu/MainMenu'
 import * as S from './CenterBlockProfile.styled'
 import {
   useUploadUserAvatarMutation,
   useUserUpdateMutation,
 } from '../../store/Service/Service'
-import useButtonState from '../../hooks/uesButtonState'
+import {useButtonState} from '../../hooks/uesButtonState'
 
-const CenterBlockProfile = ({ currentUser }) => {
+export const CenterBlockProfile = ({ currentUser }) => {
   const navigate = useNavigate()
   const [UpdateUser, { isLoading }] = useUserUpdateMutation()
   const [uploadUserAvatar] = useUploadUserAvatarMutation()
@@ -173,5 +173,3 @@ const CenterBlockProfile = ({ currentUser }) => {
     </S.MainCenterBlock>
   )
 }
-
-export default CenterBlockProfile

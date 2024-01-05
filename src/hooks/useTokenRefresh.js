@@ -1,6 +1,6 @@
 import { useRefreshTokenMutation } from '../store/Service/Service'
 
-const useTokenRefresh = () => {
+export const useTokenRefresh = () => {
   const [refreshToken, { isLoading, isError, isSuccess }] =
     useRefreshTokenMutation()
 
@@ -22,5 +22,3 @@ const useTokenRefresh = () => {
 
   return { handleRefreshToken, isLoading, isError, isSuccess }
 }
-
-export default useTokenRefresh

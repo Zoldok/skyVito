@@ -5,18 +5,18 @@ import {
   useGetAllCommentsQuery,
 } from '../../store/Service/Service'
 import * as S from './AdDetails.styled'
-import Footer from '../../components/Footer/Footer'
-import Header from '../../components/Header/Header'
+import {Footer} from '../../components/Footer/Footer'
+import {Header} from '../../components/Header/Header'
 import { useAuth } from '../../hooks/use-auth'
-import MainMenu from '../../components/MainMenu/MainMenu'
+import {MainMenu} from '../../components/MainMenu/MainMenu'
 import { formatDate } from '../../utils/FormatteDate'
 import { formatTime } from '../../utils/FormatteTime'
 import { useEffect, useState } from 'react'
-import EditModal from '../../components/Modal/EditModal/EditModal'
+import {EditModal} from '../../components/Modal/EditModal/EditModal'
 import { ReviewsModal } from '../../components/Modal/ReviewsModal/ReviewsModal'
-import Preloader from '../../components/Preloader/Preloader'
+import {Preloader} from '../../components/Preloader/Preloader'
 
-const AdDetails = () => {
+export const AdDetails = () => {
   const navigate = useNavigate()
   const { adId } = useParams()
   const { isAuth } = useAuth()
@@ -260,5 +260,3 @@ const AdDetails = () => {
     </div>
   )
 }
-
-export default AdDetails

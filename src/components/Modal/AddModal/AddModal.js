@@ -8,7 +8,7 @@ import * as S from './AddModalStyle'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setAds } from '../../../store/slices/userSlice'
-import useButtonState from '../../../hooks/uesButtonState'
+import {useButtonState} from '../../../hooks/uesButtonState'
 
 export const AddModal = ({ onClose }) => {
   const [title, setTitle] = useState('')
@@ -183,4 +183,3 @@ export const AddModal = ({ onClose }) => {
   )
 }
 
-export default AddModal

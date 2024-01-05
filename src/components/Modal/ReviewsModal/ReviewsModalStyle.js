@@ -85,7 +85,6 @@ export const ModalContent = styled.div`
 export const ModalTitle = styled.h3`
   font-size: 32px;
   line-height: 46px;
-  font-weight: 500;
   color: #000000;
   margin-bottom: 15px;
 

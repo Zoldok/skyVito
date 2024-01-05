@@ -5,7 +5,7 @@ import {
   useDelImgAdsMutation,
 } from '../../../store/Service/Service'
 import * as S from './EditModalStyle'
-import useButtonState from '../../../hooks/uesButtonState'
+import {useButtonState} from '../../../hooks/uesButtonState'
 
 export const EditModal = ({ data, onClose, updateAdData }) => {
   const [title, setTitle] = useState(data.title)
@@ -200,5 +200,3 @@ export const EditModal = ({ data, onClose, updateAdData }) => {
     </S.Wrapper>
   )
 }
-
-export default EditModal

@@ -1,16 +1,16 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import Footer from '../../components/Footer/Footer'
-import Header from '../../components/Header/Header'
-import MainMenu from '../../components/MainMenu/MainMenu'
+import {Footer} from '../../components/Footer/Footer'
+import {Header} from '../../components/Header/Header'
+import {MainMenu} from '../../components/MainMenu/MainMenu'
 import * as S from './SellerProfile.styled'
-import AdsComponent from '../../components/AdsComponent/AdsComponent'
+import {AdsComponent} from '../../components/AdsComponent/AdsComponent'
 import { useGetAllUserQuery } from '../../store/Service/Service'
 import { useSelector } from 'react-redux'
 import { formatDate } from '../../utils/FormatteDate'
 import { useState } from 'react'
-import Preloader from '../../components/Preloader/Preloader'
+import {Preloader} from '../../components/Preloader/Preloader'
 
-const SellerProfile = () => {
+export const SellerProfile = () => {
   const navigate = useNavigate()
   const { idSeller } = useParams()
   const { data } = useGetAllUserQuery()
@@ -127,5 +127,3 @@ const SellerProfile = () => {
     </S.Wrapper>
   )
 }
-
-export default SellerProfile

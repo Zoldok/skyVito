@@ -1,6 +1,6 @@
 import * as S from './Preloader.styles'
 
-function Preloader() {
+export function Preloader() {
   return (
     <S.HeaderStyleMyProfile>
       <S.RippleLoaderContainer>
@@ -13,4 +13,3 @@ function Preloader() {
   )
 }
 
-export default Preloader

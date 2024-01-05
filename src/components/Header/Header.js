@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as S from './Header.styled'
 import { useAuth } from '../../hooks/use-auth'
-import AddModal from '../Modal/AddModal/AddModal'
+import {AddModal} from '../Modal/AddModal/AddModal'
 
-const Header = ({ profileKey }) => {
+export const Header = ({ profileKey }) => {
   const { isAuth } = useAuth()
   const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -64,5 +64,3 @@ const Header = ({ profileKey }) => {
     </S.Header>
   )
 }
-
-export default Header

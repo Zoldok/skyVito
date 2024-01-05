@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import * as S from './Search.styled'
 
-const Search = ({ onSearch }) => {
+export const Search = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState('')
 
   const handleInputChange = (e) => {
@@ -59,5 +59,3 @@ const Search = ({ onSearch }) => {
     </S.MainSearch>
   )
 }
-
-export default Search
