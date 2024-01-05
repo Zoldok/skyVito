@@ -18,11 +18,9 @@ export const MainCenterBlock = styled.div`
 `
 export const MainH2 = styled.h2`
   font-style: normal;
-  font-weight: 500;
   font-size: 40px;
   line-height: 42px;
   color: #000000;
-  margin-bottom: 30px;
 
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     font-size: 24px;
@@ -53,7 +51,6 @@ export const ProfileContent = styled.div`
 export const ProfileTitle = styled.h3`
   font-size: 32px;
   line-height: 70px;
-  font-weight: 500;
   color: #000000;
   margin-bottom: 20px;
   margin-top: 20px;
@@ -251,7 +248,6 @@ export const MainTitle = styled.h3`
   color: #000;
   font-size: 32px;
   font-style: normal;
-  font-weight: 500;
   line-height: 220%; /* 70.4px */
   @media screen and (max-width: ${maxMobileWidthTwo}) {
     margin-bottom: 30px;

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import * as S from './AdsComponent.styled'
 import { formatTime } from '../../utils/FormatteTime'
 
-const AdsComponent = ({ ads, hasNoResults }) => {
+export const AdsComponent = ({ ads, hasNoResults }) => {
   if (!ads) return <div>Обьявлений не наидено</div>
 
   if (hasNoResults) {
@@ -40,5 +40,3 @@ const AdsComponent = ({ ads, hasNoResults }) => {
     </>
   )
 }
-
-export default AdsComponent

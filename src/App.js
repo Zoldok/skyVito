@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import * as S from './App.styled'
-import AppRoutes from './utils/routes'
-import useTokenRefresh from './hooks/useTokenRefresh'
+import {AppRoutes} from './utils/routes'
+import {useTokenRefresh} from './hooks/useTokenRefresh'
 import { useGetAdsQuery } from './store/Service/Service'
 import { setAds } from './store/slices/userSlice'
 import { useDispatch } from 'react-redux'
-import Preloader from './components/Preloader/Preloader'
+import {Preloader} from './components/Preloader/Preloader'
 
-function App() {
+export function App() {
   const dispatch = useDispatch()
   const { handleRefreshToken } = useTokenRefresh()
 
@@ -39,4 +39,3 @@ function App() {
   )
 }
 
-export default App

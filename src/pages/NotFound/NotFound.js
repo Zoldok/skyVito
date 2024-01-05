@@ -1,6 +1,6 @@
 import * as S from './NotFound.styled'
 
-const NotFound = () => {
+export const NotFound = () => {
   return (
     <S.Wrapper>
       <S.Container>
@@ -10,5 +10,3 @@ const NotFound = () => {
     </S.Wrapper>
   )
 }
-
-export default NotFound

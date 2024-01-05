@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAddCommentMutation } from '../../../store/Service/Service'
-import Footer from '../../Footer/Footer'
+import {Footer} from '../../Footer/Footer'
 import { Header } from '../../Header/Header.styled'
 import * as S from './ReviewsModalStyle'
 import { ReviewItem } from './ReviewItem'
 import { useAuth } from '../../../hooks/use-auth'
-import useButtonState from '../../../hooks/uesButtonState'
+import {useButtonState} from '../../../hooks/uesButtonState'
 
 export const ReviewsModal = ({ comments, onClose }) => {
   const modalRef = useRef(null)

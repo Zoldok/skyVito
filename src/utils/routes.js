@@ -1,14 +1,14 @@
 import { Route, Routes } from 'react-router-dom'
-import Login from '../pages/Login/Login'
-import Profile from '../pages/Profile/Profile'
-import SellerProfile from '../pages/SellerProfile/SellerProfile'
-import Main from '../pages/Main/Main'
-import AdDetails from '../pages/AdDetails/AdDetails'
-import Registration from '../pages/Register/Register'
-import NotFound from '../pages/NotFound/NotFound'
+import {Login} from '../pages/Login/Login'
+import {Profile} from '../pages/Profile/Profile'
+import {SellerProfile} from '../pages/SellerProfile/SellerProfile'
+import {Main} from '../pages/Main/Main'
+import {AdDetails} from '../pages/AdDetails/AdDetails'
+import {Registration} from '../pages/Register/Register'
+import {NotFound} from '../pages/NotFound/NotFound'
 import { ProtectedRoute } from './ProtectedRoute/ProtectedRoute'
 
-const AppRoutes = () => {
+export const AppRoutes = () => {
   return (
     <Routes>
       <Route exact path="/" Component={Main} />
@@ -23,5 +23,3 @@ const AppRoutes = () => {
     </Routes>
   )
 }
-
-export default AppRoutes

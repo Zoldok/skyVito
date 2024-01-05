@@ -1,7 +1,7 @@
-import AdsComponent from '../../components/AdsComponent/AdsComponent'
-import Footer from '../../components/Footer/Footer'
-import Header from '../../components/Header/Header'
-import Search from '../../components/Search/Search'
+import {AdsComponent} from '../../components/AdsComponent/AdsComponent'
+import {Footer} from '../../components/Footer/Footer'
+import {Header} from '../../components/Header/Header'
+import {Search} from '../../components/Search/Search'
 import {
   useGetAdsQuery,
   useGetUserInfoQuery,
@@ -10,9 +10,9 @@ import * as S from './Main.styled'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { setAds } from '../../store/slices/userSlice'
-import Preloader from '../../components/Preloader/Preloader'
+import {Preloader} from '../../components/Preloader/Preloader'
 
-const Main = () => {
+export const Main = () => {
   const dispatch = useDispatch()
   const { data: userInfo, isLoading, refetch } = useGetUserInfoQuery()
   const { data, isLoading: isis, refetch: refetchAds } = useGetAdsQuery()
@@ -72,5 +72,3 @@ const Main = () => {
     </S.Wrapper>
   )
 }
-
-export default Main

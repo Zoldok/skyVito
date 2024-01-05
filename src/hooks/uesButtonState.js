@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const useButtonState = () => {
+export const useButtonState = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
   const updateButtonState = (...args) => {
@@ -10,4 +10,3 @@ const useButtonState = () => {
   return { isButtonDisabled, updateButtonState }
 }
 
-export default useButtonState

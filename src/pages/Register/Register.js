@@ -3,7 +3,7 @@ import * as S from './Register.styled'
 import { registerUser } from '../../store/Service/api'
 import { useNavigate } from 'react-router-dom'
 
-const Registration = () => {
+export const Registration = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -94,5 +94,3 @@ const Registration = () => {
     </S.Wrapper>
   )
 }
-
-export default Registration
