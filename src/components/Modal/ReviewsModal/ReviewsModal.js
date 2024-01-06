@@ -1,15 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAddCommentMutation } from '../../../store/Service/Service'
 import {Footer} from '../../Footer/Footer'
-import { Header } from '../../Header/Header.styled'
 import * as S from './ReviewsModalStyle'
 import { ReviewItem } from './ReviewItem'
 import { useAuth } from '../../../hooks/use-auth'
 import {useButtonState} from '../../../hooks/uesButtonState'
 
 export const ReviewsModal = ({ comments, onClose }) => {
-  const modalRef = useRef(null)
   const { adId } = useParams()
   const { isAuth } = useAuth()
   const [addComment, { isLoading }] = useAddCommentMutation(adId)
@@ -17,23 +15,8 @@ export const ReviewsModal = ({ comments, onClose }) => {
   const [error, setError] = useState(null)
   const { isButtonDisabled, updateButtonState } = useButtonState()
 
-  useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (!modalRef.current.contains(event.target)) {
-        onClose()
-      }
-    }
-
-    document.addEventListener('mousedown', handleOutsideClick)
-
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick)
-    }
-  }, [onClose])
-
-  const handleAddComment = async (event) => {
-    event.preventDefault()
-
+  const handleAddComment = async (e) => {
+    e.preventDefault()
     if (!newComment) {
       setError('Пожалуйста, введите комментарий')
       return
@@ -47,8 +30,7 @@ export const ReviewsModal = ({ comments, onClose }) => {
 
   return (
     <S.Wrapper>
-      <Header />
-      <S.Container ref={modalRef}>
+      <S.Container>
         <S.ModalBlock>
           <S.ModalContent>
             <S.ModalTitle onClick={onClose}>Отзывы о товаре</S.ModalTitle>
